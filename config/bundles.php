@@ -61,4 +61,6 @@ return [
     Symplify\ConsoleColorDiff\ConsoleColorDiffBundle::class => ['dev' => true, 'test' => true],
     Sylius\PayPalPlugin\SyliusPayPalPlugin::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
+    FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
+    BitBag\SyliusCmsPlugin\BitBagSyliusCmsPlugin::class => ['all' => true],
 ];

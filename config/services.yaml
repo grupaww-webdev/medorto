@@ -3,6 +3,9 @@
 parameters:
     locale: en_US
 
+imports:
+    - { resource: "@BitBagSyliusCmsPlugin/Resources/config/services/sitemap_provider.yml" }
+
 services:
     # Default configuration for services in *this* file
     _defaults:
