@@ -1,0 +1,48 @@
+@import 'include/_colors';
+#top-bar {
+    .slogan {
+        padding: 8px 0 8px 90px;
+        background: $secondary;
+        .slogan--text {
+            margin-left: 11px;
+            font-size: 17px;
+            color: $white;
+        }
+        @media only screen and (max-width: 768px) {
+            padding: 20px 0;
+        }
+    }
+}
+
+header {
+    .right {
+        .column {
+            &.search {
+                padding: 0 !important;
+            }
+        }
+    }
+
+    #top-menu {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $black;
+        .ui {
+            &.menu {
+                border: none;
+                background: none;
+                .item {
+                    border: none;
+                    &::before {
+                        background: none;
+                    }
+
+                    &:hover {
+                        border-bottom: 3px solid $orange;
+                        margin-bottom: -3px;
+                    }
+                }
+            }
+        }
+    }
+}

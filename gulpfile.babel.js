@@ -49,15 +49,29 @@ export const watchShop = function watchShop() {
 };
 watchShop.description = 'Watch shop asset sources and rebuild on changes.';
 
-export const build = gulp.parallel(buildAdmin, buildShop);
+export const buildApp = function buildApp() {
+  return gulp.src('assets/gulpfile.babel.js', { read: false })
+    .pipe(chug({ args: config, tasks: 'build' }));
+};
+buildApp.description = 'Build marketfront and seller panel assets.';
+
+export const watchApp = function watcbApp() {
+  return gulp.src('assets/gulpfile.babel.js', { read: false })
+    .pipe(chug({ args: config, tasks: 'watch' }));
+};
+buildApp.description = 'Build marketfront and seller panel assets.';
+
+export const build = gulp.parallel(buildAdmin, buildShop, buildApp);
 build.description = 'Build assets.';
 
-export const watch = gulp.parallel(watchAdmin, watchShop);
+export const watch = gulp.parallel(watchAdmin, watchShop, watchApp);
 watch.description = 'Watch asset sources and rebuild on changes.';
 
 gulp.task('admin', buildAdmin);
 gulp.task('admin-watch', watchAdmin);
 gulp.task('shop', buildShop);
 gulp.task('shop-watch', watchShop);
+gulp.task('app-build', buildApp);
+gulp.task('app-watch', watchApp);
 
 export default build;
