@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1cdeaab1cdda33f6635c9ee91bf56a6",
+    "content-hash": "6485f196a236959d96350f238e3eca54",
     "packages": [
         {
             "name": "alcohol/iso4217",
@@ -2310,6 +2310,66 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
+            "name": "excelwebzone/recaptcha-bundle",
+            "version": "v1.5.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/excelwebzone/EWZRecaptchaBundle.git",
+                "reference": "41c9828a6e817a2b669a56666c2ea84c1fb21695"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/excelwebzone/EWZRecaptchaBundle/zipball/41c9828a6e817a2b669a56666c2ea84c1fb21695",
+                "reference": "41c9828a6e817a2b669a56666c2ea84c1fb21695",
+                "shasum": ""
+            },
+            "require": {
+                "google/recaptcha": "^1.1",
+                "php": ">=5.6 || ^7.0",
+                "symfony/form": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "symfony/security-bundle": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "symfony/validator": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "symfony/yaml": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "twig/twig": "^1.40 || ^2.9 || ^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5 || ^6 || ^7"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony": {
+                    "allow-contrib": "true"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EWZ\\Bundle\\RecaptchaBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael H. Arieli",
+                    "email": "excelwebzone@gmail.com",
+                    "homepage": "http://excelwebzone.com/"
+                }
+            ],
+            "description": "This bundle provides easy reCAPTCHA form field integration",
+            "homepage": "https://github.com/excelwebzone/EWZRecaptchaBundle",
+            "keywords": [
+                "recaptcha"
+            ],
+            "support": {
+                "issues": "https://github.com/excelwebzone/EWZRecaptchaBundle/issues",
+                "source": "https://github.com/excelwebzone/EWZRecaptchaBundle/tree/v1.5.26"
+            },
+            "time": "2021-01-26T15:13:42+00:00"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.14.1",
             "source": {
@@ -3082,6 +3142,58 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2021-04-23T09:16:01+00:00"
+        },
+        {
+            "name": "google/recaptcha",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/614f25a9038be4f3f2da7cbfd778dc5b357d2419",
+                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.2.20|^2.15",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^4.8.36|^5.7.27|^6.59|^7.5.11"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
+            "homepage": "https://www.google.com/recaptcha/",
+            "keywords": [
+                "Abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/forum/#!forum/recaptcha",
+                "issues": "https://github.com/google/recaptcha/issues",
+                "source": "https://github.com/google/recaptcha"
+            },
+            "time": "2020-03-31T17:50:54+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -4938,21 +5050,21 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.2.0",
+            "version": "1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084"
+                "reference": "2209ddd84e7ef1256b7af205d0717fb62cfc9c33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
-                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/2209ddd84e7ef1256b7af205d0717fb62cfc9c33",
+                "reference": "2209ddd84e7ef1256b7af205d0717fb62cfc9c33",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
-                "psr/log": "^1.0.1"
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
             },
             "provide": {
                 "psr/log-implementation": "1.0.0"
@@ -4960,39 +5072,29 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^7",
-                "graylog2/gelf-php": "^1.4.2",
-                "mongodb/mongodb": "^1.8",
+                "graylog2/gelf-php": "~1.0",
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
-                "phpspec/prophecy": "^1.6.1",
                 "phpstan/phpstan": "^0.12.59",
-                "phpunit/phpunit": "^8.5",
-                "predis/predis": "^1.1",
-                "rollbar/rollbar": "^1.3",
-                "ruflin/elastica": ">=0.90 <7.0.1",
+                "phpunit/phpunit": "~4.5",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
-                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mbstring": "Allow to work properly with unicode symbols",
-                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Monolog\\": "src/Monolog"
@@ -5006,11 +5108,11 @@
                 {
                     "name": "Jordi Boggiano",
                     "email": "j.boggiano@seld.be",
-                    "homepage": "https://seld.be"
+                    "homepage": "http://seld.be"
                 }
             ],
             "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "https://github.com/Seldaek/monolog",
+            "homepage": "http://github.com/Seldaek/monolog",
             "keywords": [
                 "log",
                 "logging",
@@ -5018,7 +5120,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.2.0"
+                "source": "https://github.com/Seldaek/monolog/tree/1.26.0"
             },
             "funding": [
                 {
@@ -5030,7 +5132,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-14T13:15:25+00:00"
+            "time": "2020-12-14T12:56:38+00:00"
         },
         {
             "name": "namshi/jose",
@@ -5098,6 +5200,160 @@
                 "source": "https://github.com/namshi/jose/tree/master"
             },
             "time": "2016-12-05T07:27:31+00:00"
+        },
+        {
+            "name": "odiseoteam/blog-bundle",
+            "version": "v1.1.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/odiseoteam/OdiseoBlogBundle.git",
+                "reference": "c04613c15586be499cf53c418f8f979552b152c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/odiseoteam/OdiseoBlogBundle/zipball/c04613c15586be499cf53c418f8f979552b152c6",
+                "reference": "c04613c15586be499cf53c418f8f979552b152c6",
+                "shasum": ""
+            },
+            "require": {
+                "excelwebzone/recaptcha-bundle": "^1.5",
+                "friendsofsymfony/ckeditor-bundle": "^1.1|^2.1",
+                "knplabs/knp-gaufrette-bundle": "^0.5|^0.7",
+                "monolog/monolog": "~1.22",
+                "php": "^7.2",
+                "sylius/grid-bundle": "^1.6",
+                "sylius/resource-bundle": "^1.4",
+                "symfony/framework-bundle": "^4.4 || ^5.2",
+                "symfony/monolog-bundle": "^3.0",
+                "symfony/orm-pack": "^1.0"
+            },
+            "require-dev": {
+                "behat/behat": "^3.6.1",
+                "behat/mink-selenium2-driver": "^1.4",
+                "dmore/behat-chrome-extension": "^1.3",
+                "dmore/chrome-mink-driver": "^2.7",
+                "friends-of-behat/mink": "^1.8",
+                "friends-of-behat/mink-browserkit-driver": "^1.4",
+                "friends-of-behat/mink-extension": "^2.4",
+                "friends-of-behat/page-object-extension": "^0.3",
+                "friends-of-behat/suite-settings-extension": "^1.0",
+                "friends-of-behat/symfony-extension": "^2.1",
+                "friends-of-behat/variadic-extension": "^1.3",
+                "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
+                "lakion/mink-debug-extension": "^2.0.0",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "0.12.74",
+                "phpstan/phpstan-doctrine": "0.12.31",
+                "phpstan/phpstan-strict-rules": "^0.12.0",
+                "phpstan/phpstan-webmozart-assert": "0.12.12",
+                "phpunit/phpunit": "^9.5",
+                "sensiolabs/security-checker": "^6.0",
+                "sylius-labs/coding-standard": "^3.1",
+                "symfony/browser-kit": "^4.4 || ^5.2",
+                "symfony/debug-bundle": "^4.4 || ^5.2",
+                "symfony/dotenv": "^4.4 || ^5.2",
+                "symfony/intl": "^4.4 || ^5.2",
+                "symfony/web-profiler-bundle": "^4.4 || ^5.2",
+                "vimeo/psalm": "4.4.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Odiseo\\BlogBundle\\": "src/",
+                    "Tests\\Odiseo\\BlogBundle\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Bundle for Symfony to generate blog content.",
+            "support": {
+                "issues": "https://github.com/odiseoteam/OdiseoBlogBundle/issues",
+                "source": "https://github.com/odiseoteam/OdiseoBlogBundle/tree/v1.1.23"
+            },
+            "time": "2021-03-15T18:21:20+00:00"
+        },
+        {
+            "name": "odiseoteam/sylius-blog-plugin",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/odiseoteam/SyliusBlogPlugin.git",
+                "reference": "b085ead94e66daf5be49811ecc6fb9369504fd2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/odiseoteam/SyliusBlogPlugin/zipball/b085ead94e66daf5be49811ecc6fb9369504fd2f",
+                "reference": "b085ead94e66daf5be49811ecc6fb9369504fd2f",
+                "shasum": ""
+            },
+            "require": {
+                "odiseoteam/blog-bundle": "^1.1",
+                "php": "^7.3",
+                "sylius/sylius": "~1.8.0 || ~1.9.0"
+            },
+            "conflict": {
+                "api-platform/core": "^2.6"
+            },
+            "require-dev": {
+                "behat/behat": "^3.6.1",
+                "behat/mink-selenium2-driver": "^1.4",
+                "dmore/behat-chrome-extension": "^1.3",
+                "dmore/chrome-mink-driver": "^2.7",
+                "friends-of-behat/mink": "^1.8",
+                "friends-of-behat/mink-browserkit-driver": "^1.4",
+                "friends-of-behat/mink-extension": "^2.4",
+                "friends-of-behat/page-object-extension": "^0.3",
+                "friends-of-behat/suite-settings-extension": "^1.0",
+                "friends-of-behat/symfony-extension": "^2.1",
+                "friends-of-behat/variadic-extension": "^1.3",
+                "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
+                "lakion/mink-debug-extension": "^2.0.0",
+                "phpspec/phpspec": "^7.0",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "0.12.74",
+                "phpstan/phpstan-doctrine": "0.12.31",
+                "phpstan/phpstan-strict-rules": "^0.12.0",
+                "phpstan/phpstan-webmozart-assert": "0.12.12",
+                "phpunit/phpunit": "^9.5",
+                "sensiolabs/security-checker": "^6.0",
+                "sylius-labs/coding-standard": "^3.1",
+                "symfony/browser-kit": "^4.4 || ^5.2",
+                "symfony/debug-bundle": "^4.4 || ^5.2",
+                "symfony/dotenv": "^4.4 || ^5.2",
+                "symfony/intl": "^4.4 || ^5.2",
+                "symfony/web-profiler-bundle": "^4.4 || ^5.2",
+                "vimeo/psalm": "4.4.1"
+            },
+            "type": "sylius-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Odiseo\\SyliusBlogPlugin\\": "src/",
+                    "Tests\\Odiseo\\SyliusBlogPlugin\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This plugin add blog capabilities to your Sylius project",
+            "keywords": [
+                "sylius",
+                "sylius-blog",
+                "sylius-plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/odiseoteam/SyliusBlogPlugin/issues",
+                "source": "https://github.com/odiseoteam/SyliusBlogPlugin/tree/v1.2.2"
+            },
+            "time": "2021-03-17T12:17:09+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -10855,6 +11111,37 @@
                 }
             ],
             "time": "2021-01-27T12:56:27+00:00"
+        },
+        {
+            "name": "symfony/orm-pack",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "c9bcc08102061f406dc908192c0f33524a675666"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/c9bcc08102061f406dc908192c0f33524a675666",
+                "reference": "c9bcc08102061f406dc908192c0f33524a675666",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-migrations-bundle": "*",
+                "doctrine/orm": "*"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "support": {
+                "issues": "https://github.com/symfony/orm-pack/issues",
+                "source": "https://github.com/symfony/orm-pack/tree/master"
+            },
+            "time": "2020-02-10T18:03:48+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
