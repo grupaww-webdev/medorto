@@ -3,3 +3,12 @@ app:
         enable_facebook_messenger: Aktywuj FB Messenger Chat Box
         facebook_page_id: Id Aplikacji Facebook
         facebook_messenger: Facebook Messenger
+        
+odiseo_sylius_blog_plugin:
+    menu:
+        admin:
+            blog:
+                header: Blog
+                article_categories: Kategorie
+                articles: Artykuły
+                article_comments: Komentarze
