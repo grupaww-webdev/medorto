@@ -40,6 +40,9 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "bitbag/cms-plugin": {
+        "version": "v3.0.0"
+    },
     "clue/stream-filter": {
         "version": "v1.4.0"
     },
@@ -148,6 +151,19 @@
     "egulias/email-validator": {
         "version": "2.1.5"
     },
+    "excelwebzone/recaptcha-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "fd4da7bc71749db65bc83abf5d164bfa9c839cf4"
+        },
+        "files": [
+            "config/packages/dev/ewz_recaptcha.yaml",
+            "config/packages/ewz_recaptcha.yaml"
+        ]
+    },
     "fakerphp/faker": {
         "version": "v1.12.0"
     },
@@ -190,6 +206,18 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "8eb1cd0962ded6a6d6e1e5a9b6d3e888f9f94ff6"
+        },
+        "files": [
+            "config/packages/fos_ckeditor.yaml"
+        ]
+    },
     "friendsofsymfony/oauth-server-bundle": {
         "version": "1.6.1"
     },
@@ -207,6 +235,18 @@
     },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
+    },
+    "google/recaptcha": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "d087df3e087f50da3955f2def05079380da5894b"
+        },
+        "files": [
+            "config/packages/google_recaptcha.yaml"
+        ]
     },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
@@ -288,6 +328,9 @@
     },
     "lcobucci/jwt": {
         "version": "3.3.2"
+    },
+    "league/csv": {
+        "version": "9.7.1"
     },
     "league/uri": {
         "version": "5.3.0"
@@ -384,6 +427,12 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.0"
+    },
+    "odiseoteam/blog-bundle": {
+        "version": "v1.1.23"
+    },
+    "odiseoteam/sylius-blog-plugin": {
+        "version": "v1.2.2"
     },
     "openlss/lib-array2xml": {
         "version": "0.0.10"
@@ -640,6 +689,9 @@
     "sylius-labs/polyfill-symfony-security": {
         "version": "v1.0.0"
     },
+    "sylius/admin-api-bundle": {
+        "version": "v1.9.4"
+    },
     "sylius/fixtures-bundle": {
         "version": "v1.4.1"
     },
@@ -804,6 +856,9 @@
     },
     "symfony/options-resolver": {
         "version": "v4.1.3"
+    },
+    "symfony/orm-pack": {
+        "version": "v1.0.8"
     },
     "symfony/polyfill-ctype": {
         "version": "v1.9.0"
@@ -993,6 +1048,9 @@
     },
     "symplify/smart-file-system": {
         "version": "v7.1.3"
+    },
+    "symplify/symplify-kernel": {
+        "version": "8.3.48"
     },
     "textalk/websocket": {
         "version": "1.3.1"

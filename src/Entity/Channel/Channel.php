@@ -11,6 +11,7 @@ use Sylius\Component\Core\Model\Channel as BaseChannel;
  * @ORM\Entity
  * @ORM\Table(name="sylius_channel")
  */
-class Channel extends BaseChannel
+class Channel extends BaseChannel implements FacebookMessengerAwareInterface
 {
+    use FacebookMessengerAwareTrait;
 }

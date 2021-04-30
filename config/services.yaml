@@ -2,6 +2,13 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en_US
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    odiseo_blog.model.article.class: Odiseo\BlogBundle\Model\Article
+    odiseo_blog.model.article_category.class: Odiseo\BlogBundle\Model\ArticleCategory
+    odiseo_blog.model.article_comment.class: Odiseo\BlogBundle\Model\ArticleComment
+
+imports:
+    - { resource: "@BitBagSyliusCmsPlugin/Resources/config/services/sitemap_provider.yml" }
 
 services:
     # Default configuration for services in *this* file
@@ -39,3 +46,10 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    app.facebook_messenger_widget.rendering.block:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - 'elements/facebook-widget.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
