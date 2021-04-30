@@ -1,0 +1,10 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <section class="{{ class|default('page cart container wrapper') }}">
+        {{ sylius_template_event('sylius.shop.cart.header', {'header': header}) }}
+        {{ sylius_template_event(['sylius.shop.checkout.address.steps', 'sylius.shop.checkout.steps'], _context) }}
+
+        {% block cart_content %}{% endblock %}
+    </section>
+{% endblock %}

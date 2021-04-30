@@ -1,0 +1,19 @@
+.nfz-bar {
+  &__offset {
+    padding: 12px 82px;
+    font-size: 16px;
+    @media screen and (max-width: $mobile) {
+      flex-direction: column;
+      text-align: center;
+      padding: 12px;
+    }
+  }
+  span {
+    color: $white;
+  }
+  img {
+    @media screen and (max-width: $mobile) {
+      margin-bottom: 12px;  
+    }
+  }
+}

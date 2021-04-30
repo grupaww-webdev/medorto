@@ -1,0 +1,19 @@
+{% set product = order_item.variant.product %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+    {{ sylius_template_event('sylius.shop.product.show.before_add_to_cart', {'product': product, 'order_item': order_item}) }}
+
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path(configuration.getRedirectRoute('summary'))}}) }}
+    {{ form_errors(form) }}
+    <div class="ui red label bottom pointing hidden sylius-validation-error" id="sylius-cart-validation-error" {{ sylius_test_html_attribute('cart-validation-error') }}></div>
+    {% if product.simple %}
+        {{ form_row(form.cartItem.quantity, sylius_test_form_attribute('quantity')|merge({'type': 'hidden', 'value': 1, 'label': false})) }}
+        {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
+        <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+    {% else %}
+        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="button button--blue disabled" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.add_to_cart'|trans }}</a>
+    {% endif %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}

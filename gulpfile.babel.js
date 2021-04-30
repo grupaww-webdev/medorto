@@ -61,7 +61,7 @@ export const watchApp = function watcbApp() {
 };
 buildApp.description = 'Build marketfront and seller panel assets.';
 
-export const build = gulp.parallel(buildAdmin, buildShop, buildApp);
+export const build = gulp.parallel(buildAdmin, buildApp);
 build.description = 'Build assets.';
 
 export const watch = gulp.parallel(watchAdmin, watchShop, watchApp);

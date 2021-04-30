@@ -9,6 +9,8 @@ import concat from 'gulp-concat';
 import livereload from 'gulp-livereload';
 import order from 'gulp-order';
 import merge from 'merge-stream';
+const babel = require('gulp-babel');
+const imagemin = require('gulp-imagemin');
 
 const env = process.env.GULP_ENV;
 const options = {
@@ -21,14 +23,29 @@ const distPath = "../public/assets/shop/";
 const config = {
   src: './',
   scssin: [
-    'scss/**/*.scss',
+    'shop/scss/**/*.scss',
   ],
   scssout: 'css/',
   cssin: [
-    'css/*.css',
+    'shop/css/*.css',
   ],
   cssout: upath.joinSafe(distPath, 'css/'),
-  cssoutname: 'app.css',
+  cssoutname: 'style.css',
+  jsin: [
+    'shop/js/*.js',
+  ],
+  jsvendors: [
+    'shop/js/plugin/*.js',
+  ],
+  jsout: upath.joinSafe(distPath, 'js/'),
+  jsoutname: 'app.js',
+  imgin: [
+    'shop/img/**/*.{jpg,jpeg,png,gif,svg,ico}',
+    upath.joinSafe(vendorUiPath, 'Resources/private/img/**'),
+  ],
+  imgout: upath.joinSafe(distPath, 'img/'),
+  fontsin: 'shop/fonts/*.*',
+  fontsout: upath.joinSafe(distPath, 'fonts/'),
 };
 const appStyle = () => {
   const sassStream = gulp.src(config.scssin)
@@ -57,11 +74,6 @@ const browserReload = (done) => {
 
 const serve = async (done) => {
   browserSync({
-    // server: {
-    //     baseDir: config.src
-    // },
-    // notify: false,
-    // browser: "google chrome",
     proxy: "http://127.0.0.1:8000"
   });
   done();
@@ -71,9 +83,31 @@ const watchFiles = () => {
   gulp.watch(upath.joinSafe(config.scssin[0]), gulp.series(appStyle, browserReload))
 };
 
-export const build = gulp.parallel(appStyle);
+const appImages = () => {
+  return gulp.src(config.imgin)
+    .pipe(imagemin())
+    .pipe(gulp.dest(config.imgout));
+};
+
+const appFonts = () => {
+  return gulp.src(config.fontsin)
+    .pipe(gulp.dest(config.fontsout));
+};
+
+const appJs = () => {
+  return gulp.src(config.jsin)
+    .pipe(babel())
+    .pipe(gulp.src(config.jsvendors))
+    .pipe(gulp.dest(config.jsout));
+};
+
+export const build = gulp.parallel(appStyle, appImages, appFonts, appJs);
 export const watching = gulp.parallel(watchFiles, serve);
 
 gulp.task('watch', watching);
 gulp.task('app-style', appStyle);
+gulp.task('app-js', appJs);
+gulp.task('app-img', appImages);
+gulp.task('app-fonts', appFonts);
+
 export default build;

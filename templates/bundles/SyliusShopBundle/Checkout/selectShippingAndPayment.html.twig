@@ -1,0 +1,36 @@
+{% extends '@SyliusShop/Layout/cart.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% set header = 'sylius.ui.cart.step_3.header' %}
+
+{% block title %}{{ 'sylius.ui.shipping'|trans }} | {{ parent() }}{% endblock %}
+
+{% block cart_content %}
+    <div class="cart__payments container wrapper">
+        {{ sylius_template_event('sylius.shop.checkout.select_shipping.before_form', {'order': order}) }}
+        {{ form_start(form, {'action': path('app_shop_checkout_select_shipping_and_payment'), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <div class="row">
+            <div class="col-xs-12 col-md-5 col-md-offset-1">
+                <h2 class="cart__payments__title text-darkBlue">{{ 'sylius.ui.select_shipping_method'|trans }}</h2>
+                <div class="login__checkbox cart__payments__radio">
+                    {% include '@SyliusShop/Checkout/SelectShipping/_form.html.twig' %}
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-5 col-md-offset-1">
+                <h2 class="cart__payments__title text-darkBlue">{{ 'sylius.ui.select_payment_method'|trans }}</h2>
+                <div class="login__checkbox cart__payments__radio cart__payments__radio--form">
+                    {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                {{ sylius_template_event('app.shop.checkout.footer', _context) }}
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

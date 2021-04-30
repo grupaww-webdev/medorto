@@ -1,0 +1,29 @@
+.subscription {
+    margin: 60px auto;
+    @media screen and (max-width: $mobile) {
+        margin: 40px auto;
+    }
+
+    .flex {
+        @media screen and (max-width: $mobile) {
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: center;
+        }
+    }
+
+    .button {
+        margin-left: 100px;
+        @media screen and (max-width: $mobile) {
+            margin: 20px auto 0;
+        }
+    }
+
+    img {
+        margin: 0 12px;
+        @media screen and (max-width: $mobile) {
+            margin: 12px;
+            max-width: calc(50% - 24px);
+        }
+    }
+}

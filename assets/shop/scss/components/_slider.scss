@@ -1,0 +1,88 @@
+.slider {
+  margin-top: 8px;
+
+  &--static {
+    margin-bottom: 32px;
+    .slider__item {
+      padding: 36px 90px;
+    }
+    .responsive-img {
+      height: 240px;
+      display: flex;
+    }
+    h2 {
+      margin-top: 0;
+    }
+  }
+  &__item {
+    @include flex(row, flex-start, center);
+    flex-direction: column;
+    padding: 160px 90px;
+    @media screen and (max-width: $mobile) {
+      padding: 12px 12px 48px;
+    }
+  }
+  &__content {
+    max-width: 470px;
+    @media screen and (max-width: $mobile) {
+      text-align: center;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    h2 {
+      margin-bottom: 12px;
+      font-size: 39px;
+      font-weight: 900;
+      color: $white;
+      @media screen and (max-width: $mobile) {
+        font-size: 32px;
+      }
+    }
+    p {
+      margin-bottom: 32px;
+      font-size: 16px;
+      font-weight: 300;
+      color: $white;
+    }
+  }
+  .glide__slide {
+    display: flex;
+    @media screen and (max-width: $mobile) {
+      flex-direction: column;
+    }
+
+    .responsive-img {
+      @media screen and (max-width: $mobile) {
+        display: flex;
+      }
+    }
+  }
+  .glide__bullets {
+    bottom: 10px;
+  }
+  .glide__bullet {
+    background-color: transparent;
+    box-shadow: none;
+    width: 10px;
+    height: 10px;
+    border: 1px solid $white;
+    transition: none;
+
+    &--active {
+      background-color: $white;
+    }
+  }
+  .glide__arrow {
+    outline: none;
+    border: 0;
+    box-shadow: none;
+    @media screen and (max-width: $mobile) {
+      display: none;
+    }
+    &--left {
+      img {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.button {
+  @include flex(row, center, center);
+  display: inline-flex;
+  border-radius: 4px;
+  padding: 12px 44px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 0;
+  cursor: pointer;
+
+  &--disabled {
+    pointer-events: none!important;
+    cursor: none!important;
+    background-color: #ccc!important;
+  }
+
+  &--white {
+    color: $darkBlue;
+    background-color: $white;
+  }
+
+  &--darkBlue {
+    color: $white;
+    background-color: $darkBlue;
+  }
+
+  &--blue {
+    color: $white;
+    background-color: $blue;
+  }
+
+  &--orange {
+    color: darkBlue;
+    background-color: $orange;
+  }
+
+  &--submit {
+    border-radius: 7px;
+    border: 0;
+    padding: 9px 40px;
+  }
+
+  &--border {
+    border-radius: 7px;
+    border: 1px solid #fff;
+
+    &--blue {
+      border-color: $blue;
+    }
+  }
+}

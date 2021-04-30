@@ -1,0 +1,27 @@
+{% if active is not defined %}
+    {% set steps = {'cart': 'cart__breadcrumbs__item--active', 'address': 'disabled', 'select_shipping': 'disabled', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'address' %}
+    {% set steps = {'cart': 'completed', 'address': 'cart__breadcrumbs__item--active', 'select_shipping': 'disabled', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_shipping' %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_payment' %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'active', 'complete': 'disabled'} %}
+{% else %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
+{% endif %}
+
+<ul class="cart__breadcrumbs flex flex--between flex--center">
+    <li class="cart__breadcrumbs__item cart__breadcrumbs__item--active flex flex-center">
+        <a href="/">
+            <img src="{{ asset('/assets/shop/img/home.svg') }}" alt="medorto strona główna">
+        </a>
+    </li>
+    <li class="cart__breadcrumbs__item {{ steps['cart'] }} flex flex-center"><a href="{{ path('sylius_shop_cart_summary') }}">KOSZYK</a></li>
+    <li class="cart__breadcrumbs__item {{ steps['address'] }} flex flex-center">
+        <a href="{{ path('sylius_shop_checkout_address') }}" {{ sylius_test_html_attribute('step-address') }}>{{ 'sylius.ui.cart.step_2.header'|trans }}</a>
+    </li>
+    <li class="cart__breadcrumbs__item {{ steps['select_shipping'] }} flex flex-center">
+        <a href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>{{ 'sylius.ui.cart.step_3.header'|trans }}</a>
+    </li>
+    <li class="cart__breadcrumbs__item {{ steps['complete'] }} flex flex-center"><a href="{{ path('sylius_shop_checkout_complete') }}">{{ 'sylius.ui.cart.step_4.header'|trans }}</a></li>
+</ul>

@@ -43,6 +43,9 @@
     "bitbag/cms-plugin": {
         "version": "v3.0.0"
     },
+    "bitbag/przelewy24-plugin": {
+        "version": "v1.2.0"
+    },
     "clue/stream-filter": {
         "version": "v1.4.0"
     },

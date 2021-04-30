@@ -1,0 +1,14 @@
+<h2 class="login__title text-darkBlue">{{ 'sylius.ui.personal_information'|trans }}</h2>
+{{ form_row(form.email, {'attr': {'class': 'input'}}) }}
+{{ form_row(form.user.plainPassword.first, {'attr': {'class': 'input'}}) }}
+{{ form_row(form.user.plainPassword.second, {'attr': {'class': 'input'}}) }}
+{{ form_row(form.firstName, {'attr': {'class': 'input'}}) }}
+{{ form_row(form.lastName, {'attr': {'class': 'input'}}) }}
+{{ form_row(form.phoneNumber, {'attr': {'class': 'input'}}) }}
+<div class="login__checkbox">
+    <label class="login__checkbox__label">
+        <input class="login__checkbox__checkbox" type="checkbox">
+        <span class="login__checkbox__checkmark"></span>
+        Oświadczam, że znam i akceptuje regulamin serwisu
+    </label>
+</div>

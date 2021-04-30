@@ -1,0 +1,6 @@
+<div class="flex flex--between">
+    {{ sylius_template_event('app.shop.vendor.simple', _context) }}
+    <div class="products text-center">
+        {% include '@SyliusShop/Product/Show/_priceWidget.html.twig' %}
+    </div>
+</div>

@@ -1,0 +1,42 @@
+.breadcrumbs {
+  &--faq {
+    margin-top: 18px;
+  }
+  &--page {
+    margin: 18px auto 70px;
+  }
+  .flex {
+    @media screen and (max-width: $mobile) {
+      flex-wrap: wrap;
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    position: relative;
+    color: #414042;
+
+    &:after {
+      content: "/";
+      display: inline-block;
+      font-weight: 300;
+      margin: 0 4px;
+    }
+    &:last-of-type {
+      &:after {
+        display: none;
+      }
+      a {
+        font-weight: 400;
+      }
+    }
+  }
+  a {
+    color: #414042;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 25px;
+  }
+}

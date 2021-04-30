@@ -1,0 +1,12 @@
+{% extends '@OdiseoSyliusBlogPlugin/Shop/Article/index.html.twig' %}
+{% import 'App/Shop/_breadcrumbs.html.twig' as breadcrumb %}
+
+{% block breadcrumb %}
+    {% set breadcrumbs = [
+        { label: 'app.ui.breadcrumbs.homepage'|trans, url: path('sylius_shop_homepage') },
+        { label: 'odiseo_sylius_blog_plugin.ui.blog.header'|trans, url: path('odiseo_sylius_blog_plugin_shop_article_index') },
+        { label: app.request.get('slug') }
+    ]
+    %}
+    {{ breadcrumb.crumble(breadcrumbs) }}
+{% endblock %}

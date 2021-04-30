@@ -1,0 +1,6 @@
+services:
+    sylius.shop.menu_builder.account:
+        class: App\Menu\AccountMenuBuilder
+        arguments: ['@knp_menu.factory', '@event_dispatcher']
+        tags:
+            - {name: knp_menu.menu_builder, method: createMenu, alias: sylius.shop.account }

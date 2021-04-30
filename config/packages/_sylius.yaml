@@ -108,6 +108,7 @@ sylius_order:
         order:
             classes:
                 model: App\Entity\Order\Order
+                controller: App\Controller\OrderController
         order_item:
             classes:
                 model: App\Entity\Order\OrderItem
@@ -146,6 +147,7 @@ sylius_product:
     resources:
         product:
             classes:
+                repository: App\Repository\ProductRepository
                 model: App\Entity\Product\Product
             translation:
                 classes:
@@ -250,10 +252,48 @@ sylius_user:
 sylius_shop:
     product_grid:
         include_all_descendants: true
-
+    checkout_resolver:
+        pattern: /checkout/.+
+        route_map:
+            cart:
+                route: sylius_shop_checkout_address
+            addressed:
+                route: app_shop_checkout_select_shipping_and_payment
 sylius_theme:
     sources:
         filesystem:
             scan_depth: 1
             directories:
                 - "%kernel.project_dir%/themes"
+winzou_state_machine:
+    sylius_order_checkout:
+        transitions:
+            complete:
+                from: [addressed]
+                to: completed
+        callbacks:
+            after:
+                app_select_shipping:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'select_shipping'", "'sylius_order_checkout'"]
+                app_select_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'select_payment'", "'sylius_order_checkout'"]
+
+sylius_resource:
+    resources:
+        app.order_refund:
+            classes:
+                model: App\Entity\Order\Refund
+                form: App\Form\Type\RefundType
+
+odiseo_blog:
+    resources:
+        article:
+            classes:
+                model: App\Entity\Blog\Article
+            translation:
+                classes:
+                    model: App\Entity\Blog\ArticleTranslation

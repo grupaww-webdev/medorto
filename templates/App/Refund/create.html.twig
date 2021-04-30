@@ -1,0 +1,48 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <section class="page renouncement container wrapper">
+        <h1 class="page__title text-darkBlue">Formularza odstąpienia od umowy</h1>
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <p class="page__subtitle text-darkBlue">Dane Użytkownika Ortopedio.pl sp. z o.o. ul. Forteczna 35-37 87-100 Toruń</p>
+                <p>Ja/My (*) niniejszym odstępuję/odstępujemy (*) od umowy sprzedaży następujących towarów/ świadczenia następującej usługi (*):</p>
+                <form class="renouncement__form" action="" data-parsley-validate="" novalidate="" _lpchecked="1">
+                    <div class="flex relative">
+                        <p>Data zamówienia:</p>
+                        <input type="text" class="input" required="">
+                    </div>
+                    <div class="flex relative">
+                        <p>Data odbioru towaru:</p>
+                        <input type="text" class="input" required="">
+                    </div>
+                    <div class="flex relative">
+                        <p>Imię i nazwisko / Nazwa / konsumenta(-ów) (*):</p>
+                        <input type="text" class="input" required="">
+                    </div>
+                    <div class="flex relative">
+                        <p>Adres konsumenta(-ów):</p>
+                        <textarea cols="30" rows="8" class="input input--textarea" required=""></textarea>
+                    </div>
+                    <div class="flex flex--full relative">
+                        <p>Proszę dokonać zwrotu zapłaconej ceny to- waru wraz z poniesionymi przeze mnie/nas (*) kosztami dostawy towaru do konsumenta(-ów) na niniejszy numer rachunku bankowego / w następujący sposób</p>
+                        <input type="text" class="input" required="">
+                    </div>
+                    <div class="flex">
+                        <p>Miejscowość, data:</p>
+                        <div class="relative">
+                            <input type="text" class="input" required="">
+                        </div>
+                        <div class="relative">
+                            <input type="text" class="input" required="">
+                        </div>
+                    </div>
+                    <div class="flex flex--between">
+                        <input type="submit" value="Wyślij" class="button button--blue">
+                        <a href="#" class="button button--blue">Wydrukuj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

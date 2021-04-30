@@ -1,0 +1,7 @@
+<p class="product__description">
+    {% if product.description is not empty %}
+        {{ product.description | nl2br }}
+    {% else %}
+        {{ 'sylius.ui.no_description'|trans }}.
+    {% endif %}
+</p>

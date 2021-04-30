@@ -1,0 +1,18 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set itemsSubtotal = sylius_order_items_subtotal(cart) %}
+{% set taxIncluded = sylius_order_tax_included(cart) %}
+{% set taxExcluded = sylius_order_tax_excluded(cart) %}
+{{ sylius_template_event('sylius.shop.cart.summary.totals', {'cart': cart}) }}
+<div class="flex flex--column">
+    {% if cart.orderPromotionTotal %}
+        <p class="text-orange flex flex--between">
+            {{ 'sylius.ui.discount'|trans }}
+            <span {{ sylius_test_html_attribute('cart-promotion-total') }}>{{ money.convertAndFormat(cart.orderPromotionTotal) }}</span>
+        </p>
+    {% endif %}
+    <p class="flex flex--between">
+        <span class="font-medium">{{ 'sylius.ui.cart.step_1.total'|trans }}</span>
+        <strong>{{ money.convertAndFormat(itemsSubtotal) }}</strong>
+    </p>
+</div>

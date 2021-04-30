@@ -1,0 +1,28 @@
+.categories {
+	margin-bottom: 54px;
+	@media screen and (max-width: $mobile) {
+		margin-bottom: 40px;
+    padding: 0 12px;
+	}
+	&--articles {
+		margin-bottom: 38px;
+	}
+	&__item {
+		box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.37);
+		border-radius: 19px;
+		padding: 16px;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 25px;
+		text-align: center;
+		color: $darkBlue;
+		width: 100%;
+		display: block;
+		margin-bottom: 10px;
+
+		&--active {
+			background-color: $blue;
+			color: $white;
+		}
+	}
+}

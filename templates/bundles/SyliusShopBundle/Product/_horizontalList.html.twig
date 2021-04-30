@@ -1,0 +1,8 @@
+{% set counter = products|length %}
+{% set class = 'col-xs-12 col-sm-6 col-md-3' %}
+{% if counter == 3 %}
+    {% set class = 'col-xs-12 col-sm-6 col-md-4' %}
+{% endif %}
+{% for product in products %}
+    {% include '@SyliusShop/Product/_box.html.twig' with { class } %}
+{% endfor %}

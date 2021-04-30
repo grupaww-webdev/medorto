@@ -3,12 +3,16 @@
     "babel-polyfill": "^6.26.0",
     "browser-sync": "^2.26.14",
     "chart.js": "^2.9.3",
+    "gulp-babel": "^8.0.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-stream": "^0.0.2",
     "gulp-uglify": "^3.0.2",
+    "imagemin-webp": "^6.0.0",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0",
+    "semantic-ui-message": "^2.3.1",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {

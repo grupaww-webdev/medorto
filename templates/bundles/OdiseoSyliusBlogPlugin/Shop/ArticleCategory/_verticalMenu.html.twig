@@ -1,0 +1,11 @@
+{% if resources|length > 0 %}
+    <section class="categories container">
+        <div class="row">
+            {% for articleCategory in resources %}
+                <div class="col-sm-12 col-md-6">
+                    <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_index_by_category', {'slug': articleCategory.slug}) }}" class="categories__item"> {{ articleCategory.title }} </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

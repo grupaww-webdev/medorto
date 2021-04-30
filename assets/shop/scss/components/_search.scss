@@ -1,0 +1,74 @@
+.search-page {
+  margin: 78px auto 60px;
+  @media screen and (max-width: $mobile) {
+    margin: 40px auto;
+  }
+  &__title {
+    font-size: 39px;
+    font-weight: 300;
+    line-height: 46px;
+    @media screen and (max-width: $mobile) {
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+    b {
+      font-weight: 900;
+      color: $darkBlue;
+    }
+  }
+  &__subtitle {
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 25px;
+    margin: 40px 0 20px;
+  }
+  &__categories {
+    padding-left: 18px;
+    margin: 0;
+    li {
+      display: flex;
+      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 25px;
+    }
+    input {
+      margin: 5px 10px 0 0;
+    }
+  }
+  &__items {
+    padding: 0;
+    margin: 70px 0 0 0;
+  }
+  &__item {
+    box-shadow: 2px 3px 4px rgba(130, 130, 130, 0.75);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 50px 42px;
+    justify-content: space-between;
+    @media screen and (max-width: $mobile) {
+      flex-direction: column;
+    }
+    &__content {
+      max-width: 330px;
+      @media screen and (max-width: $mobile) {
+        max-width: 100%;
+        margin: 12px 0;
+      }
+      h4 {
+        margin-top: 0;
+      }
+      p {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 25px;
+      }
+    }
+    &__shop {
+      max-width: 174px;
+    }
+    .button {
+      margin-top: 6px;
+    }
+  }
+}

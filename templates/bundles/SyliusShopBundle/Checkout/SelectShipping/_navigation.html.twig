@@ -1,0 +1,6 @@
+{% set enabled = order.shipments|length %}
+
+<div class="flex flex--between cart__payments__buttons">
+    <a href="{{ path('sylius_shop_checkout_address') }}" class="button button--border button--border--blue text-blue">{{ 'sylius.ui.change_address'|trans }}</a>
+    <button type="submit" class="button button--orange text-darkBlue" {% if not enabled %} disabled{% endif %} {{ sylius_test_html_attribute('next-step') }}>{{ 'sylius.ui.next'|trans }}</button>
+</div>

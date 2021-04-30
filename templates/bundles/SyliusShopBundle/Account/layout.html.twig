@@ -1,0 +1,20 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <section class="page account container wrapper">
+        <h1 class="page__title text-darkBlue">{{ 'sylius.ui.my_account'|trans }}</h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                {{ sylius_template_event('sylius.shop.account.layout.menu') }}
+            </div>
+            <div class="col-sm-12 col-md-9">
+                {{ sylius_template_event('sylius.shop.account.layout.before_subcontent') }}
+
+                {% block subcontent %}
+                {% endblock %}
+
+                {{ sylius_template_event('sylius.shop.account.layout.after_subcontent') }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

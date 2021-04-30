@@ -19,8 +19,9 @@
     "require": {
         "php": "^7.3",
         "bitbag/cms-plugin": "^3.0",
-        "odiseoteam/sylius-blog-plugin": "^1.2",
+        "bitbag/przelewy24-plugin": "^1.2",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
+        "odiseoteam/sylius-blog-plugin": "^1.2",
         "sylius/paypal-plugin": "^1.1",
         "sylius/sylius": "~1.9.0",
         "symfony/dotenv": "^4.4 || ^5.2",

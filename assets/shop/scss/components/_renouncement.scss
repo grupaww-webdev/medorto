@@ -1,0 +1,78 @@
+.renouncement {
+	&__form {
+		margin-top: 36px;
+		.input {
+			margin-left: 54px;
+			border-color: #d1d5db;
+			border-radius: 7px;
+			max-width: none;
+      @media screen and (max-width: $mobile) {
+        margin-left: 0;
+        margin-bottom: 12px;
+      }
+		}
+		.flex {
+			margin-bottom: 12px;
+      @media screen and (max-width: $mobile) {
+        flex-wrap: wrap;
+        margin-bottom: 0;
+      }
+
+			.relative {
+				margin-left: 54px;
+				width: 100%;
+
+				.input {
+					margin-left: 0;
+				}
+			}
+
+			&--full {
+				margin-top: 42px;
+				flex-wrap: wrap;
+				.input {
+					min-width: 100%;
+					margin-left: 0%;
+				}
+				p {
+					min-width: 100%;
+					flex: auto;
+					margin-bottom: 8px;
+				}
+			}
+		}
+		p {
+			flex: 0 0 auto;
+      @media screen and (max-width: $mobile) {
+        flex: auto;
+        min-width: 100%;
+        margin-bottom: 8px;
+      }
+		}
+	}
+	p {
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 25px;
+	}
+
+	.button {
+		width: calc(50% - 10px);
+		border-radius: 7px;
+		margin-top: 20px;
+    @media screen and (max-width: $mobile) {
+      width: 100%;
+      margin-top: 12px;
+    }
+	}
+
+	.page__title {
+		margin-bottom: 46px;
+	}
+
+	.page__subtitle {
+		font-weight: 700;
+		font-size: 17px;
+		margin-bottom: 32px;
+	}
+}

@@ -1,13 +1,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en_US
+    locale: pl_PL
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
-    odiseo_blog.model.article.class: Odiseo\BlogBundle\Model\Article
+    odiseo_blog.model.article.class: App\Entity\Blog\Article
     odiseo_blog.model.article_category.class: Odiseo\BlogBundle\Model\ArticleCategory
-    odiseo_blog.model.article_comment.class: Odiseo\BlogBundle\Model\ArticleComment
+    odiseo_blog.model.article_comment.class: Odiseo\SyliusBlogPlugin\Entity\ArticleComment
 
 imports:
+    - { resource: 'services/*.yml' }
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/services/sitemap_provider.yml" }
 
 services:
@@ -28,12 +29,13 @@ services:
             autowire: false
         Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType:
             autowire: false
-    app.block_event_listener.admin.layout.stylesheets:
+            
+    app.block_event_listener.admin.layout.scripts:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
-            - 'App/Shop/_stylesheets.html.twig'
+            - 'App/Shop/_javascripts.html.twig'
         tags:
-            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.stylesheets, method: onBlockEvent }
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
 
     # Makes classes in src/ available to be used as services;
     # this creates a service per class whose id is the fully-qualified class name
@@ -53,3 +55,35 @@ services:
             - 'elements/facebook-widget.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
+
+    app.form.type.checkout_select_shipping_and_payment:
+       class: App\Form\Type\Checkout\SelectShippingAndPaymentType
+       public: true
+       arguments: ['%sylius.model.order.class%', '%sylius.form.type.checkout_select_shipping.validation_groups%']
+       tags:
+           - { name: form.type }
+    app.request.matcher:
+        class: Symfony\Component\HttpFoundation\RequestMatcher
+
+    sylius.listener.checkout_redirect:
+        class: Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_address',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_select_shipping',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_payment',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_test',  method: 'handleCheckoutRedirect'}
+        arguments:
+            - '@request_stack'
+            - '@sylius.router.checkout_state'
+            - '@app.request.matcher'
+
+    app.refund.form.type:
+        class: App\Form\Type\RefundType
+        tags:
+            - { name: form.type }
+        arguments: ['%app.model.order_refund.class%', []]
+        
+    app.form.extension.type.article:
+        class: App\Form\Extension\ArticleTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }

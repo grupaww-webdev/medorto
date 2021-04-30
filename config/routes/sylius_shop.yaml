@@ -27,3 +27,48 @@ sylius_shop_request_password_reset_token_redirect:
     defaults:
         route: sylius_shop_request_password_reset_token
         permanent: false
+
+app_shop_product_bestsellers_list:
+    path: /products/bestsellers-list/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: '@SyliusShop/Product/_horizontalList.html.twig'
+            limit: 4
+            repository:
+                method: findAllByBestsellers
+                arguments: 
+                    - '!!int $count'
+            criteria: false
+        paginate: true
+
+app_shop_checkout_select_shipping_and_payment:
+    path: /checkout/shipping-and-payment
+    methods: [GET, PUT]
+    defaults:
+       _controller: sylius.controller.order:updateAction
+       _sylius:
+           event: complete
+           flash: false
+           template: "@SyliusShop/Checkout/selectShippingAndPayment.html.twig"
+           form: App\Form\Type\Checkout\SelectShippingAndPaymentType
+           repository:
+               method: findCartForSelectingShipping
+               arguments:
+                   - "expr:service('sylius.context.cart').getCart().getId()"
+           state_machine:
+               graph: sylius_order_checkout
+               transition: complete
+           redirect:
+               route: sylius_shop_order_pay
+               parameters:
+                   tokenValue: resource.tokenValue
+                   
+app_refund_create:
+    path: /{_locale}/refund/new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.order_refund:createAction
+        _sylius:
+            template: App\Refund\create.html.twig
