@@ -85,7 +85,7 @@ const watchFiles = () => {
 
 const appImages = () => {
   return gulp.src(config.imgin)
-    .pipe(imagemin())
+    // .pipe(imagemin())
     .pipe(gulp.dest(config.imgout));
 };
 

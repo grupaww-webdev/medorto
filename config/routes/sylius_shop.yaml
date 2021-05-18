@@ -39,6 +39,8 @@ app_shop_product_bestsellers_list:
             repository:
                 method: findAllByBestsellers
                 arguments: 
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - '!!int $count'
             criteria: false
         paginate: true
