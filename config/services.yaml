@@ -8,7 +8,8 @@ parameters:
     odiseo_blog.model.article_comment.class: Odiseo\SyliusBlogPlugin\Entity\ArticleComment
 
 imports:
-    - { resource: 'services/*.yml' }
+    - { resource: 'services/_sonata_events.yml' }
+    - { resource: 'services/_menu.yml' }
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/services/sitemap_provider.yml" }
 
 services:
@@ -23,6 +24,8 @@ services:
         # Allows optimizing the container by removing unused services; this also means
         # fetching services directly from the container via $container->get() won't work
         public: false
+        bind:
+            Sylius\Component\Core\Factory\CartItemFactoryInterface $orderItemFactory: '@sylius.factory.order_item'
 
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
@@ -87,3 +90,7 @@ services:
         class: App\Form\Extension\ArticleTranslationTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }
+        
+    app.controller_action.shop_add_to_cart:
+        public: true
+        class: App\Controller\Action\Shop\AddToCart
