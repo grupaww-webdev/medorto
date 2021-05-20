@@ -167,6 +167,9 @@
             "config/packages/ewz_recaptcha.yaml"
         ]
     },
+    "ezyang/htmlpurifier": {
+        "version": "v4.13.0"
+    },
     "fakerphp/faker": {
         "version": "v1.12.0"
     },
@@ -208,6 +211,9 @@
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
+    },
+    "friendsofsylius/sylius-import-export-plugin": {
+        "version": "0.19.1"
     },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.0",
@@ -377,8 +383,17 @@
             "ref": "7f6676627c1ceeeee204553d24a0545d5f918b7b"
         }
     },
+    "maennchen/zipstream-php": {
+        "version": "2.1.0"
+    },
     "marcj/topsort": {
         "version": "1.1.0"
+    },
+    "markbaker/complex": {
+        "version": "2.0.0"
+    },
+    "markbaker/matrix": {
+        "version": "2.1.2"
     },
     "matthiasnoback/symfony-config-test": {
         "version": "3.1.1"
@@ -397,6 +412,9 @@
     },
     "myclabs/deep-copy": {
         "version": "1.8.1"
+    },
+    "myclabs/php-enum": {
+        "version": "1.8.0"
     },
     "namshi/jose": {
         "version": "7.2.3"
@@ -503,6 +521,9 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "phpoffice/phpspreadsheet": {
+        "version": "1.17.1"
+    },
     "phpoption/phpoption": {
         "version": "1.5.0"
     },
@@ -563,6 +584,15 @@
     "polishsymfonycommunity/symfony-mocker-container": {
         "version": "v1.0.2"
     },
+    "portphp/csv": {
+        "version": "1.1.0"
+    },
+    "portphp/portphp": {
+        "version": "1.4.0"
+    },
+    "portphp/spreadsheet": {
+        "version": "1.0.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -575,6 +605,9 @@
     "psr/http-client": {
         "version": "1.0.0"
     },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
     "psr/http-message": {
         "version": "1.0.1"
     },
@@ -586,6 +619,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "queue-interop/queue-interop": {
+        "version": "0.8.1"
     },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
