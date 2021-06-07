@@ -1,0 +1,18 @@
+<h2 class="comments__heading text-darkBlue">{{ 'app.ui.reviews.title'|trans }}</h2>
+<div class="row">
+    <div class="comments__rating col-xs-12 col-sm-6 text-center">
+        <p class="comments__heading">{{ product.averageRating|number_format(1) }}/<span class="comments__heading--small">5</span></p>
+        <div class="flex flex--vcenter">
+            <div id="overall" class="my-rating flex" data-rating="{{ product.averageRating|round(2) }}"></div>
+            <span class="products__amount">({{ product.acceptedReviews|length }})</span>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <div class="comments__subheading">
+            <h3 class="text-darkBlue">Dodaj opinie</h3>
+            <p>Wózek inwalidzki Wheelie AIR 4613</p>
+        </div>
+
+        {{ render(url('app_shop_product_review_create', {'slug': product.slug, 'template': '@SyliusShop/ProductReview/simpleCreate.html.twig'})) }}
+    </div>
+</div>

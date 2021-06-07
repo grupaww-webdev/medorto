@@ -14,10 +14,9 @@
         {% include '@SyliusShop/Product/Show/_options.html.twig' %}
     {% endif %}
 {% endif %}
-{{ form_row(form.cartItem.quantity, sylius_test_form_attribute('quantity')) }}
+{{ form_row(form.cartItem.quantity, sylius_test_form_attribute('quantity')|sylius_merge_recursive({'attr': {'class': 'input mb-4'}})) }}
 
 {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
-{#<a href="#" class="button button--blue">Do koszyka</a>#}
 
 <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
 {{ form_row(form._token) }}

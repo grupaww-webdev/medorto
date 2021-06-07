@@ -1,5 +1,16 @@
 sylius_ui:
     events:
+        app.shop.product.show.reviews:
+            blocks:
+                header:
+                    template: "@SyliusShop/Product/Show/Reviews/_header.html.twig"
+                    priority: 30
+                latest_reviews:
+                    template: "@SyliusShop/Product/Show/Reviews/_latest.html.twig"
+                    priority: 20
+                view_more:
+                    template: "@SyliusShop/Product/Show/Reviews/_viewMore.html.twig"
+                    priority: 10
         sylius.app.layout.footer:
             blocks:
                 grid:
@@ -117,4 +128,13 @@ sylius_ui:
                     priority: 20
                 navigation:
                     template: "@SyliusShop/Checkout/SelectShipping/_navigation.html.twig"
+                    priority: 10
+
+        app.shop.product_review.index.list:
+            blocks:
+                list:
+                    template: "@SyliusShop/ProductReview/_list.html.twig"
+                    priority: 20
+                back_button:
+                    template: "@SyliusShop/ProductReview/List/_backButton.html.twig"
                     priority: 10

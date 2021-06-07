@@ -28,6 +28,10 @@ a {
 	cursor: pointer;
 }
 
+.jq-star svg {
+	@include size(100%, 100%);
+}
+
 .relative {
 	position: relative;
 }
@@ -107,3 +111,5 @@ a {
 .font-black {
 	font-weight: 900;
 }
+
+

@@ -1,0 +1,19 @@
+<li class="comments__item flex" {{ sylius_test_html_attribute('comment', review.comment) }}>
+    <span class="item__author">
+        {{ review.author.firstName|default('Gość') }}
+    </span>
+    <div class="item__content">
+        <div class="item__rating flex">
+            <div
+                id="overall"
+                class="my-rating flex"
+                data-rating="{{ review.rating }}"
+            ></div>
+            {{ review.createdAt|format_date }}
+        </div>
+        <b>{{ review.title }}</b>
+        <p>
+            {{ review.comment }}
+        </p>
+    </div>
+</li>

@@ -37,6 +37,10 @@ sylius:
                 delete_account: Usuń konto
 app:
     ui:
+        reviews:
+            title: Opinie
+            user_reviews: Opinie użytkowników
+            review_product: Oceń produkt
         products:
             new: Nowość
         breadcrumbs:

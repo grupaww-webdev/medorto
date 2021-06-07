@@ -17,9 +17,28 @@
         </div>
         {{ sylius_template_event('app.shop.product.show.content', _context) }}
     </section>
+
+    <section class="comments container wrapper" id="sylius-product-reviews " {{ sylius_test_html_attribute('product-reviews') }}>
+        {{ sylius_template_event('app.shop.product.show.reviews', _context) }}
+    </section>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-
+    <script>
+        $(".user-rating").starRating({
+            totalStars: 5,
+            starShape: "rounded",
+            starSize: 44,
+            useGradient: false,
+            strokeColor: 'transparent',
+            ratedColor: '#09d',
+            activeColor: '#09d',
+            useFullStars: true,
+            disableAfterRate: false,
+            callback: function(currentRating, $el) {
+                $('#sylius_product_review_rating_' + (currentRating - 1)).prop('checked', true);
+            }
+        });
+    </script>
 {% endblock %}
