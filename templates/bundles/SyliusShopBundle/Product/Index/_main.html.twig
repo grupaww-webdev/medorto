@@ -3,7 +3,11 @@
 
 <div class="products container wrapper">
     <div class="row">
-        <div class="products__lists col-xs-12 col-md-12">
+        <div class="col-xs-12 col-md-3">
+            <h3 class="search-page__subtitle text-darkBlue">KATEGORIE</h3>
+            {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_leftSidebar.html.twig'})) }}
+        </div>
+        <div class="col-xs-12 col-md-9">
             {{ sylius_template_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
             {% if resources.data|length > 0 %}
