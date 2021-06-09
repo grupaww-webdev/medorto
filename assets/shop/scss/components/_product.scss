@@ -30,12 +30,12 @@
     font-size: 28px;
   }
   #sylius-product-adding-to-cart {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      grid-column-gap: 1em;
-      .field {
-          margin-bottom: 10px;
-      }
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: 1em;
+    .field {
+      margin-bottom: 10px;
+    }
   }
   .slider {
     margin-top: 0;

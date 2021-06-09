@@ -20,6 +20,10 @@ a {
 	transition: all 0.2s ease;
 }
 
+[class*="svg-hovered"] {
+	fill: #f99e23!important;
+}
+
 .hidden {
 	display: none;
 }

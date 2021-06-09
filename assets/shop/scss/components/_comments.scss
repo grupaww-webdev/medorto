@@ -83,8 +83,10 @@
 
     .item {
       &__author {
-        width: 200px;
+        width: 180px;
         font-weight: 700;
+        word-break: break-all;
+        margin-right: 20px;
         @media screen and (max-width: $mobile) {
           width: auto;
           margin-bottom: 20px;
@@ -100,6 +102,7 @@
         font-size: 16px;
         font-weight: 300;
         line-height: 25px;
+        width: 100%;
       }
     }
   }
