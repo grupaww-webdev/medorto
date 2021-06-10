@@ -138,3 +138,8 @@ sylius_ui:
                 back_button:
                     template: "@SyliusShop/ProductReview/List/_backButton.html.twig"
                     priority: 10
+        sylius.shop.account.order.show.subcontent:
+            blocks:
+                buttons:
+                    template: "@SyliusShop/Account/Order/Show/_buttons.html.twig"
+                    priority: 15

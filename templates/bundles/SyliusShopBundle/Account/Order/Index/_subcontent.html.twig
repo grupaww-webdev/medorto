@@ -7,7 +7,7 @@
         <li class="account__order flex row">
             <p class="account__content col-sm-12 col-md-3">
                 {{ 'sylius.ui.order'|trans }}<br>
-                nr. {{ order.number }}<br>
+                nr. <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}">{{ order.number }}</a> <br>
                 {{ 'sylius.ui.state'|trans }}: {{ order.state }}<br>
                 <b>{{ money.format(order.total, order.currencyCode) }}</b>
             </p>

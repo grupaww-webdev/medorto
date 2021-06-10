@@ -37,6 +37,11 @@ sylius:
                 delete_account: Usuń konto
 app:
     ui:
+        item: Nazwa produktu
+        unit_price: Cena
+        subtotal: Wartość
+        order: Zamówienie nr
+        total: Całkowita wartość zamówienia
         reviews:
             title: Opinie
             user_reviews: Opinie użytkowników
@@ -76,7 +81,11 @@ app:
                 gpdr: Obowiązek informacyjny na podstawie artykułu 13 RODO
                 shipping_costs: Koszty dostawy
                 pick_up_places: Punkty odbioru Click & Collect
-        
+    order:
+        status: Status zamówienia
+        placed_date: Data złożenia zamówienia
+        shipping_date: Data dostawy
+        payment_state: Status płatności
 odiseo_sylius_blog_plugin:
     ui:
         blog:

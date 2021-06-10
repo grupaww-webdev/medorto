@@ -8,6 +8,23 @@
   border: 0;
   cursor: pointer;
 
+  &--small {
+      font-size: 12px;
+      padding: 3px 10px;
+      min-width: 100px;
+  }
+
+  &--secondary {
+      color: $black;
+      background-color: $white;
+      font-weight: 400;
+
+      &:hover {
+          background-color: $darkBlue;
+          color: $white;
+      }
+  }
+
   &--disabled {
     pointer-events: none!important;
     cursor: none!important;
@@ -46,6 +63,9 @@
 
     &--blue {
       border-color: $blue;
+    }
+    &--black {
+        border-color: $black;
     }
   }
 }
