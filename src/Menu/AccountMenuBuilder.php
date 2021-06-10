@@ -46,9 +46,9 @@ final class AccountMenuBuilder
             ->setLabelAttribute('image', 'settings')
         ;
         $menu
-            ->addChild('delete_account', ['route' => 'sylius_shop_account_order_index'])
-            ->setLabel('sylius.menu.shop.account.delete_account')
-            ->setLabelAttribute('image', 'delete')
+            ->addChild('change_password', ['route' => 'sylius_shop_account_change_password'])
+            ->setLabel('sylius.menu.shop.account.change_password')
+            ->setLabelAttribute('image', 'change')
         ;
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);

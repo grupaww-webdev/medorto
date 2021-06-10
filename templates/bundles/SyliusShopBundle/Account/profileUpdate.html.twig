@@ -1,0 +1,29 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% form_theme form 'App/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
+
+{% block subcontent %}
+    <section class="login login--register login--cart cart__forms container">
+        <div class="login__form login__form--register">
+        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'novalidate': 'novalidate'}}) }}
+
+        {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
+
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}
+        {{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}
+        {{ form_row(form.email, sylius_test_form_attribute('email')) }}
+        {{ form_row(form.birthday) }}
+        {{ form_row(form.gender, {'attr': {'class': 'input'}}) }}
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
+
+        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+
+        <button type="submit" class="button button--darkBlue" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </section>
+{% endblock %}
