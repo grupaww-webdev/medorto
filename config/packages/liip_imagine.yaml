@@ -10,7 +10,7 @@ liip_imagine:
                 thumbnail: { size: [202, 200], mode: outbound }
         app_shop_category_thumbnail:
             filters:
-                thumbnail: { size: [1300, 240], mode: outbound }                
+                thumbnail: { size: [1300, 258], mode: outbound }                
         app_shop_product_small_thumbnail:
             filters:
                 thumbnail: { size: [69, 78], mode: outbound }
