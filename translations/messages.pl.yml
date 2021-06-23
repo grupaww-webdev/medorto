@@ -3,6 +3,9 @@ sylius:
         menu:
             refunds: Zwroty            
     ui:
+        order_refunds: Zwroty
+        bank_account: Konto bankowe
+        issue_date: Data założenia
         add_to_cart: Do koszyka
         account: Konto
         customer_login: Logowanie

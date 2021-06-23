@@ -16,7 +16,9 @@ final class AdminMenuListener
     {
         $menu = $event->getMenu();
         $sales = $menu->getChild('sales');
-        $sales->addChild('refunds')
+        $sales->addChild('refunds', [
+                'route' => 'app_admin_order_refund_index'
+            ])
             ->setLabel('sylius.admin.menu.refunds')
             ->setLabelAttribute('icon', 'suitcase')
             ;

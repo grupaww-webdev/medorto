@@ -282,6 +282,38 @@ winzou_state_machine:
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'select_payment'", "'sylius_order_checkout'"]
 
+sylius_grid:
+    grids:
+        app_admin_refund:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Order\Refund
+            fields:
+                order:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: 'App\Refund\Grid\order.html.twig'
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    sortable: ~
+                    path: order.state
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/State"
+                bankAccount:
+                    type: string
+                    label: sylius.ui.bank_account
+                issueDate:
+                    type: datetime
+                    label: sylius.ui.issue_date
+            actions:
+                item:
+                    show:
+                        type: show
 sylius_resource:
     resources:
         app.order_refund:
