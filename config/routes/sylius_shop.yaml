@@ -87,14 +87,33 @@ app_shop_checkout_select_shipping_and_payment:
                route: sylius_shop_order_pay
                parameters:
                    tokenValue: resource.tokenValue
+
+app_refund_index:
+    path: /{_locale}/account/refunds
+    methods: [GET]
+    defaults:
+        _controller: app.controller.order_refund:indexAction
+        _sylius:
+            template: App\Refund\index.html.twig
+            repository:
+                method: findForCustomer
+                arguments: 
+                 - "expr:service('sylius.context.customer').getCustomer()"
                    
 app_refund_create:
-    path: /{_locale}/refund/new
+    path: /{_locale}/refund/{orderId}
     methods: [GET, POST]
     defaults:
         _controller: app.controller.order_refund:createAction
         _sylius:
+            redirect: sylius_shop_account_order_index
             template: App\Refund\create.html.twig
+            factory:
+                method: createNewForOrder
+                arguments: 
+                    - 'expr:service("sylius.repository.order").find($orderId)'
+            form:
+                type: App\Form\Type\RefundType
 #
 app_shop_add_to_cart:
     path: /{_locale}/cart/add

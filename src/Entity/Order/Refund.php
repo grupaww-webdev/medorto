@@ -77,6 +77,19 @@ class Refund implements ResourceInterface
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Order", inversedBy="refunds")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     * @var Order
+     */
+    protected $order;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -152,5 +165,77 @@ class Refund implements ResourceInterface
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param  \DateTimeInterface  $orderDate
+     */
+    public function setOrderDate(?\DateTimeInterface $orderDate): void
+    {
+        $this->orderDate = $orderDate;
+    }
+
+    /**
+     * @param  ?\DateTimeInterface  $orderReceivedDate
+     */
+    public function setOrderReceivedDate(?\DateTimeInterface $orderReceivedDate): void
+    {
+        $this->orderReceivedDate = $orderReceivedDate;
+    }
+
+    /**
+     * @param ?string $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @param  string  $bankAccount
+     */
+    public function setBankAccount(string $bankAccount): void
+    {
+        $this->bankAccount = $bankAccount;
+    }
+
+    /**
+     * @param  string  $city
+     */
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @param  \DateTimeInterface  $issueDate
+     */
+    public function setIssueDate(\DateTimeInterface $issueDate): void
+    {
+        $this->issueDate = $issueDate;
+    }
+
+    /**
+     * @return Order
+     */
+    public function getOrder(): ?Order
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param  Order  $order
+     */
+    public function setOrder(Order $order): void
+    {
+        $this->order = $order;
     }
 }

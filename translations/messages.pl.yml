@@ -1,4 +1,7 @@
 sylius:
+    admin:
+        menu:
+            refunds: Zwroty            
     ui:
         add_to_cart: Do koszyka
         account: Konto

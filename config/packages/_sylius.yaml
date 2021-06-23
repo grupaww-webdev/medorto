@@ -288,6 +288,8 @@ sylius_resource:
             classes:
                 model: App\Entity\Order\Refund
                 form: App\Form\Type\RefundType
+                factory: App\Factory\RefundFactory
+                repository: App\Repository\RefundRepository
 
 odiseo_blog:
     resources:

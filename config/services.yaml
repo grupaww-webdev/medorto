@@ -94,3 +94,19 @@ services:
     app.controller_action.shop_add_to_cart:
         public: true
         class: App\Controller\Action\Shop\AddToCart
+
+    app.refund.form.type.refund:
+        class: App\Form\Type\RefundType
+        arguments:
+            - "%app.model.order_refund.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+
+    app.refund.context.setup.block:
+        class: Tests\BitBag\SyliusCmsPlugin\Behat\Context\Setup\BlockContext
+        arguments:
+            - "@sylius.behat.shared_storage"
+            - "@bitbag_sylius_cms_plugin.behat.random_string_generator"
+            - "@bitbag_sylius_cms_plugin.factory.block"
+            - "@bitbag_sylius_cms_plugin.repository.block"

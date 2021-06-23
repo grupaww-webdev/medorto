@@ -4,3 +4,8 @@ services:
         arguments: ['@knp_menu.factory', '@event_dispatcher']
         tags:
             - {name: knp_menu.menu_builder, method: createMenu, alias: sylius.shop.account }
+    
+    sylius.admin.menu_builder:
+        class: App\Menu\AdminMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addRefundMenu }

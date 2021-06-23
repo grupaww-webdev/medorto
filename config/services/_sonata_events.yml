@@ -57,6 +57,12 @@ sylius_ui:
                     template: "@SyliusShop/Homepage/_banner.html.twig"
                     priority: 20
                     
+        sylius.app.account.refund.index.subcontent:
+            blocks:
+                subcontent:
+                    template: "App/Refund/Index/_subcontent.html.twig"
+                    priority: 10
+                    
         sylius.app.account.order.index.subcontent:
              blocks:
                 after_content_header_legacy:
