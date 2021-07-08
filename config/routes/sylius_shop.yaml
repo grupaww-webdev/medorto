@@ -114,9 +114,44 @@ app_refund_create:
                     - 'expr:service("sylius.repository.order").find($orderId)'
             form:
                 type: App\Form\Type\RefundType
-#
+
 app_shop_add_to_cart:
     path: /{_locale}/cart/add
     methods: [GET]
     defaults:
         _controller: app.controller_action.shop_add_to_cart
+
+app_shop_add_to_cart_with_refund:
+    path: /{_locale}/cart/{productCode}/{productVariantId}/refund/
+    methods: [GET]
+    defaults:
+        _controller: app.controller_action.shop_add_to_cart_with_refund
+
+app_shop_update_refund_product:
+    path: /{_locale}/cart/{productCode}/{productVariantId}/refund/
+    methods: [POST]
+    defaults:
+        _controller: app.controller_action.update_product_refund
+
+sylius_shop_ajax_cart_add_item:
+    path: cart/add
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order_item:addAction
+        _format: json
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments: [expr:notFoundOnNull(service('sylius.repository.product').find($productId))]
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType
+                options:
+                    product: expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+            redirect:
+                route: app_shop_add_to_cart_with_refund
+                parameters:
+                    productCode: expr:notFoundOnNull(service('sylius.repository.product').find($productId)).getCode()
+                    productVariantId: expr:notFoundOnNull(service('app.resolver.variant').resolve($productId)).getId()
+                
+                    
+            flash: sylius.cart.add_item

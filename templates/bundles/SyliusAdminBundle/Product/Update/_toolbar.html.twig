@@ -1,0 +1,9 @@
+<div class="ui right floated buttons">
+    {% set menu = knp_menu_get('sylius.admin.product.update', [], {'product': product}) %}
+    {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
+    <a class="ui labeled icon button" href="{{ path('app_admin_product_refund_index', {'productId': product.id}) }}">
+        <i class="barcode right icon"></i>
+        {{ 'app.ui.product_refunds'|trans }}
+    </a>
+    {% include '@SyliusAdmin/Product/_showInShopButton.html.twig' %}
+</div>

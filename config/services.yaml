@@ -92,18 +92,34 @@ services:
             - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }
             
     app.form.extension.type.product_translation:
-        class: App\Form\Extension\ProductTranslationTypeExtension
+        class: App\Form\Extension\Product\ProductTranslationTypeExtension
         tags:
             - { name: form.type_extension, extended_type: \Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType }
             
     app.controller_action.shop_add_to_cart:
         public: true
         class: App\Controller\Action\Shop\AddToCart
+        
+    app.controller_action.shop_add_to_cart_with_refund:
+        public: true
+        class: App\Controller\Action\Shop\ShowRefundProductToCard
+    
+    app.controller_action.update_product_refund:
+        public: true
+        class: App\Controller\Action\Shop\UpdateRefundProduct
 
     app.refund.form.type.refund:
         class: App\Form\Type\RefundType
         arguments:
             - "%app.model.order_refund.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+            
+    app.refund.form.type.product_type:
+        class: App\Form\Type\Product\ProductRefundType
+        arguments:
+            - "%app.model.product_refund.class%"
             - ['sylius']
         tags:
             - { name: form.type }
@@ -144,3 +160,16 @@ services:
             - "%sylius.importer.stop_on_failure%"
         tags:
             - { name: sylius.importer, type: product, format: csv }
+
+    
+    App\Calculator\ProductVariantPriceCalculator:
+        decorates: 'sylius.calculator.product_variant_price'
+        arguments: ['@.inner']
+
+    app.resolver.variant:
+        public: true
+        class: App\Resolver\ProductVariantResolver
+    App\Processor\OrderItemRefundCodeCalculator:
+        class: App\Processor\OrderItemRefundCodeCalculator
+        tags:
+            - { name: sylius.order_processor, priority: 45 }

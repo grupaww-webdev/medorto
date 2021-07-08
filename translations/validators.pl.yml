@@ -1,4 +1,9 @@
-sylius:
+app:
+    product_refund:
+        code:
+            not_blank: Kod nie może być pusty
+        discount:
+            not_blank: Zniżka musi być wartością pomiędzy 1 a 100
     refund:
         date_format: Nieprawidłowy format daty 
         not_blank: To pole jest wymagane

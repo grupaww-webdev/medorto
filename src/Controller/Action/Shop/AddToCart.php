@@ -38,6 +38,10 @@ final class AddToCart
 
     /** @var SessionInterface */
     private $session;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
@@ -47,7 +51,7 @@ final class AddToCart
         OrderProcessorInterface $orderProcessor,
         RouterInterface $router,
         SessionInterface $session,
-        EntityManagerInterface $em
+        EntityManagerInterface $entityManager
     ) {
         $this->productRepository = $productRepository;
         $this->orderItemFactory = $orderItemFactory;
@@ -56,7 +60,7 @@ final class AddToCart
         $this->orderProcessor = $orderProcessor;
         $this->router = $router;
         $this->session = $session;
-        $this->em = $em;
+        $this->entityManager = $entityManager;
     }
 
     public function __invoke(
@@ -72,7 +76,7 @@ final class AddToCart
         $cart = $this->cartContext->getCart();
         $cart->addItem($orderItem);
         $this->orderProcessor->process($cart);
-        $this->em->flush();
+        $this->entityManager->flush();
         $this->session->getBag('flashes')->add('success', 'sylius.cart.add_item');
 
         return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));

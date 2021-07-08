@@ -9,3 +9,7 @@ sylius_paypal_admin:
 app_order_refunds:
     resource: "admin/refund.yml"
     prefix: '/%sylius_admin.path_name%'
+
+app_product_refund:
+    resource: "admin/product_refund.yml"
+    prefix: '/%sylius_admin.path_name%/products/{productId}/refund/'

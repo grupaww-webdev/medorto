@@ -1,8 +1,12 @@
 sylius:
+    form: 
+        product:
+            refund_code: Kod refundacji
     admin:
         menu:
             refunds: Zwroty            
     ui:
+        refund: Refundacja
         order_refunds: Zwroty
         bank_account: Konto bankowe
         issue_date: Data założenia
@@ -42,7 +46,22 @@ sylius:
                 account_settings: Ustawienia konta
                 delete_account: Usuń konto
 app:
+    form:
+        product_refund:
+            code: Kod refundacji
+            discount: Procent zniżki
+            active: Aktywny
     ui:
+        buy_and_pay: 
+           title: Kup i zapłać
+           description: Wykonaj polecenie zapłaty online i odbierz zamówienie w dowolnym miejscu dzięki przesyłce kurierskiej.
+        buy_with_refund:
+            title: Realizuję wniosek NFZ
+            description: Realizuj posiadany wniosek na refundację i zamów produkt z zakupem w objętej refundacją aptece z naszej bazy. Kwota do zapłaty zależna jest od kodu refundacji.
+        edit_product_refund: Edycja kodu refundacji
+        discount: Zniżka
+        product_refunds: Kody refundacji
+        new_product_refund: Nowy kod refundacji
         item: Nazwa produktu
         unit_price: Cena
         subtotal: Wartość

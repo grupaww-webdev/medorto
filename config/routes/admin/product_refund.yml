@@ -1,0 +1,77 @@
+app_admin_product_refund_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_refund:indexAction
+        _sylius:
+            template: "@SyliusAdmin/Crud/index.html.twig"
+            grid: app_product_refund
+            section: admin
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                icon: barcode
+                subheader: app.ui.product_refunds
+                
+app_admin_product_refund_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.product_refund:createAction
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments:
+                    - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+            template: "@SyliusAdmin/Crud/create.html.twig"
+            grid: app_product_refund
+            section: admin
+            redirect:
+                route: app_admin_product_refund_index
+                parameters: { productId: $productId }
+            permission: true
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                        
+app_admin_product_refund_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: app.controller.product_refund:deleteAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            repository:
+                method: findOneByIdAndProductId
+                arguments:
+                    id: $id
+                    productId: $productId
+
+app_admin_product_refund_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: app.controller.product_refund:updateAction
+        _sylius:
+            template: "@SyliusAdmin/Crud/update.html.twig"
+            grid: app_product_refund
+            section: admin
+            redirect:
+                route: app_admin_product_refund_index
+                parameters: { productId: $productId }
+            permission: true
+            repository:
+                method: findOneByIdAndProductId
+                arguments:
+                    id: $id
+                    productId: $productId
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                        productId: $productId

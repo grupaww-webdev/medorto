@@ -284,6 +284,43 @@ winzou_state_machine:
 
 sylius_grid:
     grids:
+        app_product_refund:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Product\ProductRefund
+                    repository:
+                        method: createQueryBuilderByProductId
+                        arguments: ['!!int $productId']
+            fields:
+                code: 
+                    type: string
+                    label: sylius.ui.code
+                discount:
+                    type: string
+                    label: app.ui.discount
+                active:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            actions:
+                item:
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
+                main:                                    
+                    create:
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
         app_admin_refund:
             driver:
                 name: doctrine/orm
@@ -316,6 +353,14 @@ sylius_grid:
                         type: show
 sylius_resource:
     resources:
+        app.product_refund:
+            classes:
+                model: App\Entity\Product\ProductRefund
+                factory: App\Factory\ProductRefundFactory
+                form: App\Form\Type\Product\ProductRefundType
+                interface: App\Entity\Product\ProductRefundInterface
+                repository: App\Repository\ProductRefundRepository
+                
         app.order_refund:
             classes:
                 model: App\Entity\Order\Refund
