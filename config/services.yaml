@@ -90,7 +90,12 @@ services:
         class: App\Form\Extension\ArticleTranslationTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }
-        
+            
+    app.form.extension.type.product_translation:
+        class: App\Form\Extension\ProductTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: \Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType }
+            
     app.controller_action.shop_add_to_cart:
         public: true
         class: App\Controller\Action\Shop\AddToCart
