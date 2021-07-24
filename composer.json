@@ -25,6 +25,7 @@
         "odiseoteam/sylius-blog-plugin": "^1.2",
         "portphp/csv": "^1.1",
         "portphp/spreadsheet": "^1.0",
+        "ramsey/uuid-doctrine": "^1.6",
         "sylius/paypal-plugin": "^1.1",
         "sylius/sylius": "~1.9.0",
         "symfony/dotenv": "^4.4 || ^5.2",

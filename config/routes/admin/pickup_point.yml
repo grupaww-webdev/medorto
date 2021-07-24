@@ -1,0 +1,20 @@
+app_admin_pickup_point:
+    resource: |
+        alias: app.pickup_point
+        section: admin
+        templates: "@SyliusAdmin/Crud"
+        except: ['show']
+        grid: app_admin_pickup_point
+    type: sylius.resource
+
+app_admin_pickup_point_active_toggle:
+    path: /pickup_points/{pointId}/active
+    methods: [GET]
+    defaults:
+        _controller: app.controller.pickup_point:activeAction
+        _sylius:
+            grid: app_admin_pickup_point
+            section: admin
+            redirect:
+                route: app_admin_pickup_point_index
+            permission: true

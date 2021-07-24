@@ -1,10 +1,26 @@
 {% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
 
 <label class="login__checkbox__label flex flex--column" {{ sylius_test_html_attribute('shipping-item') }}>
-    <div {{ sylius_test_html_attribute('shipments') }}>
-        {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')|merge({'attr': {'class': 'login__checkbox__checkbox'}})) }}
+    <div class="item">
+        {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')|merge({'attr': {'class': 'login__checkbox__checkbox input-shipping-method'}})) }}
         <span class="login__checkbox__checkmark"></span>
         <b>{{ form.vars.label }}</b>
         <span>+ {{ money.convertAndFormat(fee) }}</span>
+        <div class="login__checkbox cart__payments__radio cart__payments__radio--form list">
+            <template id="pickup-point">
+                <label class="login__checkbox__label flex flex--column">
+                    <div>
+                        <input type="radio" id="" name="" required="required" class="login__checkbox__checkbox" value="" data-field="input">
+                        <span class="login__checkbox__checkmark"></span>
+                        <aside class="cart__payments__logo flex">
+                            <aside>
+                                <b data-field="name"></b>
+                                <p data-field="address"></p>
+                            </aside>
+                        </aside>
+                    </div>
+                </label>
+            </template>
+        </div>
     </div>
 </label>

@@ -1,0 +1,12 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
+{% if data.active %}
+    {% set color = 'red' %}
+    {% set label = 'sylius.ui.deactivate' %}
+{% else %}
+    {% set color = 'green' %}
+    {% set label = 'sylius.ui.activate' %}
+{% endif %}
+
+{{ buttons.default(path, label, null, 'check', color) }}

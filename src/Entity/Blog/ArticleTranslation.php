@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping AS ORM;
  * @ORM\Entity
  * @ORM\Table(name="odiseo_blog_article_translation")
  */
-final class ArticleTranslation extends BaseArticleTranslation
+class ArticleTranslation extends BaseArticleTranslation
 {
     /**
      * @ORM\Column(type="text", nullable=true)

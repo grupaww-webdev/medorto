@@ -283,7 +283,52 @@ winzou_state_machine:
                     args: ["object", "event", "'select_payment'", "'sylius_order_checkout'"]
 
 sylius_grid:
+    templates:
+        action: 
+            active_toggle: 'App/Grid/Action/active_toggle.html.twig'
     grids:
+        app_admin_pickup_point:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Shipping\PickupPoint
+            fields:
+                name:
+                    type: string
+                    sortable: ~
+                    label: sylius.ui.name
+                city:
+                    type: string
+                    sortable: ~
+                    label: sylius.ui.city
+                address:
+                    type: string
+                    label: sylius.ui.address
+                active:
+                    type: twig
+                    label: sylius.ui.active
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                city:
+                    type: string
+                    label: sylius.ui.city
+                name:
+                    type: string
+                    label: sylius.ui.name
+            actions:
+                main:                                    
+                    create:
+                        type: create
+                item:
+                    active:
+                        type: active_toggle
+                        options:
+                            link:
+                                route: app_admin_pickup_point_active_toggle
+                                parameters:
+                                    pointId: resource.id
+                    
         app_product_refund:
             driver:
                 name: doctrine/orm
@@ -353,6 +398,13 @@ sylius_grid:
                         type: show
 sylius_resource:
     resources:
+        app.pickup_point:
+            classes: 
+                model: App\Entity\Shipping\PickupPoint
+                interface: App\Entity\Shipping\PickupPointInterface
+                factory: App\PickupPoint\Factory\PickupPointFactory
+                form: App\PickupPoint\Form\Type\PickupPointType
+                controller: App\Controller\Admin\PickupPointController
         app.product_refund:
             classes:
                 model: App\Entity\Product\ProductRefund

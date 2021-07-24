@@ -26,6 +26,7 @@ services:
         public: false
         bind:
             Sylius\Component\Core\Factory\CartItemFactoryInterface $orderItemFactory: '@sylius.factory.order_item'
+            iterable $pickupPointProviders: !tagged_iterator app.pickup_point.provider
 
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
@@ -79,13 +80,7 @@ services:
             - '@request_stack'
             - '@sylius.router.checkout_state'
             - '@app.request.matcher'
-
-    app.refund.form.type:
-        class: App\Form\Type\RefundType
-        tags:
-            - { name: form.type }
-        arguments: ['%app.model.order_refund.class%', []]
-        
+            
     app.form.extension.type.article:
         class: App\Form\Extension\ArticleTranslationTypeExtension
         tags:
@@ -115,7 +110,15 @@ services:
             - ['sylius']
         tags:
             - { name: form.type }
-            
+
+    App\PickupPoint\Form\Type\PickupPointType:
+        class: App\PickupPoint\Form\Type\PickupPointType
+        arguments:
+            - "%app.model.pickup_point.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+                        
     app.refund.form.type.product_type:
         class: App\Form\Type\Product\ProductRefundType
         arguments:
@@ -173,3 +176,22 @@ services:
         class: App\Processor\OrderItemRefundCodeCalculator
         tags:
             - { name: sylius.order_processor, priority: 45 }
+            
+    App\PickupPoint\Form\Extension\ShippingMethodTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShippingMethodTypeExtension
+        tags: 
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType' }
+            
+    App\PickupPoint\Form\Extension\ShippingMethodChoiceTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShippingMethodChoiceTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType' }
+            
+    App\PickupPoint\Form\Extension\ShipmentTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShipmentTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType' }
+            
+    App\PickupPoint\Provider\LocalPickupPointProvider:
+        class: App\PickupPoint\Provider\LocalPickupPointProvider
+        tags: ['app.pickup_point.provider']

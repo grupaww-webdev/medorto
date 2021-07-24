@@ -4,8 +4,12 @@ sylius:
             refund_code: Kod refundacji
     admin:
         menu:
-            refunds: Zwroty            
+            refunds: Zwroty
+            pickup_points: Punkty odbioru            
     ui:
+        active: Aktywny
+        activate: Aktywuj
+        deactivate: Dezaktywuj
         refund: Refundacja
         order_refunds: Zwroty
         bank_account: Konto bankowe
@@ -47,11 +51,21 @@ sylius:
                 delete_account: Usuń konto
 app:
     form:
+        shipping_method:
+            pickup_point_provider: Provider
+            select_pickup_point_provider: Wybierz providera
         product_refund:
             code: Kod refundacji
             discount: Procent zniżki
             active: Aktywny
+        pickup_point:
+            name: Nazwa punktu odbioru
+            address: Adres
+            zip_code: Kod pocztowy
+            city: Miasto
+            active: Aktywny
     ui:
+        pickup_points: Punkty odbioru
         buy_and_pay: 
            title: Kup i zapłać
            description: Wykonaj polecenie zapłaty online i odbierz zamówienie w dowolnym miejscu dzięki przesyłce kurierskiej.

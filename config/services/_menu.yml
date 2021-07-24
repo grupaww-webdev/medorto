@@ -9,3 +9,4 @@ services:
         class: App\Menu\AdminMenuListener
         tags:
             - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addRefundMenu }
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addPickupPointMenu }

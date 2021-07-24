@@ -9,10 +9,7 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 final class AdminMenuListener
 {
-    /**
-     * @param MenuBuilderEvent $event
-     */
-    public function addRefundMenu(MenuBuilderEvent $event)
+    public function addRefundMenu(MenuBuilderEvent $event): void
     {
         $menu = $event->getMenu();
         $sales = $menu->getChild('sales');
@@ -22,5 +19,17 @@ final class AdminMenuListener
             ->setLabel('sylius.admin.menu.refunds')
             ->setLabelAttribute('icon', 'suitcase')
             ;
+    }
+
+    public function addPickupPointMenu(MenuBuilderEvent $event): void
+    {
+        $menu = $event->getMenu();
+        $configuration = $menu->getChild('configuration');
+        $configuration->addChild('pickup_points', [
+                'route' => 'app_admin_pickup_point_index'
+            ])
+            ->setLabel('sylius.admin.menu.pickup_points')
+            ->setLabelAttribute('icon', 'gift')
+        ;
     }
 }

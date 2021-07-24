@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping AS ORM;
  * @ORM\Entity
  * @ORM\Table(name="odiseo_blog_article")
  */
-final class Article extends BaseArticle
+class Article extends BaseArticle
 {
     public function getIntro(): ?string
     {

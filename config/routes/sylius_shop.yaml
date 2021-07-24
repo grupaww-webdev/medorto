@@ -155,3 +155,9 @@ sylius_shop_ajax_cart_add_item:
                 
                     
             flash: sylius.cart.add_item
+            
+app_pickup_point_shop_ajax_find_pickup_points:
+    path: pickup_points/{providerCode}/find
+    defaults:
+        _controller: App\Controller\Action\PickupPoint\FindPickupPoints
+        _format: json
