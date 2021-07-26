@@ -8,8 +8,8 @@
 </div>
 <div class="footer__block col-sm-12 col-md-4">
     <ul>
-        <li><a href="{{ bitbag_cms_get_link_for_code('shipping_costs') }}">{{ 'app.ui.menu.footer.promotions'|trans }}</a></li>
-        <li><a href="{{ bitbag_cms_get_link_for_code('shipping_costs') }}">{{ 'app.ui.menu.footer.bestsellers'|trans }}</a></li>
+        <li><a href="{{ path('sylius_shop_product_index_promotions') }}">{{ 'app.ui.menu.footer.promotions'|trans }}</a></li>
+        <li><a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.menu.footer.bestsellers'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('shipping_costs') }}">{{ 'app.ui.menu.footer.shipping_costs'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('pick_up_places') }}">{{ 'app.ui.menu.footer.pick_up_places'|trans }}</a></li>
     </ul>
