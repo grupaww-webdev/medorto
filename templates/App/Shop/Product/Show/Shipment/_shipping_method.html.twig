@@ -1,0 +1,19 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<table class="table table__border table__border-rounded order__table">
+    <tr>
+        <th>{{ 'sylius.ui.shipping_method' | trans }}</th>
+        <th>{{ 'sylius.ui.price' | trans }}</th>
+    </tr>
+    {% for method in shippingMethods %}
+        <tr>
+            <td>
+                {{ method.name }}
+                <p><small>{{ method.description }}</small></p>
+            </td>
+            <td>
+                {{ money.convertAndFormat(method.price.amount) }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>

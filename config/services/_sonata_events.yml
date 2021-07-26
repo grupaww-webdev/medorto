@@ -1,5 +1,13 @@
 sylius_ui:
     events:
+        app.shop.product.show.shipment:
+            blocks:
+                header:
+                    template: 'App/Shop/Product/Show/Shipment/_header.html.twig'
+                    priority: 30
+                content:
+                    template: 'App/Shop/Product/Show/Shipment/_content.html.twig'
+                    priority: 30
         app.shop.product.show.reviews:
             blocks:
                 header:

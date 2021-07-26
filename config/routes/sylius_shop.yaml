@@ -161,3 +161,8 @@ app_pickup_point_shop_ajax_find_pickup_points:
     defaults:
         _controller: App\Controller\Action\PickupPoint\FindPickupPoints
         _format: json
+
+app_shop_shipment_method_list:
+    path: products/shipment
+    defaults:
+        _controller: App\Controller\Action\Shop\ShipmentMethodList

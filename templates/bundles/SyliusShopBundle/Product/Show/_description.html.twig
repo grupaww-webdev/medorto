@@ -22,7 +22,7 @@
             </section>
         </section>
         <section id="shipping" class="tab-panel">
-            <h2>Dostawa</h2>
+            {{ sylius_template_event('app.shop.product.show.shipment', _context) }}
         </section>
     </div>
 </div>

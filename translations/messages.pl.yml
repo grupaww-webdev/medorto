@@ -120,6 +120,9 @@ app:
                 gpdr: Obowiązek informacyjny na podstawie artykułu 13 RODO
                 shipping_costs: Koszty dostawy
                 pick_up_places: Punkty odbioru Click & Collect
+                faq: FAQ
+                promotions: Promocje
+                bestsellers: Bestsellery
     order:
         status: Status zamówienia
         placed_date: Data złożenia zamówienia

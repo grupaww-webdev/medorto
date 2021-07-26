@@ -27,6 +27,7 @@ services:
         bind:
             Sylius\Component\Core\Factory\CartItemFactoryInterface $orderItemFactory: '@sylius.factory.order_item'
             iterable $pickupPointProviders: !tagged_iterator app.pickup_point.provider
+            Sylius\Component\Registry\ServiceRegistryInterface $calculators: '@sylius.registry.shipping_calculator'
 
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
