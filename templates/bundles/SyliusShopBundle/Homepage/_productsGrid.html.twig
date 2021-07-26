@@ -3,14 +3,14 @@
         <div class="products__lists col-sm-12 col-md-9">
             <h3 class="products__heading text-darkBlue flex">
                 {{ 'app.ui.homepage.bestsellers'|trans }}
-                <a href="#" class="button button--darkBlue">{{ 'app.ui.buttons.see_more'|trans }}</a>
+                <a href="{{ path('sylius_shop_product_index_bestsellers') }}" class="button button--darkBlue">{{ 'app.ui.buttons.see_more'|trans }}</a>
             </h3>
             <div class="row">
                 {{ render(url('app_shop_product_bestsellers_list', {'count': 3, 'template': '@SyliusShop/Homepage/_list.html.twig'})) }}
             </div>
             <h3 class="products__heading text-darkBlue flex">
                 {{ 'app.ui.homepage.newests'|trans }}
-                <a href="" class="button button--darkBlue">{{ 'app.ui.buttons.see_more'|trans }}</a>
+                <a href="{{ path('sylius_shop_product_index_latest') }}" class="button button--darkBlue">{{ 'app.ui.buttons.see_more'|trans }}</a>
             </h3>
             <div class="row">
                 {{ render(url('sylius_shop_partial_product_index_latest', {'count': 3, 'template': '@SyliusShop/Homepage/_list.html.twig', '_label': 'app.ui.products.new'})) }}
@@ -19,10 +19,10 @@
         <div class="products__promo col-sm-12 col-md-3 bg-blue">
             <h3 class="products__heading products__heading--promo text-white text-center">{{ 'app.ui.homepage.promotions'|trans }}</h3>
             <div class="row">
-                {{ render(url('sylius_shop_partial_product_index_latest', {'count': 2, 'template': '@SyliusShop/Homepage/_list_vertical.html.twig'})) }}
+                {{ render(url('sylius_shop_partial_product_index_by_category', {'code': 'promotions', 'count': 2})) }}
             </div>
             <div class="text-center">
-                <a href="/produkt.html" class="button button--white text-blue">Zobacz więcej</a>
+                <a href="{{ path('sylius_shop_product_index_promotions') }}" class="button button--white text-blue">{{ 'app.ui.buttons.see_more'|trans }}</a>
             </div>
         </div>
     </div>
