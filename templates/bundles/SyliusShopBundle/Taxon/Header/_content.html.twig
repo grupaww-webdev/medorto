@@ -2,7 +2,7 @@
     {% if taxon.images.first %}
         {% set path = taxon.images.first.path|imagine_filter('app_shop_category_thumbnail') %}
     {% else %}
-        {% set path = '//placehold.it/1300x240' %}
+        {% set path = 'assets/shop/img/placeholder_5.png' %}
     {% endif %}
     <section class="slider slider--static">
         <div class="glide__slides">
