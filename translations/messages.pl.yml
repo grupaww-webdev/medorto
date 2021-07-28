@@ -117,7 +117,7 @@ app:
             footer:
                 privacy: Polityka prywatności
                 regulations: Regulamin serwisu
-                gpdr: Obowiązek informacyjny na podstawie artykułu 13 RODO
+                gpdr: RODO
                 shipping_costs: Koszty dostawy
                 pick_up_places: Punkty odbioru Click & Collect
                 faq: FAQ
