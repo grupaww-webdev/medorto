@@ -1,3 +1,8 @@
-<a href="#">
-    <img src="{{ asset('assets/shop/img/placeholder_5.png') }}" alt="logo producenta">
-</a>
+{% if product.vendor %}
+    {% set vendor = product.vendor %}
+    <div class="column" {{ sylius_test_html_attribute('vendor') }}>
+        <a href="#">
+            <img src="{{ vendor.logoName|imagine_filter('odiseo_sylius_vendor_plugin_logo') }}" alt="{{ vendor.name }}">
+        </a>
+    </div>
+{% endif %}

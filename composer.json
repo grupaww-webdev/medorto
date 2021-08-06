@@ -23,6 +23,7 @@
         "friendsofsylius/sylius-import-export-plugin": "^0.19.1",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
         "odiseoteam/sylius-blog-plugin": "^1.2",
+        "odiseoteam/sylius-vendor-plugin": "^1.4",
         "portphp/csv": "^1.1",
         "portphp/spreadsheet": "^1.0",
         "ramsey/uuid-doctrine": "^1.6",

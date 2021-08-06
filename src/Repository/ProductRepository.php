@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Odiseo\SyliusVendorPlugin\Repository\ProductRepositoryTrait;
 use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Odiseo\SyliusVendorPlugin\Repository\ProductRepositoryInterface;
 
-final class ProductRepository extends BaseProductRepository
+final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
+    use ProductRepositoryTrait;
+
     private const DEFAULT_LIMIT = 12;
 
     public function findAllByBestsellers(

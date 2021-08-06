@@ -455,6 +455,15 @@
     "odiseoteam/sylius-blog-plugin": {
         "version": "v1.2.2"
     },
+    "odiseoteam/sylius-vendor-plugin": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "001463bcdb5c8ab5b61ca1a6ab98381359614d14"
+        }
+    },
     "openlss/lib-array2xml": {
         "version": "0.0.10"
     },
@@ -703,6 +712,15 @@
     },
     "squizlabs/php_codesniffer": {
         "version": "3.3.1"
+    },
+    "stefandoorn/sitemap-plugin": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "1793537db1cc9b0618d53f60bb3962930cdc3bed"
+        }
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",

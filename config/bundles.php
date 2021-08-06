@@ -68,4 +68,5 @@ return [
     Odiseo\SyliusBlogPlugin\OdiseoSyliusBlogPlugin::class => ['all' => true],
     BitBag\SyliusPrzelewy24Plugin\BitBagSyliusPrzelewy24Plugin::class => ['all' => true],
     FriendsOfSylius\SyliusImportExportPlugin\FOSSyliusImportExportPlugin::class => ['all' => true],
+    Odiseo\SyliusVendorPlugin\OdiseoSyliusVendorPlugin::class => ['all' => true]
 ];

@@ -139,3 +139,26 @@ odiseo_sylius_blog_plugin:
                 article_categories: Kategorie
                 articles: Artykuły
                 article_comments: Komentarze
+
+odiseo_sylius_vendor_plugin:
+    ui:
+        vendor: Producent
+        vendors: Producenci
+        edit_vendor: Edycja producenta
+        new_vendor: Nowy producent
+        profile: Profil
+        manage_vendors: Zarządzanie producentami
+    menu:
+        admin:
+            vendors: Producenci
+    form:
+        product:
+            select_vendor: Wybierz producenta
+        vendor:
+            slug: Slug
+            email: Email
+            translations: Tłumaczenie
+            description: Opis
+            logo: Logo
+            channels: Kanały
+            extra_emails: Dodatkowy email

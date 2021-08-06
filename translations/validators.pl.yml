@@ -7,3 +7,27 @@ app:
     refund:
         date_format: Nieprawidłowy format daty 
         not_blank: To pole jest wymagane
+
+odiseo_sylius_vendor_plugin:
+    vendor:
+        slug:
+            unique: Producent z tym slugiem już istnieje.
+            not_blank: Slug nie może być pusty
+            min_length: Minimalna długość sluga musi wynosić {{ limit }} znaków.
+            max_length: Długość sluga nie może wynosić więcej niż {{ limit }} znaków.
+        name:
+            unique: Istnieje już producent o tej nazwie.
+            not_blank: Nazwa nie może być pusta.
+            min_length: Minimalna długość nazwy musi wynosić {{ limit }} znaków.
+            max_length: Nazwa nie może być dłuższa niż {{ limit }} znaków.
+        email:
+            invalid: This email is invalid.
+            unique: This email is already used.
+            not_blank: Email cannot be blank.
+            min_length: Email must be at least {{ limit }} characters long.
+            max_length: Email can not be longer than {{ limit }} characters.
+        logo_file:
+            not_blank: Logo cannot be blank.
+    vendor_translation:
+        description:
+            not_blank: Description cannot be blank.
