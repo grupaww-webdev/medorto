@@ -5,7 +5,7 @@
                 {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/Product/Show/_association.html.twig'})) }}
             {% else %}
                 <h3 class="products__heading text-darkBlue flex">{{ 'sylius.ui.latest_products'|trans }}</h3>
-                <div class="row">
+                <div class="products__list">
                     {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_horizontalList.html.twig'})) }}
                 </div>
             {% endfor %}

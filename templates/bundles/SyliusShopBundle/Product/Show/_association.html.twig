@@ -1,4 +1,4 @@
 <h3 class="products__heading text-darkBlue flex">{{ product_association.type.name }}</h3>
-<div class="row">
+<div class="products__list">
     {% include '@SyliusShop/Product/_horizontalList.html.twig' with {'products': product_association.associatedProducts} %}
 </div>
