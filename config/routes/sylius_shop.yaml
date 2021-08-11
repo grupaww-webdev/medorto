@@ -133,7 +133,7 @@ app_refund_create:
 
 app_shop_add_to_cart:
     path: /{_locale}/cart/add
-    methods: [GET]
+    methods: [GET, POST]
     defaults:
         _controller: app.controller_action.shop_add_to_cart
 

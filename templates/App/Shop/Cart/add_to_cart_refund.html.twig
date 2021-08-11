@@ -2,7 +2,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% block content %}
-<form method="post" action="{{ path('app_shop_update_refund_product', {'productCode': product.code, 'productVariantId': productVariantId}) }}">
+<form method="post" action="{{ path('app_shop_update_refund_product', {'productCode': product.code, 'productVariantId': (productVariantId|default(product.variants|first))}) }}">
     <div class="products container wrapper">
         <div class="row">
             <div class="products__lists col-xs-12">

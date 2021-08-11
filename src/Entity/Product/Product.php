@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
  */
-class Product extends BaseProduct implements VendorAwareInterface
+class Product extends BaseProduct implements ProductInterface, VendorAwareInterface
 {
     use VendorTrait;
 
@@ -63,7 +63,7 @@ class Product extends BaseProduct implements VendorAwareInterface
         return $refundCode->first();
     }
 
-    public function getRefunds()
+    public function getRefunds(): Collection
     {
         return $this->refunds;
     }
