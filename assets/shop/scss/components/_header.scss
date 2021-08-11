@@ -70,10 +70,10 @@
 			}
 			&:hover {
 				.header__submenu {
-					display: block;
-					column-count: 4;
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
 					@media screen and (max-width: $mobile) {
-						display: block;
+                        grid-template-columns: repeat(3, 1fr);
 					}
 				}
 			}

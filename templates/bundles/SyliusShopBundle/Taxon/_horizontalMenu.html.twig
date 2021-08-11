@@ -1,27 +1,45 @@
 {% macro item(taxon, level) %}
     {% import _self as macros %}
     {% if taxon.enabledChildren|length > 0 %}
-        <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
-            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
-            <ul>
+        {% if level == 1 %}
+            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }} <img src="/assets/shop/img/chevron.png" alt="{{ taxon.name }}" /></a>
+            <ul class="header__submenu" {{ sylius_test_html_attribute('menu') }}>
                 {% for childTaxon in taxon.enabledChildren %}
                     {{ macros.item(childTaxon, level + 1) }}
                 {% endfor %}
             </ul>
-        </li>
+        {% else %}
+            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
+                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
+                <ul>
+                    {% for childTaxon in taxon.enabledChildren %}
+                        {{ macros.item(childTaxon, level + 1) }}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
     {% else %}
-        <li class="header__submenu__item {% if level == 1 %}header__submenu__item--bold{% endif %}" {{ sylius_test_html_attribute('menu-item') }}>
+        {% if level == 1 %}
             <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
-        </li>
+        {% else   %}
+            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
+                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
+            </li>
+        {% endif %}
     {% endif %}
 {% endmacro %}
 
 {% import _self as macros %}
 
 {% if taxons|length > 0 %}
-<ul class="header__submenu" {{ sylius_test_html_attribute('menu') }}>
     {% for taxon in taxons %}
-        {{ macros.item(taxon, 1) }}
+        <li class="header__menu__item header__menu__item--active">
+            {{ macros.item(taxon, 1) }}
+        </li>
     {% endfor %}
-</ul>
+
+{#    {% for taxon in taxons %}#}
+{#        {{ macros.item(taxon, 1) }}#}
+{#    {% endfor %}#}
+{#</ul>#}
 {% endif %}
