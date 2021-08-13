@@ -38,6 +38,8 @@
 		border-bottom: 1px solid #58595b;
 		margin: 0;
         position: relative;
+        padding-left: 0;
+        flex-wrap: wrap;
 		@media screen and (max-width: $mobile) {
 			flex-direction: column;
 			border-bottom: 0;
@@ -81,7 +83,6 @@
 				@include size(100%, 3px);
 				content: "";
 				display: block;
-				background-color: $orange;
 				opacity: 0;
 				position: absolute;
 				bottom: -2px;
@@ -122,9 +123,10 @@
 		overflow: hidden;
 		z-index: 9;
 		position: absolute;
-		left: 0;
+		left: 5%;
 		display: none;
-		@media screen and (max-width: $mobile) {
+        width: 90%;
+        @media screen and (max-width: $mobile) {
 			position: static;
 			display: flex;
 			flex-wrap: wrap;
