@@ -1,0 +1,20 @@
+<nav class="mobile">
+    <input type="checkbox" id="menu" name="menu" class="m-menu__checkbox">
+    <label class="m-menu__toggle" for="menu">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-linejoin="arcs"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </label>
+    <label class="m-menu__overlay" for="menu"></label>
+
+    <div class="m-menu">
+        <div class="m-menu__header">
+            <label class="m-menu__toggle" for="menu">
+                <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="arcs">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </label>
+            <span>Kategorie</span>
+        </div>
+        {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': 'App/Taxon/_mobileMenu.html.twig'})) }}
+    </div>
+</nav>
