@@ -18,3 +18,6 @@ liip_imagine:
         app_shop_blog:
             filters:
                 thumbnail: { size: [480, 380], mode: outbound }
+        app_shop_search:
+            filters:
+                thumbnail: { size: [150, 200], mode: outbound }

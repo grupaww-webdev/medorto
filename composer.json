@@ -19,6 +19,7 @@
     "require": {
         "php": "^7.3",
         "bitbag/cms-plugin": "^3.0",
+        "bitbag/elasticsearch-plugin": "^1.7",
         "bitbag/przelewy24-plugin": "^1.2",
         "friendsofsylius/sylius-import-export-plugin": "^0.19.1",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",

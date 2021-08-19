@@ -1,0 +1,45 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme searchForm '@SyliusUi/Form/theme.html.twig' %}
+
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+
+{% block content %}
+    {% include '@SyliusShop/Homepage/_banner.html.twig' %}
+    <section class="search-page container wrapper">
+        <h2 class="search-page__title text-darkBlue">
+{#            {{ 'bitbag_sylius_elasticsearch_plugin.ui.search_header'|trans({':search:': app.request.query.get('bitbag_elasticsearch_search')['box']['query']|default(''), ':results:': results.nbResults})|raw }}#}
+        </h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                {{ form_start(searchForm, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                <div style="display: none;">
+                    {{ form_row(searchForm.box) }}
+                </div>
+                <div class="item">
+                    {{ form_rest(searchForm) }}
+                </div>
+                <div class="item">
+                    <button type="submit" class="button button--blue disabled">
+                        <i class="search icon"></i>
+                        {{ 'bitbag_sylius_elasticsearch_plugin.ui.filter'|trans }}
+                    </button>
+                </div>
+                {{ form_end(searchForm) }}
+                <h3 class="search-page__subtitle text-darkBlue">KATEGORIE</h3>
+                {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_leftSidebar.html.twig'})) }}
+            </div>
+            <div class="col-xs-12 col-md-9">
+                {% if results|length > 0 %}
+                    <div class="products__list" id="products" {{ sylius_test_html_attribute('products') }}>
+                            {% include '@SyliusShop/Homepage/_list.html.twig' with {'products': results} %}
+                    </div>
+                    {{ pagination.simple(results) }}
+                {% else %}
+                    {{ messages.info('sylius.ui.no_results_to_display') }}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

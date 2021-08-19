@@ -48,7 +48,7 @@
                     <a href="#" class="flex">
                         <img class="input__icon" src="/assets/shop/img/glass.png" alt="szukaj" />
                     </a>
-                    <input type="text" placeholder="Szukaj" />
+                    <input type="text" placeholder="Szukaj" name="bitbag_elasticsearch_search[box][query]" />
                 </div>
                 <div class="actions flex">
                     <a href="{% if app.user %}{{ path('sylius_shop_account_dashboard') }}{% else %}{{ path('sylius_shop_login') }}{% endif %}">

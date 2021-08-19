@@ -11,6 +11,7 @@ imports:
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/config.yml" }
     - { resource: "@OdiseoSyliusBlogPlugin/Resources/config/config.yaml" }
     - { resource: "@OdiseoSyliusVendorPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusElasticsearchPlugin/Resources/config/config.yml" }
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
