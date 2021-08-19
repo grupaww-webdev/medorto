@@ -5,7 +5,7 @@ ARG PHP_VERSION=7.3
 ARG NODE_VERSION=10
 ARG NGINX_VERSION=1.16
 
-FROM php:${PHP_VERSION}-fpm-alpine AS sylius_php
+FROM php:${PHP_VERSION}-fpm-alpine3.13 AS sylius_php
 
 # persistent / runtime deps
 RUN apk add --no-cache \
