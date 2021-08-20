@@ -87,8 +87,9 @@
         </div>
         {% include 'App/Shop/_nav.html.twig' %}
     </header>
-    {% include '@SyliusUi/_flashes.html.twig' %}
-
+    <div class="container mt-4">
+        {% include '@SyliusUi/_flashes.html.twig' %}
+    </div>
     {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
 
     {% block content %}

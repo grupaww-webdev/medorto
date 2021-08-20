@@ -17,7 +17,7 @@ class Shipment extends BaseShipment implements PickupPointAwareInterface
 
     /**
      * @var string|null
-     * @ORM\ManyToOne(targetEntity="PickupPoint", inversedBy="pickupPoint")
+     * @ORM\ManyToOne(targetEntity="PickupPoint")
      * @ORM\JoinColumn(name="pick_up_point_id", referencedColumnName="id")
      */
     protected $pickupPoint;
