@@ -23,5 +23,5 @@
 
 {% block image %}
     {% set image = item.labelAttribute('image') %}
-    <img src="{{ asset('/assets/shop/img/'~ image ~'.png') }}" alt="Zamówienia">
+    <img src="{{ asset('/assets/shop/img/'~ image ~'.png') }}" alt="{{ item.label|trans }}">
 {% endblock %}
