@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import 'App/Shop/_breadcrumbs.html.twig' as breadcrumb %}
+
+{% block content %}
+    {% include '@SyliusShop/Homepage/_banner.html.twig' %}
+    {% block breadcrumb %}
+        {% set breadcrumbs = [
+            { label: 'app.ui.breadcrumbs.homepage'|trans, url: path('sylius_shop_homepage') },
+            { label: 'odiseo_sylius_blog_plugin.ui.blog.header'|trans }
+        ]
+        %}
+        {{ breadcrumb.crumble(breadcrumbs) }}
+    {% endblock %}
+    {% block blog_articles %}
+        {{ render(url('odiseo_sylius_blog_plugin_shop_partial_article_category_index', {
+            'template': '@OdiseoSyliusBlogPlugin/Shop/ArticleCategory/_verticalMenu.html.twig'
+        })) }}
+        <div class="blog container wrapper">
+            {% if resources|length > 0 %}
+                <div class="row">
+                    {% for article in resources %}
+                        {% include '@OdiseoSyliusBlogPlugin/Shop/Article/_box.html.twig' %}
+                    {% endfor %}
+                </div>
+                {{ pagination.simple(resources) }}
+            {% else %}
+                {{ messages.info('sylius.ui.no_results_to_display') }}
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}

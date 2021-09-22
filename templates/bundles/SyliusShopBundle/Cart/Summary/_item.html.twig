@@ -1,0 +1,20 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set product_variant = item.variant %}
+<div class="cart__list__item flex flex--between" {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
+    <div class="flex flex--between full-size" {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
+    </div>
+    <div class="flex flex--end half-size">
+        <b class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</b>
+        {{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)|sylius_merge_recursive({'attr': {'form': main_form, 'class': 'input'}})) }}
+        <form action="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(item.id) }}" />
+            <label class="flex relative" for="remove-{{ item.id }}">
+                <img src="{{ asset('assets/shop/img/bin.svg') }}" alt="usuń" class="pointer">
+                <input type="submit" {{ sylius_test_html_attribute('cart-remove-button', item.productName) }} class="hidden" id="remove-{{ item.id }}" />
+            </label>
+        </form>
+    </div>
+</div>

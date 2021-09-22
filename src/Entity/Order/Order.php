@@ -13,4 +13,8 @@ use Sylius\Component\Core\Model\Order as BaseOrder;
  */
 class Order extends BaseOrder
 {
+    public function __toString(): string
+    {
+        return $this->number ?? '';
+    }
 }

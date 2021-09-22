@@ -1,0 +1,23 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <section class="slider slider--static">
+        <div class="glide__slides">
+            <div class="glide__slide">
+                <div class="col-xs-12 col-md-6 px-0">
+                    <img class="responsive-img" src="/assets/shop/img/placeholder.jpg" alt="{{ 'app.ui.homepage.promotions'|trans }}">
+                </div>
+                <div class="col-xs-12 col-md-6 bg-darkBlue text-white slider__item">
+                    <div class="slider__content">
+                        <h2>{{ 'app.ui.homepage.promotions'|trans }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include '@SyliusShop/Product/Index/_main.html.twig' with {
+        resources: {
+            data: resources
+        }
+    } %}
+{% endblock %}

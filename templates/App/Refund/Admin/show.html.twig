@@ -1,0 +1,35 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% set order = order_refund.order %}
+{% block title %}{{ 'sylius.ui.refund'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
+{% block content %}
+    <div class="ui stackable grid">
+        <div class="eight wide column" id="info">
+            <div class="ui fluid card">
+                <div class="content">
+                    <a href="{{ path('sylius_admin_order_show', {'id': order.id}) }}" class="header">
+                        #{{ order.number }}
+                    </a>
+                    <div class="meta">
+                        <span class="date">{{ order_refund.issueDate|date }}</span>
+                        <br>
+                    </div>
+                </div>
+                <div class="content">
+                    <div id="subscribed-to-newsletter">
+                        <i class="icon payment icon"></i>
+                        {{ order_refund.bankAccount }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="eight wide column">
+            <h4 class="ui top attached styled header">
+                {{ 'sylius.ui.address'|trans }}
+            </h4>
+            <div class="ui attached segment" id="default-address">
+                {{ order_refund.address }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

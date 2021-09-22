@@ -1,0 +1,6 @@
+{% form_theme form 'App/Form/errors.html.twig' %}
+
+{{ form_widget(form.promotionCoupon, sylius_test_form_attribute('cart-promotion-coupon-input')|sylius_merge_recursive({'attr': {'form': main_form, 'placeholder': 'sylius.ui.enter_your_code'|trans~'...', 'class': 'input'}})) }}
+{{ form_errors(form.promotionCoupon) }}
+<button type="submit" id="sylius-save" {{ sylius_test_html_attribute('apply-coupon-button') }} class="button button--orange" form="{{ main_form }}">{{ 'sylius.ui.apply_coupon'|trans }}</button>
+<button type="submit" class="button button--border border-blue button--primary mb-3" id="sylius-cart-update" {{ sylius_test_html_attribute('cart-update-button') }} form="{{ main_form }}">{{ 'sylius.ui.update_cart'|trans }}</button>

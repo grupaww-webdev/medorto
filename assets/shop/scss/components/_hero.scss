@@ -1,0 +1,25 @@
+.hero {
+  padding: 46px;
+  box-shadow: 2px 3px 4px rgba(130, 130, 130, 0.75);
+  border-radius: 12px;
+  margin: 42px auto;
+  @media screen and (max-width: $mobile) {
+    border-radius: 0;
+  }
+  h2 {
+    font-size: 39px;
+    font-weight: 900;
+    line-height: 46px;
+    margin: 0;
+    @media screen and (max-width: $mobile) {
+      font-size: 32px;
+    }
+  }
+  p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+  a {
+    margin-top: 32px;
+  }
+}

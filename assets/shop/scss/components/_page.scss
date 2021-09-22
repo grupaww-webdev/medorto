@@ -1,0 +1,60 @@
+.page {
+  @media screen and (max-width: $mobile) {
+    padding: 0 12px;
+  }
+  &__title {
+    font-size: 39px;
+    font-weight: 900;
+    line-height: 46px;
+    @media screen and (max-width: $mobile) {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  }
+  &__subtitle {
+    margin-bottom: 60px;
+    line-height: 25px;
+    font-size: 17px;
+    font-weight: 400;
+  }
+  &__content {
+    margin-bottom: 70px;
+    .row {
+      margin: 54px 0;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        position: relative;
+        &:before {
+          @include size(6px, 10px);
+          content: '';
+          display: inline-block;
+          background-image: url('../img/chevron_list.png');
+          margin-right: 8px;
+        }
+      }
+    }
+    b {
+      font-weight: 700;
+    }
+    article, p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 25px;
+    }
+    h2 {
+      font-size: 30px;
+      font-weight: 900;
+    }
+    h2,h3,h4,h5 {
+      color: $darkBlue;
+    }
+    img {
+      @media screen and (max-width: $mobile) {
+        max-width: 100%;
+      }
+    }
+  }
+}

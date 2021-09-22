@@ -1,0 +1,28 @@
+<div class="tabset">
+    <input type="radio" name="tabset" id="description" aria-controls="description" checked>
+    <label for="description">{{ 'sylius.ui.description'|trans }}</label>
+    <input type="radio" name="tabset" id="reviews" aria-controls="reviews">
+    <label for="reviews">{{ 'sylius.ui.reviews'|trans }}</label>
+    <input type="radio" name="tabset" id="shipping" aria-controls="shipping">
+    <label for="shipping">{{ 'sylius.ui.shipping'|trans }}</label>
+
+    <div class="tab-panels">
+        <section id="description" class="tab-panel">
+            <p class="product__description">
+                {% if product.description is not empty %}
+                    {{ product.description|raw }}
+                {% else %}
+                    {{ 'sylius.ui.no_description'|trans }}.
+                {% endif %}
+            </p>
+        </section>
+        <section id="comments" class="tab-panel">
+            <section class="comments container wrapper" id="sylius-product-reviews " {{ sylius_test_html_attribute('product-reviews') }}>
+                {{ sylius_template_event('app.shop.product.show.reviews', _context) }}
+            </section>
+        </section>
+        <section id="shipping" class="tab-panel">
+            {{ sylius_template_event('app.shop.product.show.shipment', _context) }}
+        </section>
+    </div>
+</div>

@@ -9,7 +9,9 @@ imports:
     - { resource: "@SyliusPayPalPlugin/Resources/config/config.yaml" }
     
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/config.yml" }
-
+    - { resource: "@OdiseoSyliusBlogPlugin/Resources/config/config.yaml" }
+    - { resource: "@OdiseoSyliusVendorPlugin/Resources/config/config.yaml" }
+    - { resource: "@BitBagSyliusElasticsearchPlugin/Resources/config/config.yml" }
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
@@ -108,6 +110,7 @@ sylius_order:
         order:
             classes:
                 model: App\Entity\Order\Order
+                controller: App\Controller\OrderController
         order_item:
             classes:
                 model: App\Entity\Order\OrderItem
@@ -146,6 +149,7 @@ sylius_product:
     resources:
         product:
             classes:
+                repository: App\Repository\ProductRepository
                 model: App\Entity\Product\Product
             translation:
                 classes:
@@ -250,10 +254,179 @@ sylius_user:
 sylius_shop:
     product_grid:
         include_all_descendants: true
-
+    checkout_resolver:
+        pattern: /checkout/.+
+        route_map:
+            cart:
+                route: sylius_shop_checkout_address
+            addressed:
+                route: app_shop_checkout_select_shipping_and_payment
 sylius_theme:
     sources:
         filesystem:
             scan_depth: 1
             directories:
                 - "%kernel.project_dir%/themes"
+winzou_state_machine:
+    sylius_order_checkout:
+        transitions:
+            complete:
+                from: [addressed]
+                to: completed
+        callbacks:
+            after:
+                app_select_shipping:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'select_shipping'", "'sylius_order_checkout'"]
+                app_select_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'select_payment'", "'sylius_order_checkout'"]
+
+sylius_grid:
+    templates:
+        action: 
+            active_toggle: 'App/Grid/Action/active_toggle.html.twig'
+    grids:
+        app_admin_pickup_point:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Shipping\PickupPoint
+            fields:
+                name:
+                    type: string
+                    sortable: ~
+                    label: sylius.ui.name
+                city:
+                    type: string
+                    sortable: ~
+                    label: sylius.ui.city
+                address:
+                    type: string
+                    label: sylius.ui.address
+                active:
+                    type: twig
+                    label: sylius.ui.active
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                city:
+                    type: string
+                    label: sylius.ui.city
+                name:
+                    type: string
+                    label: sylius.ui.name
+            actions:
+                main:                                    
+                    create:
+                        type: create
+                item:
+                    active:
+                        type: active_toggle
+                        options:
+                            link:
+                                route: app_admin_pickup_point_active_toggle
+                                parameters:
+                                    pointId: resource.id
+                    
+        app_product_refund:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Product\ProductRefund
+                    repository:
+                        method: createQueryBuilderByProductId
+                        arguments: ['!!int $productId']
+            fields:
+                code: 
+                    type: string
+                    label: sylius.ui.code
+                discount:
+                    type: string
+                    label: app.ui.discount
+                active:
+                    type: twig
+                    label: sylius.ui.enabled
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            actions:
+                item:
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
+                main:                                    
+                    create:
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
+        app_admin_refund:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Order\Refund
+            fields:
+                order:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: 'App\Refund\Grid\order.html.twig'
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    sortable: ~
+                    path: order.state
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@SyliusAdmin/Order/Label/State"
+                bankAccount:
+                    type: string
+                    label: sylius.ui.bank_account
+                issueDate:
+                    type: datetime
+                    label: sylius.ui.issue_date
+            actions:
+                item:
+                    show:
+                        type: show
+sylius_resource:
+    resources:
+        app.pickup_point:
+            classes: 
+                model: App\Entity\Shipping\PickupPoint
+                interface: App\Entity\Shipping\PickupPointInterface
+                factory: App\PickupPoint\Factory\PickupPointFactory
+                form: App\PickupPoint\Form\Type\PickupPointType
+                controller: App\Controller\Admin\PickupPointController
+        app.product_refund:
+            classes:
+                model: App\Entity\Product\ProductRefund
+                factory: App\Factory\ProductRefundFactory
+                form: App\Form\Type\Product\ProductRefundType
+                interface: App\Entity\Product\ProductRefundInterface
+                repository: App\Repository\ProductRefundRepository
+                
+        app.order_refund:
+            classes:
+                model: App\Entity\Order\Refund
+                form: App\Form\Type\RefundType
+                factory: App\Factory\RefundFactory
+                repository: App\Repository\RefundRepository
+
+odiseo_blog:
+    resources:
+        article:
+            classes:
+                model: App\Entity\Blog\Article
+            translation:
+                classes:
+                    model: App\Entity\Blog\ArticleTranslation

@@ -1,9 +1,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en_US
+    locale: pl_PL
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    odiseo_blog.model.article.class: App\Entity\Blog\Article
+    odiseo_blog.model.article_category.class: Odiseo\BlogBundle\Model\ArticleCategory
+    odiseo_blog.model.article_comment.class: Odiseo\SyliusBlogPlugin\Entity\ArticleComment
 
 imports:
+    - { resource: 'services/_sonata_events.yml' }
+    - { resource: 'services/_menu.yml' }
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/services/sitemap_provider.yml" }
 
 services:
@@ -18,12 +24,23 @@ services:
         # Allows optimizing the container by removing unused services; this also means
         # fetching services directly from the container via $container->get() won't work
         public: false
+        bind:
+            Sylius\Component\Core\Factory\CartItemFactoryInterface $orderItemFactory: '@sylius.factory.order_item'
+            iterable $pickupPointProviders: !tagged_iterator app.pickup_point.provider
+            Sylius\Component\Registry\ServiceRegistryInterface $calculators: '@sylius.registry.shipping_calculator'
 
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
             autowire: false
         Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType:
             autowire: false
+            
+    app.block_event_listener.admin.layout.scripts:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - 'App/Shop/_javascripts.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
 
     # Makes classes in src/ available to be used as services;
     # this creates a service per class whose id is the fully-qualified class name
@@ -36,3 +53,168 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    app.facebook_messenger_widget.rendering.block:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - 'elements/facebook-widget.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.after_body, method: onBlockEvent }
+
+    app.form.type.checkout_select_shipping_and_payment:
+       class: App\Form\Type\Checkout\SelectShippingAndPaymentType
+       public: true
+       arguments: ['%sylius.model.order.class%', '%sylius.form.type.checkout_select_shipping.validation_groups%']
+       tags:
+           - { name: form.type }
+    app.request.matcher:
+        class: Symfony\Component\HttpFoundation\RequestMatcher
+
+    sylius.listener.checkout_redirect:
+        class: Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_address',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_select_shipping',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_payment',  method: 'handleCheckoutRedirect'}
+            - { name: 'kernel.event_listener', event: 'sylius.order.post_test',  method: 'handleCheckoutRedirect'}
+        arguments:
+            - '@request_stack'
+            - '@sylius.router.checkout_state'
+            - '@app.request.matcher'
+            
+    app.form.extension.type.article:
+        class: App\Form\Extension\ArticleTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }
+            
+    app.form.extension.type.product_translation:
+        class: App\Form\Extension\Product\ProductTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: \Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType }
+            
+    app.controller_action.shop_add_to_cart:
+        public: true
+        class: App\Controller\Action\Shop\AddToCart
+        
+    app.controller_action.shop_add_to_cart_with_refund:
+        public: true
+        class: App\Controller\Action\Shop\ShowRefundProductToCard
+    
+    app.controller_action.update_product_refund:
+        public: true
+        class: App\Controller\Action\Shop\UpdateRefundProduct
+
+    app.refund.form.type.refund:
+        class: App\Form\Type\RefundType
+        arguments:
+            - "%app.model.order_refund.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+
+    App\PickupPoint\Form\Type\PickupPointType:
+        class: App\PickupPoint\Form\Type\PickupPointType
+        arguments:
+            - "%app.model.pickup_point.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+                        
+    app.refund.form.type.product_type:
+        class: App\Form\Type\Product\ProductRefundType
+        arguments:
+            - "%app.model.product_refund.class%"
+            - ['sylius']
+        tags:
+            - { name: form.type }
+
+    app.refund.context.setup.block:
+        class: Tests\BitBag\SyliusCmsPlugin\Behat\Context\Setup\BlockContext
+        arguments:
+            - "@sylius.behat.shared_storage"
+            - "@bitbag_sylius_cms_plugin.behat.random_string_generator"
+            - "@bitbag_sylius_cms_plugin.factory.block"
+            - "@bitbag_sylius_cms_plugin.repository.block"
+
+    app.importer.image:
+        class: App\Importer\ImageExternalImporter
+        arguments:
+            - '%sylius_core.public_dir%/media/tmp/'
+
+    app.processor.products:
+        class: App\Processor\ProductProcessor
+        arguments:
+            - "@sylius.processor.products"
+            - "@sylius.repository.product"
+            - '@sylius.service.product_image_code'
+            - '@sylius.factory.product_image'
+            - '@app.importer.image'
+            - '@sylius.image_uploader'
+            - ['Code', 'Locale', 'Name', 'Description', 'Short_description', 'Meta_description', 'Meta_keywords', 'Main_taxon', 'Taxons', 'Channels', 'Enabled', 'Price']
+
+    sylius.importer.products.csv:
+        class: FriendsOfSylius\SyliusImportExportPlugin\Importer\ResourceImporter
+        arguments:
+            - "@sylius.factory.csv_reader"
+            - "@sylius.manager.product"
+            - "@app.processor.products"
+            - "@sylius.importer.result"
+            - "%sylius.importer.batch_size%"
+            - "%sylius.importer.fail_on_incomplete%"
+            - "%sylius.importer.stop_on_failure%"
+        tags:
+            - { name: sylius.importer, type: product, format: csv }
+
+    
+    App\Calculator\ProductVariantPriceCalculator:
+        decorates: 'sylius.calculator.product_variant_price'
+        arguments: ['@.inner']
+
+    app.resolver.variant:
+        public: true
+        class: App\Resolver\ProductVariantResolver
+    App\Processor\OrderItemRefundCodeCalculator:
+        class: App\Processor\OrderItemRefundCodeCalculator
+        tags:
+            - { name: sylius.order_processor, priority: 45 }
+            
+    App\PickupPoint\Form\Extension\ShippingMethodTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShippingMethodTypeExtension
+        tags: 
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType' }
+            
+    App\PickupPoint\Form\Extension\ShippingMethodChoiceTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShippingMethodChoiceTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType' }
+            
+    App\PickupPoint\Form\Extension\ShipmentTypeExtension:
+        class: App\PickupPoint\Form\Extension\ShipmentTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType' }
+            
+    App\PickupPoint\Provider\LocalPickupPointProvider:
+        class: App\PickupPoint\Provider\LocalPickupPointProvider
+        tags: ['app.pickup_point.provider']
+
+    bitbag_sylius_cms_plugin.sitemap_provider.page:
+        class: App\Sitemap\Provider\PageUrlProvider
+        arguments:
+          - "@bitbag_sylius_cms_plugin.repository.page"
+          - "@router"
+          - "@sylius.sitemap_url_factory"
+          - "@sylius.context.locale"
+          - "@sylius.context.channel"
+        tags:
+          - { name: sylius.sitemap_provider }
+    
+    bitbag_sylius_cms_plugin.sitemap_provider.section:
+        class: App\Sitemap\Provider\SectionUrlProvider
+        arguments:
+          - "@bitbag_sylius_cms_plugin.repository.section"
+          - "@router"
+          - "@sylius.sitemap_url_factory"
+          - "@sylius.context.locale"
+          - "@sylius.context.channel"
+        tags:
+          - { name: sylius.sitemap_provider }

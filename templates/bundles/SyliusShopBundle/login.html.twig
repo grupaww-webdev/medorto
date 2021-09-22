@@ -1,0 +1,39 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.customer_login'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <section class="login container">
+        <h1 class="title text-darkBlue">{{ 'sylius.ui.customer_login'|trans }}</h1>
+        {{ sylius_template_event('sylius.shop.login.after_content_header') }}
+        <div class="row">
+            <div class="login__form col-sm-12 col-md-6 col-md-offset-1">
+                {{ sylius_template_event('sylius.shop.login.main_column', _context) }}
+            </div>
+            <div class="login__register col-sm-12 col-md-4 col-md-offset-1">
+                {{ sylius_template_event('sylius.shop.login.register_column', _context) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block cont2ent %}
+    {% include '@SyliusShop/Login/_header.html.twig' %}
+
+    {{ sylius_template_event('sylius.shop.login.after_content_header') }}
+
+    <div class="ui padded segment">
+        <div class="ui two column very relaxed stackable grid">
+            <div class="column">
+                {{ sylius_template_event('sylius.shop.login.main_column', _context) }}
+            </div>
+            <div class="ui hidden vertical divider">
+            </div>
+            <div class="column">
+                {{ sylius_template_event('sylius.shop.login.register_column', _context) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

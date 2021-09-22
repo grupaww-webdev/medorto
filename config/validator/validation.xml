@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+    <class name="App\Entity\Product\ProductRefund">
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">app.product_refund.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+            </constraint>
+        </property>
+        <property name="discount">
+            <constraint name="NotBlank">
+                <option name="message">app.product_refund.discount.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="max">100</option>
+                <option name="min">1</option>
+                <option name="groups">sylius</option>
+            </constraint>
+
+        </property>
+    </class>
+    <class name="App\Entity\Order\Refund">
+        <property name="orderDate">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Type">
+                <option name="type">\DateTime</option>
+                <option name="message">app.refund.date_format</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="orderReceivedDate">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Type">
+                <option name="type">\DateTime</option>
+                <option name="message">app.refund.date_format</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="issueDate">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Type">
+                <option name="type">\DateTime</option>
+                <option name="message">app.refund.date_format</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="address">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="bankAccount">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="city">
+            <constraint name="NotBlank">
+                <option name="message">app.refund.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

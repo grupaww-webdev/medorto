@@ -1,0 +1,27 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    <ul class="account__list">
+        {{ block('list') }}
+    </ul>
+{% endblock %}
+
+{% block list %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    <li>
+        <a href="{{ item.uri }}">
+            {{ block('image') }}
+            {{ item.label|trans }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block image %}
+    {% set image = item.labelAttribute('image') %}
+    <img src="{{ asset('/assets/shop/img/'~ image ~'.png') }}" alt="{{ item.label|trans }}">
+{% endblock %}

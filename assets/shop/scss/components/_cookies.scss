@@ -1,0 +1,27 @@
+.cookies {
+    @include flex(column, center, center);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    padding: 14px 12px 26px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 25px;
+    display: none;
+
+    &--active {
+        display: flex;
+    }
+
+    h2 {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: normal;
+    }
+
+    .button {
+        margin-top: 12px;
+    }
+}

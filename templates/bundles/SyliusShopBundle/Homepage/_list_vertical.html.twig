@@ -1,0 +1,6 @@
+{% set products = resources %}
+
+{% for product in products %}
+    {% set class = 'col-sm-12' %}
+    {% include '@SyliusShop/Product/_box.html.twig' %}
+{% endfor %}

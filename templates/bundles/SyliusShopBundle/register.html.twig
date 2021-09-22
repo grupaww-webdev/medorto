@@ -1,0 +1,37 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <section class="login login--register container">
+        {{ sylius_template_event('sylius.shop.register.after_content_header') }}
+
+        <h1 class="title text-darkBlue">{{ 'sylius.ui.register_in_the_store'|trans }}</h1>
+        <div class="row">
+            <div class="register col-sm-12 col-md-6">
+                {{ sylius_template_event('sylius.shop.register.before_form') }}
+
+                {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'login__form login__form--register', 'novalidate': 'novalidate'}}) }}
+                {% include '@SyliusShop/Register/_form.html.twig' %}
+
+                {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
+
+                <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('register-button') }}>
+                    {{ 'sylius.ui.create_an_account'|trans }}
+                </button>
+                {{ form_row(form._token) }}
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="login__form">
+                    <h2 class="login__title text-darkBlue">Zaloguj się</h2>
+                    <form action="">
+                        <input type="submit" value="Zaloguj" class="button button--blue">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

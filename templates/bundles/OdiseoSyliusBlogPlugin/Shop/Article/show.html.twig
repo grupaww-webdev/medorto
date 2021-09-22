@@ -1,0 +1,62 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block metatags %}
+    {% if article.metaKeywords is not empty %}
+        <meta name="keywords" content="{{ article.metaKeywords }}"/>
+    {% endif %}
+    {% if article.metaDescription is not empty %}
+        <meta name="description" content="{{ article.metaDescription }}"/>
+    {% endif %}
+{% endblock %}
+
+{% import 'App/Shop/_breadcrumbs.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+    { label: 'app.ui.breadcrumbs.homepage'|trans, url: path('sylius_shop_homepage') },
+    { label: 'odiseo_sylius_blog_plugin.ui.blog.header'|trans, url: path('odiseo_sylius_blog_plugin_shop_article_index') }
+]
+%}
+
+{% if article.categories|length > 0 %}
+    {% set category = article.categories|first %}
+    {% set breadcrumbs = breadcrumbs|merge([
+        { label: category.title, url: path('odiseo_sylius_blog_plugin_shop_article_index_by_category', {'slug': category.slug}) }
+    ]) %}
+{% endif %}
+
+{% set breadcrumbs = breadcrumbs|merge([
+    { label: article.title }
+]) %}
+
+{% block content %}
+    {% include '@SyliusShop/Homepage/_banner.html.twig' %}
+    {{ breadcrumb.crumble(breadcrumbs) }}
+
+    {% block blog_article %}
+        <section class="page container">
+            <h1 class="page__title text-darkBlue">{{ article.title }}</h1>
+            <div class="page__subtitle text-darkBlue">{{ article.intro|raw }}</div>
+            <div class="page__content container">
+                <div class="row">
+                    {% if article.images|length > 0 %}
+                        <div class="col-xs-12 col-sm-6">
+                            <img src="{{ article.images[0].path|imagine_filter(filter|default('sylius_large')) }}" alt="{{ article.images[0].path }}">
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <p>{{ article.firstParagraph|raw }}</p>
+                        </div>
+                    {% else %}
+                        <div class="col-xs-12">
+                            <p>{{ article.firstParagraph|raw }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <article>
+                    {{ article.content|raw }}
+                </article>
+            </div>
+        </section>
+        {{ render(url('odiseo_sylius_blog_plugin_shop_partial_article_category_index', {'template': '@OdiseoSyliusBlogPlugin/Shop/ArticleCategory/_verticalMenu.html.twig'})) }}
+        {% include 'App/Shop/_blog.html.twig' %}
+    {% endblock %}
+{% endblock %}

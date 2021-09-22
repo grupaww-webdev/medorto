@@ -1,0 +1,29 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import 'App/Shop/_breadcrumbs.html.twig' as breadcrumb %}
+
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% set breadcrumbs = [
+    { label: 'app.ui.breadcrumbs.homepage'|trans, url: path('sylius_shop_homepage') },
+    { label: 'app.ui.breadcrumbs.faq'|trans }
+]|merge(breadcrumbs|default([]))
+%}
+{% block content %}
+    {{ sylius_template_event('sylius.app.faq') }}
+    {{ breadcrumb.crumble(breadcrumbs) }}
+
+    <section class="page faq container wrapper">
+        <h1 class="page__title text-darkBlue">FAQ</h1>
+            {% if resources|length > 0 %}
+                {% for frequentlyAskedQuestion in resources %}
+                    <div class="faq__content">
+                    {% include '@BitBagSyliusCmsPlugin/Shop/FrequentlyAskedQuestion/Index/_show.html.twig' %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {{ messages.info('sylius.ui.no_results_to_display') }}
+            {% endif %}
+    </section>
+    {% include 'App/Shop/_blog.html.twig'%}
+{% endblock %}

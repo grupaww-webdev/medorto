@@ -1,0 +1,31 @@
+$orange: #f99e23;
+$blue: #0099dd;
+$darkBlue: #085083;
+$lightBlue: #29abe2;
+$white: #fff;
+$black: #000;
+$lightGrey: #878787;
+$mobile: 1023px;
+$red: #e80709;
+
+$colors: (
+  orange: $orange,
+  blue: $blue,
+  darkBlue: $darkBlue,
+  lightBlue: $lightBlue,
+  white: $white,
+  black: $black,
+  lightGrey: $lightGrey,
+);
+
+@mixin gen-props($prefix, $property) {
+  @each $color-name, $color in $colors {
+    .#{$prefix}-#{$color-name} {
+      #{$property}: $color!important;
+    }
+  }
+}
+
+@include gen-props("text", "color");
+@include gen-props("bg", "background");
+@include gen-props("border", "border-color");

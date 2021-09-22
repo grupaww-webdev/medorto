@@ -69,7 +69,6 @@ final class Version20210423162307 extends AbstractMigration
         $this->addSql('ALTER TABLE bitbag_cms_page_translation ADD CONSTRAINT FK_FDD074A62C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES bitbag_cms_page (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE bitbag_cms_page_translation ADD CONSTRAINT FK_FDD074A63DA5256D FOREIGN KEY (image_id) REFERENCES bitbag_cms_media (id)');
         $this->addSql('ALTER TABLE bitbag_cms_section_translation ADD CONSTRAINT FK_F99CA8582C2AC5D3 FOREIGN KEY (translatable_id) REFERENCES bitbag_cms_section (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE sylius_channel DROP enable_facebook_messenger, DROP facebook_page_id');
     }
 
     public function down(Schema $schema) : void
@@ -116,6 +115,5 @@ final class Version20210423162307 extends AbstractMigration
         $this->addSql('DROP TABLE bitbag_cms_page_translation');
         $this->addSql('DROP TABLE bitbag_cms_section');
         $this->addSql('DROP TABLE bitbag_cms_section_translation');
-        $this->addSql('ALTER TABLE sylius_channel ADD enable_facebook_messenger TINYINT(1) DEFAULT NULL, ADD facebook_page_id VARCHAR(255) CHARACTER SET utf8 DEFAULT NULL COLLATE `utf8_unicode_ci`');
     }
 }

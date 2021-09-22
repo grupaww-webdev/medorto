@@ -1,0 +1,31 @@
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% set orders = resources.data %}
+<ul class="account__orders">
+    {% if orders|length > 0 %}
+        {% for order in orders %}
+            <li class="account__order flex row">
+                <p class="account__content col-sm-12 col-md-3">
+                    {{ 'sylius.ui.order'|trans }}<br>
+                    nr. <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}">{{ order.number }}</a> <br>
+                    {{ 'sylius.ui.state'|trans }}: {{ order.state }}<br>
+                    <b>{{ money.format(order.total, order.currencyCode) }}</b>
+                </p>
+                {% for item in order.items %}
+                    {% set variant = item.variant %}
+                    {% set product = variant.product %}
+                    {% if variant.hasImages %}
+                        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': variant, 'filter': 'sylius_shop_product_tiny_thumbnail', 'imageClass': 'col-sm-12 col-md-3'} %}
+                    {% else %}
+                        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail', 'imageClass': 'col-sm-12 col-md-3'} %}
+                    {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display') }}
+    {% endif %}
+</ul>
+{{ pagination.simple(orders) }}

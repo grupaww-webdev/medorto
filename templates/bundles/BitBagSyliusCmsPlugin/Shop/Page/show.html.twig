@@ -1,0 +1,46 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import 'App/Shop/_breadcrumbs.html.twig' as breadcrumb %}
+
+{% set breadcrumbs = [
+    { label: 'app.ui.breadcrumbs.homepage'|trans, url: path('sylius_shop_homepage') },
+    { label: page.breadcrumb }
+]|merge(breadcrumbs|default([]))
+%}
+
+{% set published = (page.publishAt is not null and page.publishAt|date("Y-m-d H:i:s") < "now"|date("Y-m-d H:i:s") or page.publishAt is null) %}
+
+{%- block title -%}
+    {% if page.title is not empty and published == true  %}
+        {{ page.title }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{%- endblock -%}
+
+{% block metatags %}
+    {% if published == true %}
+        {% if page.metaKeywords is not empty %}
+            <meta name="keywords" content="{{ page.metaKeywords }}"/>
+        {% endif %}
+        {% if page.metaDescription is not empty %}
+            <meta name="description" content="{{ page.metaDescription }}"/>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {{ breadcrumb.crumble(breadcrumbs) }}
+    {% if published == true %}
+        <section class="page container">
+            <h1 class="page__title text-darkBlue">{{ page.name }}</h1>
+            <div class="page__content container">
+                <article>
+                    {{ bitbag_cms_render_content(page) }}
+                </article>
+            </div>
+        </section>
+    {% else %}
+        {% include '@BitBagSyliusCmsPlugin/Shop/Page/Error/_notPublished.html.twig' with {'publishAt': page.publishAt} %}
+    {% endif %}
+
+{% endblock %}

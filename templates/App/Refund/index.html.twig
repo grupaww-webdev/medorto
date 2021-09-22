@@ -1,0 +1,8 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
+
+{% block subcontent %}
+    {% set refunds = resources %}
+    {{ sylius_template_event('sylius.app.account.refund.index.subcontent', _context) }}
+{% endblock %}

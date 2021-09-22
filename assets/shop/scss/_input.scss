@@ -1,0 +1,44 @@
+.input {
+	@include size(100%, 36px);
+	@include flex(row, center, center);
+	border-radius: 2px;
+	border: 1px solid #8e8e8e;
+	text-align: center;
+	max-width: 270px;
+	padding: 0 12px;
+
+	@media screen and (max-width: $mobile) {
+		max-width: 100%;
+	}
+
+	&--textarea {
+		height: auto;
+		padding: 12px;
+
+		&::placeholder {
+			opacity: 0.39;
+			font-size: 14px;
+			font-weight: 300;
+			line-height: 25px;
+		}
+	}
+
+	&__icon {
+		margin-right: 12px;
+	}
+
+	input {
+		border: 0;
+		padding: 0;
+		margin: 0;
+		outline: none;
+		width: 100%;
+		color: #8e8e8e;
+
+		&::placeholder {
+			font-size: 16px;
+			font-weight: 300;
+			color: #8e8e8e;
+		}
+	}
+}

@@ -1,0 +1,55 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% block content %}
+<form method="post" action="{{ path('app_shop_update_refund_product', {'productCode': product.code, 'productVariantId': (productVariantId|default(product.variants|first))}) }}">
+    <div class="products container wrapper">
+        <div class="row">
+            <div class="products__lists col-xs-12">
+                <div class="row">
+                    {% include '@SyliusShop/Product/_box.html.twig' %}
+                    <div class="ui col-xs-12 col-sm-6 col-md-8">
+                        <div class="products__item text-center product-refunds pt-3">
+                            <div class="row">
+                                <div class="ui col-xs-12 col-sm-6 col-md-4 relative">
+                                    <label class="vertical-center header">
+                                        <input type="radio" name="type" value="regular" required/>
+                                        {{ 'app.ui.buy_and_pay.title'|trans }}
+                                    </label>
+                                </div>
+                                <div class="ui col-xs-12 col-sm-6 col-md-4">
+                                    <p>{{ 'app.ui.buy_and_pay.description'|trans }}</p>
+                                </div>
+                                <div class="ui col-xs-12 col-sm-6 col-md-4 text-right">
+                                    <h3 class="text-lightBlue mt-0 mb-0">{{ money.calculatePrice(product|sylius_resolve_variant) }}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ui col-xs-12 col-sm-6 col-md-4 relative">
+                                    <label class="vertical-center header">
+                                        <input type="radio" name="type" value="refund" required/>
+                                        {{ 'app.ui.buy_with_refund.title'|trans }}
+                                    </label>
+                                </div>
+                                <div class="ui col-xs-12 col-sm-6 col-md-4 relative">
+                                    <p class="vertical-center">{{ 'app.ui.buy_with_refund.description'|trans }}</p>
+                                </div>
+                                <div class="ui col-xs-12 col-sm-6 col-md-4">
+                                    {% for code in product.refunds %}
+                                        {% include 'App/Shop/Product/_refund.html.twig' %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button class="button button--blue" type="submit">
+                                    {{ 'sylius.ui.add_to_cart'|trans }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

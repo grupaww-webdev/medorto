@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="comments__subheading">
+            <h3 class="text-darkBlue">{{ 'app.ui.reviews.user_reviews'|trans }}</h3>
+            <p>{{ product.name }}</p>
+        </div>
+        {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/ProductReview/_list.html.twig'})) }}
+    </div>
+</div>

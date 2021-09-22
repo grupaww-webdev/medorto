@@ -27,3 +27,210 @@ sylius_shop_request_password_reset_token_redirect:
     defaults:
         route: sylius_shop_request_password_reset_token
         permanent: false
+
+sylius_shop_partial_product_index_by_category:
+    path: /products/by-category/{code}/{count}
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: '@SyliusShop/Homepage/_list_vertical.html.twig'
+            limit: 4
+            repository:
+                method: findAllByCategory
+                arguments: 
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - '$code'
+                    - '!!int $count'
+            criteria: false
+        paginate: true
+
+app_shop_product_bestsellers_list:
+    path: /products/bestsellers-list/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: '@SyliusShop/Product/_horizontalList.html.twig'
+            limit: 4
+            repository:
+                method: findAllByBestsellers
+                arguments: 
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - '!!int $count'
+            criteria: false
+        paginate: true
+
+app_shop_product_review_create:
+    path: /reviews/new-simple
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: "@SyliusShop/ProductReview/simpleCreate.html.twig"
+            form:
+                options:
+                    validation_groups: ['sylius', 'sylius_review']
+            factory:
+                method: createForSubjectWithReviewer
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneByChannelAndSlug(service('sylius.context.channel').getChannel(), service('sylius.context.locale').getLocaleCode(), $slug))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
+            redirect:
+                route: sylius_shop_product_show
+                parameters:
+                    slug: $slug
+            flash: sylius.review.wait_for_the_acceptation
+
+app_shop_checkout_select_shipping_and_payment:
+    path: /checkout/shipping-and-payment
+    methods: [GET, PUT]
+    defaults:
+       _controller: sylius.controller.order:updateAction
+       _sylius:
+           event: complete
+           flash: false
+           template: "@SyliusShop/Checkout/selectShippingAndPayment.html.twig"
+           form: App\Form\Type\Checkout\SelectShippingAndPaymentType
+           repository:
+               method: findCartForSelectingShipping
+               arguments:
+                   - "expr:service('sylius.context.cart').getCart().getId()"
+           state_machine:
+               graph: sylius_order_checkout
+               transition: complete
+           redirect:
+               route: sylius_shop_order_pay
+               parameters:
+                   tokenValue: resource.tokenValue
+
+app_refund_index:
+    path: /{_locale}/account/refunds
+    methods: [GET]
+    defaults:
+        _controller: app.controller.order_refund:indexAction
+        _sylius:
+            template: App\Refund\index.html.twig
+            repository:
+                method: findForCustomer
+                arguments: 
+                 - "expr:service('sylius.context.customer').getCustomer()"
+                   
+app_refund_create:
+    path: /{_locale}/refund/{orderId}
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.order_refund:createAction
+        _sylius:
+            redirect: sylius_shop_account_order_index
+            template: App\Refund\create.html.twig
+            factory:
+                method: createNewForOrder
+                arguments: 
+                    - 'expr:service("sylius.repository.order").find($orderId)'
+            form:
+                type: App\Form\Type\RefundType
+
+app_shop_add_to_cart:
+    path: /{_locale}/cart/add
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller_action.shop_add_to_cart
+
+app_shop_add_to_cart_with_refund:
+    path: /{_locale}/cart/{productCode}/{productVariantId}/refund/
+    methods: [GET]
+    defaults:
+        _controller: app.controller_action.shop_add_to_cart_with_refund
+
+app_shop_update_refund_product:
+    path: /{_locale}/cart/{productCode}/{productVariantId}/refund/
+    methods: [POST]
+    defaults:
+        _controller: app.controller_action.update_product_refund
+
+sylius_shop_ajax_cart_add_item:
+    path: cart/add
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.order_item:addAction
+        _format: json
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments: [expr:notFoundOnNull(service('sylius.repository.product').find($productId))]
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType
+                options:
+                    product: expr:notFoundOnNull(service('sylius.repository.product').find($productId))
+            redirect:
+                route: app_shop_add_to_cart_with_refund
+                parameters:
+                    productCode: expr:notFoundOnNull(service('sylius.repository.product').find($productId)).getCode()
+                    productVariantId: expr:notFoundOnNull(service('app.resolver.variant').resolve($productId)).getId()
+                
+                    
+            flash: sylius.cart.add_item
+            
+app_pickup_point_shop_ajax_find_pickup_points:
+    path: pickup_points/{providerCode}/find
+    defaults:
+        _controller: App\Controller\Action\PickupPoint\FindPickupPoints
+        _format: json
+
+app_shop_shipment_method_list:
+    path: products/shipment
+    defaults:
+        _controller: App\Controller\Action\Shop\ShipmentMethodList
+
+sylius_shop_product_index_latest:
+    path: /{_locale}/latest/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: 12
+            template: "App/Shop/Product/latest.html.twig"
+            repository:
+                method: findLatestByChannelPaginator
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+
+sylius_shop_product_index_bestsellers:
+    path: /{_locale}/bestsellers/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: 12
+            template: "App/Shop/Product/bestsellers.html.twig"
+            repository:
+                method: findAllByBestsellersPaginator
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+
+sylius_shop_product_index_promotions:
+    path: /{_locale}/promotions/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: 12
+            template: "App/Shop/Product/promotions.html.twig"
+            repository:
+                method: findAllByCategoryPaginator
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - 'promotions'
+
+redirect_sylius_shop_product_index:
+    path: /{_locale}/taxons/{slug}
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: bitbag_sylius_elasticsearch_plugin_shop_list_products
+        permanent: true
+    requirements:
+        _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+        slug: .+

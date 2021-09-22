@@ -1,0 +1,5 @@
+{% if form.vars.choices|length == 1 %}
+    {{ form_row(form, sylius_test_form_attribute(type ~ 'country')|merge({'value': form.vars.choices[0].value, 'attr': {'class': 'input'}})) }}
+{% else %}
+    {{ form_row(form, sylius_test_form_attribute(type ~ 'country')|merge({'attr': {'class': 'input'}})) }}
+{% endif %}

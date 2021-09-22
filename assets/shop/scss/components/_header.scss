@@ -1,0 +1,205 @@
+.header {
+	@media screen and (max-width: $mobile) {
+		padding: 12px 24px;
+	}
+	&__actions {
+		margin-top: 36px;
+		@media screen and (max-width: $mobile) {
+			margin-top: 20px;
+			flex-direction: column;
+		}
+	}
+	&__navbar {
+		margin-top: 32px;
+		&:not(.header__navbar--mobile) {
+			@media screen and (max-width: $mobile) {
+				display: none;
+			}
+		}
+		&--mobile {
+			display: none;
+
+			@media screen and (max-width: $mobile) {
+				display: flex;
+			}
+		}
+
+		&__icon {
+			&.absolute {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				z-index: 3;
+			}
+		}
+	}
+	&__menu {
+		@include flex(row, center, flex-start);
+		border-bottom: 1px solid #58595b;
+		margin: 0;
+        position: relative;
+        padding-left: 0;
+        flex-wrap: wrap;
+		@media screen and (max-width: $mobile) {
+			flex-direction: column;
+			border-bottom: 0;
+			padding: 0;
+			display: none;
+		}
+
+		&.show {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background-color: #fff;
+			width: 100%;
+			height: 100vh;
+			z-index: 2;
+			padding: 60px 20px 20px;
+			overflow: scroll;
+		}
+
+		&__item {
+			padding: 0 32px 16px;
+			height: 100%;
+			cursor: pointer;
+			@media screen and (max-width: $mobile) {
+				padding: 0;
+				margin-bottom: 12px;
+				width: 100%;
+				height: auto;
+			}
+			&:hover {
+				.header__submenu {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+					@media screen and (max-width: $mobile) {
+                        grid-template-columns: repeat(3, 1fr);
+					}
+				}
+			}
+			&::after {
+				@include size(100%, 3px);
+				content: "";
+				display: block;
+				opacity: 0;
+				position: absolute;
+				bottom: -2px;
+				left: 0;
+				@media screen and (max-width: $mobile) {
+					display: none;
+				}
+			}
+			&:hover {
+				&::after {
+					opacity: 1;
+				}
+			}
+			a {
+				@include flex(row, center, center);
+				color: #565656;
+				font-weight: 500;
+				font-size: 15px;
+				@media screen and (max-width: $mobile) {
+					justify-content: flex-start;
+					align-items: flex-start;
+				}
+			}
+			img {
+				margin-left: 8px;
+				@media screen and (max-width: $mobile) {
+					margin-top: 4px;
+				}
+			}
+		}
+	}
+	&__submenu {
+		box-shadow: 2px 3px 4px rgba(130, 130, 130, 0.75);
+		border-radius: 12px;
+		background-color: $white;
+		padding: 18px 28px;
+		cursor: default;
+		overflow: hidden;
+		z-index: 9;
+		position: absolute;
+		left: 5%;
+		display: none;
+        width: 90%;
+        @media screen and (max-width: $mobile) {
+			position: static;
+			display: flex;
+			flex-wrap: wrap;
+			box-shadow: none;
+			padding: 12px;
+		}
+
+		&__item {
+			width: 224px;
+			@media screen and (max-width: $mobile) {
+				width: 50%;
+			}
+			ul {
+				margin: 0;
+				padding: 0;
+			}
+			a {
+				justify-content: flex-start;
+				padding: 0 12px;
+				font-size: 13px;
+				font-weight: 400;
+				line-height: 21px;
+				color: #565656;
+				@media screen and (max-width: $mobile) {
+					padding: 0;
+				}
+				&:hover {
+					background-color: $orange;
+					color: $white;
+				}
+			}
+
+			&--bold {
+				a {
+					font-weight: 700;
+				}
+				li {
+					a {
+						font-weight: 400;
+					}
+				}
+			}
+		}
+	}
+	.logo {
+		display: flex;
+		margin-top: 14px;
+		@media screen and (max-width: $mobile) {
+			margin-top: 0;
+			max-width: 70%;
+		}
+	}
+	.actions {
+		margin: 12px 0 -12px auto;
+		@media screen and (max-width: $mobile) {
+			margin: 20px 0 0 0;
+		}
+
+		&--active {
+			color: $orange !important;
+			path {
+				fill: $orange;
+			}
+		}
+		a {
+			@include flex(column, center, center);
+			margin: 0 30px;
+			color: #8e8e8e;
+			font-size: 15px;
+			font-weight: 500;
+		}
+		svg {
+			margin-bottom: 6px;
+		}
+	}
+}

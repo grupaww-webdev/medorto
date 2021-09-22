@@ -1,0 +1,45 @@
+.newsletter {
+  &__subtitle {
+    padding-left: 20px;
+  }
+  &__content {
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.21);
+    border-radius: 16px;
+    border: 1px solid $blue;
+    padding: 16px 88px;
+    justify-content: space-between;
+    color: #414042;
+    @media screen and (max-width: $mobile) {
+      flex-direction: column;
+      padding: 12px;
+      text-align: center;
+    }
+    h4 {
+      font-size: 17px;
+      margin: 0;
+      @media screen and (max-width: $mobile) {
+        margin: 12px 0 4px;
+      }
+    }
+    p {
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 300;
+      @media screen and (max-width: $mobile) {
+        max-width: 80%;
+        margin: 0 auto;
+      }
+    }
+  }
+  &__form {
+      margin-top: 18px;
+      .relative {
+        margin-right: 20px;
+        width: 100%;
+      }
+      .input {
+          border-color: #d1d5db;
+          border-radius: 7px;
+      }
+  }
+}

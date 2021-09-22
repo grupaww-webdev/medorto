@@ -1,0 +1,5 @@
+{% if not product.enabledVariants.empty() %}
+    {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+{% endif %}
+{% include '@SyliusShop/Product/Show/_variantSelection.html.twig' %}
+{% include '@SyliusShop/Product/Show/_reviews.html.twig' %}

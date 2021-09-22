@@ -1,0 +1,16 @@
+{% form_theme form 'App/Form/theme.html.twig' %}
+
+{% set product = product_review.reviewSubject %}
+
+{{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'comments__form', 'novalidate': 'novalidate'}}) }}
+    {% include '@SyliusShop/ProductReview/_form.html.twig' %}
+
+    {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
+
+    {{ form_row(form._token) }}
+    <input
+        type="submit"
+        value="{{ 'sylius.ui.add'|trans }}"
+        class="button button--blue"
+    />
+{{ form_end(form, {'render_rest': false}) }}

@@ -5,3 +5,16 @@ sylius_admin:
 sylius_paypal_admin:
     resource: "@SyliusPayPalPlugin/Resources/config/admin_routing.yml"
     prefix: '/%sylius_admin.path_name%'
+    
+app_order_refunds:
+    resource: "admin/refund.yml"
+    prefix: '/%sylius_admin.path_name%'
+    
+app_pickup_point:
+    resource: "admin/pickup_point.yml"
+    prefix: '/%sylius_admin.path_name%'
+
+
+app_product_refund:
+    resource: "admin/product_refund.yml"
+    prefix: '/%sylius_admin.path_name%/products/{productId}/refund/'

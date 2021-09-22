@@ -1,0 +1,164 @@
+sylius:
+    form: 
+        product:
+            refund_code: Kod refundacji
+    admin:
+        menu:
+            refunds: Zwroty
+            pickup_points: Punkty odbioru            
+    ui:
+        active: Aktywny
+        activate: Aktywuj
+        deactivate: Dezaktywuj
+        refund: Refundacja
+        order_refunds: Zwroty
+        bank_account: Konto bankowe
+        issue_date: Data założenia
+        add_to_cart: Do koszyka
+        account: Konto
+        customer_login: Logowanie
+        registered_customers: Zaloguj się
+        your_shopping_cart: Koszyk
+        discount: Oszczędzasz
+        forgot_password: nie mogę się zalogować
+        register_in_the_store: Rejestracja
+        personal_information: Dane zamawiającego
+        shipping_and_payment: Dostawa i płatność
+        select_shipping_method: Wybierz metodę wysyłki lub odbioru
+        select_payment_method: Wybierz formę płatności
+        payment: Płatność
+        order_number: Numer zamówienia
+        shipment_method: Metoda wysyłki
+        full_name: Imię i nazwisko
+        back_to_shop: Wróć do sklepu
+        confirm_rules: Przeczytałem i akceptuję <a href=":privacyLink::"><b>Politykę Prywatności</b></a> i <a href=":rulesLink:"><b>Regulamin</b></a> zakupów metoro.pl
+        cart:
+            label: Koszyk
+            step_1:
+                total: Łączna kwota
+            step_2:
+                header: DANE ZAMÓWIENIA
+            step_3:
+                header: DOSTAWA I PŁATNOŚĆ
+            step_4:
+                header: POTWIERDZENIE
+    menu:
+        shop:
+            account:
+                order_history: Zamówienia
+                refunds: Zwroty
+                account_settings: Ustawienia konta
+                delete_account: Usuń konto
+app:
+    form:
+        shipping_method:
+            pickup_point_provider: Provider
+            select_pickup_point_provider: Wybierz providera
+        product_refund:
+            code: Kod refundacji
+            discount: Procent zniżki
+            active: Aktywny
+        pickup_point:
+            name: Nazwa punktu odbioru
+            address: Adres
+            zip_code: Kod pocztowy
+            city: Miasto
+            active: Aktywny
+    ui:
+        pickup_points: Punkty odbioru
+        buy_and_pay: 
+           title: Kup i zapłać
+           description: Wykonaj polecenie zapłaty online i odbierz zamówienie w dowolnym miejscu dzięki przesyłce kurierskiej.
+        buy_with_refund:
+            title: Realizuję wniosek NFZ
+            description: Realizuj posiadany wniosek na refundację i zamów produkt z zakupem w objętej refundacją aptece z naszej bazy. Kwota do zapłaty zależna jest od kodu refundacji.
+        edit_product_refund: Edycja kodu refundacji
+        discount: Zniżka
+        product_refunds: Kody refundacji
+        new_product_refund: Nowy kod refundacji
+        item: Nazwa produktu
+        unit_price: Cena
+        subtotal: Wartość
+        order: Zamówienie nr
+        total: Całkowita wartość zamówienia
+        reviews:
+            title: Opinie
+            user_reviews: Opinie użytkowników
+            review_product: Oceń produkt
+        products:
+            new: Nowość
+        breadcrumbs:
+            homepage: Strona główna
+            faq: FAQ
+        buttons:
+            see: Zobacz
+            see_more: Zobacz więcej
+        top_banner:
+            slogan: Refundacja-online
+            slogan_bold: Sprawdź jak to działa
+        enable_facebook_messenger: Aktywuj FB Messenger Chat Box
+        facebook_page_id: Id Aplikacji Facebook
+        facebook_messenger: Facebook Messenger
+        safe_payment: 'Bezpieczne płatności:'
+        fast_delivery: 'Superszybka wysyłka:'
+        homepage:
+            bestsellers: BESTSELLERY
+            newests: NOWOŚCI
+            promotions: PROMOCJE
+            newsletter_description: 'Nie przegap żadnej promocji, zdobywaj dodatkowe rabaty'
+            our_shops:
+                title: Sklepy własne
+                description: |
+                    Jesteśmy siecią z placówkami na terenie czterech województw
+                    tj: podkarpackie, świętokrzyskie, małopolskie oraz śląskie.
+        menu:
+            header:
+                categories: Kategorie
+            footer:
+                privacy: Polityka prywatności
+                regulations: Regulamin serwisu
+                gpdr: RODO
+                shipping_costs: Koszty dostawy
+                pick_up_places: Punkty odbioru Click & Collect
+                faq: FAQ
+                promotions: Promocje
+                bestsellers: Bestsellery
+    order:
+        status: Status zamówienia
+        placed_date: Data złożenia zamówienia
+        shipping_date: Data dostawy
+        payment_state: Status płatności
+odiseo_sylius_blog_plugin:
+    ui:
+        blog:
+            header: Artykuły
+    menu:
+        admin:
+            blog:
+                header: Blog
+                article_categories: Kategorie
+                articles: Artykuły
+                article_comments: Komentarze
+
+odiseo_sylius_vendor_plugin:
+    ui:
+        vendor: Producent
+        vendors: Producenci
+        edit_vendor: Edycja producenta
+        new_vendor: Nowy producent
+        profile: Profil
+        manage_vendors: Zarządzanie producentami
+    menu:
+        admin:
+            vendors: Producenci
+    form:
+        product:
+            select_vendor: Wybierz producenta
+        vendor:
+            slug: Slug
+            email: Email
+            translations: Tłumaczenie
+            description: Opis
+            logo: Logo
+            channels: Kanały
+            extra_emails: Dodatkowy email

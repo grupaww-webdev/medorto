@@ -1,0 +1,14 @@
+.faq {
+    margin-bottom: 240px;
+    @media screen and (max-width: $mobile) {
+        margin-bottom: 40px;
+    }
+    &__question {
+        margin: 32px 0 16px;
+    }
+    &__answer {
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 36px;
+    }
+}

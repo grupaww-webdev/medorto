@@ -1,0 +1,20 @@
+{% extends '@SyliusUi/Form/theme.html.twig' %}
+
+{% block form_row -%}
+    <div class="{% if required %}required {% endif %}{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form, {'attr': {'class': 'input'}}) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul class="parsley-errors-list filled" aria-hidden="false">
+        {%- for error in errors -%}
+            <li class="parsley-required">{{ error.message }}</li>
+        {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}

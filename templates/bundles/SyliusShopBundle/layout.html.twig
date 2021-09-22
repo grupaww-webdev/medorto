@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
+    {% endblock %}
+
+    {{ sylius_template_event('sylius.shop.layout.head') }}
+</head>
+<body>
+{{ sylius_template_event('sylius.shop.layout.before_body') }}
+
+<main>
+    {% include 'App/Layout/_mobileMenu.html.twig' %}
+    <section class="nfz-bar wrapper">
+        <div class="row">
+            <div class="nfz-bar__offset col-xs-12 col-md-6 col-md-offset-6 bg-blue text-white flex">
+                <img src="/assets/shop/img/nfz.png" alt="logo nfz" />
+                <p>
+                    <span class="font-light">{{ 'app.ui.top_banner.slogan'|trans|raw }}</span>
+                    <a href="#" class="text-white">{{ 'app.ui.top_banner.slogan_bold'|trans|raw }}</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <header class="header container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 px-0 flex flex--between">
+                <a href="{{ path('sylius_shop_homepage') }}" class="logo">
+                    <img src="/assets/shop/img/medorto.png" alt="medorto logo" />
+                </a>
+            </div>
+            <div class="header__actions col-sm-12 col-md-6 px-0 flex">
+                <div class="input input--icon">
+                    <a href="#" class="flex">
+                        <img class="input__icon" src="/assets/shop/img/glass.png" alt="szukaj" />
+                    </a>
+                    <input type="text" placeholder="Szukaj" name="bitbag_elasticsearch_search[box][query]" />
+                </div>
+                <div class="actions flex">
+                    <a href="{% if app.user %}{{ path('sylius_shop_account_dashboard') }}{% else %}{{ path('sylius_shop_login') }}{% endif %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28.133" height="35.166" viewBox="0 0 28.133 35.166">
+                            <g id="Group_598" data-name="Group 598" transform="translate(-1301.645 -72.355)">
+                                <path
+                                    id="Path_972"
+                                    data-name="Path 972"
+                                    d="M1315.712,75.871a5.275,5.275,0,0,1,5.275,5.275h3.516a8.791,8.791,0,0,0-8.791-8.791Zm-5.275,5.275a5.275,5.275,0,0,1,5.275-5.275V72.355a8.791,8.791,0,0,0-8.792,8.791Zm5.275,5.275a5.274,5.274,0,0,1-5.275-5.275h-3.517a8.792,8.792,0,0,0,8.792,8.792Zm5.275-5.275a5.275,5.275,0,0,1-5.275,5.275v3.517a8.791,8.791,0,0,0,8.791-8.792Z"
+                                    fill="#8e8e8e"
+                                />
+                                <path
+                                    id="Path_973"
+                                    data-name="Path 973"
+                                    d="M1303.4,107.521h24.617V104H1303.4Zm12.309-12.308a10.549,10.549,0,0,1,10.549,10.55h3.517A14.067,14.067,0,0,0,1315.712,91.7Zm-10.55,10.55a10.55,10.55,0,0,1,10.55-10.55V91.7a14.067,14.067,0,0,0-14.067,14.067Zm-1.759,0h-1.758a1.758,1.758,0,0,0,1.758,1.758Zm24.617,0v1.758a1.758,1.758,0,0,0,1.758-1.758Z"
+                                    fill="#8e8e8e"
+                                />
+                            </g>
+                        </svg>
+                        {{ 'sylius.ui.account'|trans }}
+                    </a>
+                    <a href="{{ path('sylius_shop_cart_summary') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35.427" height="35.427" viewBox="0 0 35.427 35.427">
+                            <path
+                                id="Path_971"
+                                data-name="Path 971"
+                                d="M1403.64,96.953h0l-2.505-2.505a3.542,3.542,0,0,0,2.505,6.047Zm0,0,4.062-4.062-2.505-2.5-4.062,4.062Zm0,3.542h20.523V96.953H1403.64Zm2.809,0a1.772,1.772,0,0,1,1.772,1.772h3.542a5.314,5.314,0,0,0-5.314-5.314Zm-1.771,1.772a1.771,1.771,0,0,1,1.771-1.772V96.953a5.314,5.314,0,0,0-5.314,5.314Zm1.771,1.771a1.771,1.771,0,0,1-1.771-1.771h-3.543a5.314,5.314,0,0,0,5.314,5.314Zm1.772-1.771a1.771,1.771,0,0,1-1.772,1.771v3.543a5.314,5.314,0,0,0,5.314-5.314Zm15.942-1.772a1.771,1.771,0,0,1,1.771,1.772h3.543a5.314,5.314,0,0,0-5.314-5.314Zm-1.772,1.772a1.772,1.772,0,0,1,1.772-1.772V96.953a5.314,5.314,0,0,0-5.314,5.314Zm1.772,1.771a1.771,1.771,0,0,1-1.772-1.771h-3.542a5.314,5.314,0,0,0,5.314,5.314Zm1.771-1.771a1.771,1.771,0,0,1-1.771,1.771v3.543a5.314,5.314,0,0,0,5.314-5.314Zm-22.319-23.028h27.633V75.7h-27.633Zm-1.737-1.424,2.834,14.171,3.474-.695-2.834-14.171Zm-.708-3.543.708,3.543,3.474-.695-.708-3.542Zm24.577,18.159,7.086-14.171-3.169-1.584-7.086,14.17Zm-19.3.979h17.714V89.867h-17.714ZM1399.364,75.7h3.543V72.154h-3.543Zm3.024,20-1.253-1.252Zm28.86-18.232,1.585.792a1.773,1.773,0,0,0-1.585-2.564Zm-7.085,14.171V93.41a1.771,1.771,0,0,0,1.584-.979Zm-21.256-17.714,1.737-.347a1.772,1.772,0,0,0-1.737-1.424Zm-3.543-1.771a1.771,1.771,0,0,0,0,3.542Z"
+                                transform="translate(-1397.593 -72.154)"
+                                fill="#8e8e8e"
+                            />
+                        </svg>
+                        {{ 'sylius.ui.cart.label'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% include 'App/Shop/_nav.html.twig' %}
+    </header>
+    <div class="container mt-4">
+        {% include '@SyliusUi/_flashes.html.twig' %}
+    </div>
+    {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+
+    {% block content %}
+    {% endblock %}
+
+    {{ sylius_template_event('sylius.app.layout.after_content') }}
+    {% block footer %}
+        {% include '@SyliusShop/_footer.html.twig' %}
+    {% endblock %}
+</main>
+<section class="cookies bg-darkBlue text-white">
+    <div class="container">
+        <h2>INFORMACJA DOTYCZĄCA PLIKÓW COOKIES</h2>
+        <p>
+            Informujemy, iż w celu optymalizacji treści dostępnych w naszym serwisie, dostosowania ich do Państwa indywidualnych potrzeb korzystamy z informacji zapisanych za pomocą
+            plików cookies na urządzeniach końcowych użytkowników. Pliki cookies użytkownik może kontrolować za pomocą ustawień swojej przeglądarki internetowej. Dalsze korzystanie z
+            naszego serwisu internetowego, bez zmiany ustawień przeglądarki internetowej oznacza, iż użytkownik akceptuje stosowanie plików cookies.
+            <a href="#" class="text-orange">Czytaj więcej</a>
+        </p>
+    </div>
+    <a href="javascript:void(0)" class="button button--white">Akceptuje</a>
+</section>
+
+{% block javascripts %}
+    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
+{% endblock %}
+<script>
+    const options = {
+        type: "carousel",
+        gap: 0,
+        perView: 1,
+    };
+    if ($('.glide').length > 0) {
+        new Glide(".glide", options).mount();
+    }
+    $(".my-rating").starRating({
+        totalStars: 5,
+        starShape: "rounded",
+        starSize: 24,
+        activeColor: "#f99e23",
+        useGradient: false,
+    });
+    checkCookie();
+</script>
+{{ sylius_template_event('sylius.shop.layout.after_body') }}
+</body>
+</html>

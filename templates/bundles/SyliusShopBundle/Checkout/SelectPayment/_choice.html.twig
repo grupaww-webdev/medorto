@@ -1,18 +1,15 @@
-<div class="item" {{ sylius_test_html_attribute('payment-item') }}>
-    <div class="field">
-        <div class="ui radio checkbox" {{ sylius_test_html_attribute('payment-method-checkbox') }}>
-            {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
-        </div>
+<label class="login__checkbox__label flex flex--column" {{ sylius_test_html_attribute('payment-item') }}>
+    <div>
+        {{ form_widget(form, sylius_test_form_attribute('payment-method-select')|merge({'attr': {'class': 'login__checkbox__checkbox'}})) }}
+        <span class="login__checkbox__checkmark"></span>
+        <aside class="cart__payments__logo flex">
+            <aside>
+                <b>{{ form.vars.label }}</b>
+                {% if method.description is not null %}
+                    <p>{{ method.description }}</p>
+                {% endif %}
+            </aside>
+            <img src="app/img/payu.png" alt="">
+        </aside>
     </div>
-    <div class="content">
-        <a class="header">{{ form_label(form, null, {'label_attr': {'data-test-payment-method-label': ''}}) }}</a>
-        {% if method.description is not null %}
-            <div class="description">
-                <p>{{ method.description }}</p>
-            </div>
-        {% endif %}
-        {% if method.gatewayConfig.factoryName == 'sylius.pay_pal' %}
-            {{ render(controller('Sylius\\PayPalPlugin\\Controller\\PayPalButtonsController:renderPaymentPageButtonsAction', {'orderId': order.id})) }}
-        {% endif %}
-    </div>
-</div>
+</label>

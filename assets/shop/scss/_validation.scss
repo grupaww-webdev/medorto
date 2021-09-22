@@ -1,0 +1,20 @@
+.parsley-errors-list {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+	font-size: 10px;
+	color: #e80709;
+}
+
+.login__checkbox {
+	.parsley-errors-list {
+		display: none;
+	}
+	.parsley-error {
+		.login__checkbox__checkmark {
+			background-color: rgba(#e80709, 0.2);
+		}
+	}
+}

@@ -1,0 +1,136 @@
+.tabset {
+    >input[type="radio"] {
+        position: absolute;
+        left: -200vw;
+    }
+    .tab-panel {
+        display: none;
+    }
+    >input {
+        &:first-child {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:first-child {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:nth-child(3) {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:nth-child(2) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:nth-child(5) {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:nth-child(3) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:nth-child(7) {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:nth-child(4) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:nth-child(9) {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:nth-child(5) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:nth-child(11) {
+            &:checked {
+                ~ {
+                    .tab-panels {
+                        >.tab-panel {
+                            &:nth-child(6) {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &:focus {
+            + {
+                label {
+                    color: $lightBlue;
+                    &::after {
+                        background: $lightBlue;
+                    }
+                }
+            }
+        }
+        &:checked {
+            + {
+                label {
+                    &::after {
+                        background: $lightBlue;
+                    }
+                    border-color: #ccc;
+                    border-bottom: 1px solid #fff;
+                    margin-bottom: -1px;
+                }
+            }
+        }
+    }
+    >label {
+        position: relative;
+        display: inline-block;
+        padding: 15px 15px 25px;
+        border: 1px solid transparent;
+        border-bottom: 0;
+        cursor: pointer;
+        font-weight: 600;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            bottom: 10px;
+            width: 22px;
+            height: 4px;
+            background: #8d8d8d;
+        }
+        &:hover {
+            color: $lightBlue;
+            &::after {
+                background: $lightBlue;
+            }
+        }
+    }
+    max-width: 65em;
+}

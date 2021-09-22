@@ -1,0 +1,15 @@
+<div class="breadcrumbs container wrapper">
+    <ul class="flex">
+        <li>
+            <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        </li>
+        {% if product.mainTaxon is not null %}
+            {% set taxon = product.mainTaxon %}
+            {% set ancestors = taxon.ancestors|reverse %}
+            {% for ancestor in ancestors %}
+                <li><a href="{{ path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}" class="section">{{ ancestor.name }}</a></li>
+            {% endfor %}
+        {% endif %}
+        <li>{{ product.name }}</li>
+    </ul>
+</div>

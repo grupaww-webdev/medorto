@@ -1,0 +1,43 @@
+.blog {
+  margin-bottom: 26px;
+  &--faq {
+    .blog__heading {
+      padding-left: 34px;
+      font-weight: 400;
+    }
+  }
+  &__heading {
+    font-size: 20px;
+    line-height: 25px;
+    margin: 0 0 28px;
+  }
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__content {
+    padding: 24px 20px;
+  }
+  &__item {
+    box-shadow: 2px 3px 4px rgba(130, 130, 130, 0.75);
+    border-radius: 12px;
+    padding: 0;
+    color: #414042;
+    margin-bottom: 16px;
+
+    h4 {
+      font-size: 17px;
+      margin: 0;
+    }
+    p {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 20px;
+    }
+    a {
+      color: #414042;
+    }
+  }
+}

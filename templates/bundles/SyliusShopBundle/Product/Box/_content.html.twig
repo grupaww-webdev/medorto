@@ -1,0 +1,25 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+<div class="products__item text-center">
+    <div>
+        <h4>
+            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="text-darkBlue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
+        </h4>
+        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="blurring dimmable image">
+            {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product} %}
+        </a>
+    </div>
+    <div class="{{ sylius_test_html_attribute('product-content') }}">
+        {% if product.hasRefundCodes %}
+            <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ 'sylius.ui.refund'|trans }}</p>
+        {% elseif app.request.query.get('_label') %}
+            <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ app.request.query.get('_label')|trans}}</p>
+        {% endif %}
+        <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
+        <a href="{{ path('app_shop_add_to_cart', {'productId': product.id, 'quantity': 1}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.add_to_cart'|trans }}</a>
+
+        <div class="products__rating">
+            <div class="my-rating" data-rating="{{ product.averageRating }}"></div>
+            <span class="products__amount">({{ product.reviews.count() }})</span>
+        </div>
+    </div>
+</div>

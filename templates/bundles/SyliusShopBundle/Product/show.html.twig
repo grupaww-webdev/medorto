@@ -1,0 +1,41 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    {% set taxon = product.mainTaxon %}
+    {% include '@SyliusShop/Taxon/Header/_content.html.twig' %}
+    {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+    <section class="product container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                {{ sylius_template_event('app.shop.product.show.right_sidebar', _context) }}
+            </div>
+        </div>
+        {{ sylius_template_event('app.shop.product.show.content', _context) }}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(".user-rating").starRating({
+            totalStars: 5,
+            starShape: "rounded",
+            starSize: 44,
+            hoverColor: "#f99e23",
+            activeColor: "#f99e23",
+            ratedColor: "#f99e23!important",
+            useGradient: false,
+            disableAfterRate: false,
+            useFullStars: true,
+            strokeColor: 'transparent',
+            callback: function(currentRating, $el) {
+                $('#sylius_product_review_rating_' + (currentRating - 1)).prop('checked', true);
+            }
+        });
+    </script>
+{% endblock %}

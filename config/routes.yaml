@@ -3,3 +3,25 @@ sylius_paypal_webhook:
 
 bitbag_sylius_cms_plugin:
     resource: "@BitBagSyliusCmsPlugin/Resources/config/routing.yml"
+
+odiseo_sylius_blog_plugin_admin:
+    resource: "@OdiseoSyliusBlogPlugin/Resources/config/routing/admin.yaml"
+    prefix: /admin/blog
+
+odiseo_sylius_blog_plugin_shop:
+    resource: "@OdiseoSyliusBlogPlugin/Resources/config/routing/shop.yaml"
+    prefix: /{_locale}/blog
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+odiseo_sylius_vendor_plugin_admin:
+    resource: "@OdiseoSyliusVendorPlugin/Resources/config/routing/admin.yaml"
+    prefix: /admin
+
+odiseo_sylius_vendor_plugin_shop:
+    resource: "@OdiseoSyliusVendorPlugin/Resources/config/routing/shop.yaml"
+    prefix: /{_locale}/vendors
+    requirements:
+        _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
+
+bitbag_sylius_elasticsearch_plugin:
+    resource: "@BitBagSyliusElasticsearchPlugin/Resources/config/routing.yml"

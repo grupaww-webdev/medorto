@@ -1,0 +1,7 @@
+{% if articles|length > 0 %}
+<div class="row">
+    {% for article in articles %}
+        {% include '@OdiseoSyliusBlogPlugin/Shop/Article/_box.html.twig' %}
+    {% endfor %}
+</div>
+{% endif %}
