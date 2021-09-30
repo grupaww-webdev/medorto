@@ -7,11 +7,10 @@ imports:
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPayPalPlugin/Resources/config/config.yaml" }
-    
+
     - { resource: "@BitBagSyliusCmsPlugin/Resources/config/config.yml" }
     - { resource: "@OdiseoSyliusBlogPlugin/Resources/config/config.yaml" }
     - { resource: "@OdiseoSyliusVendorPlugin/Resources/config/config.yaml" }
-    - { resource: "@BitBagSyliusElasticsearchPlugin/Resources/config/config.yml" }
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
@@ -286,7 +285,7 @@ winzou_state_machine:
 
 sylius_grid:
     templates:
-        action: 
+        action:
             active_toggle: 'App/Grid/Action/active_toggle.html.twig'
     grids:
         app_admin_pickup_point:
@@ -319,7 +318,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
             actions:
-                main:                                    
+                main:
                     create:
                         type: create
                 item:
@@ -330,7 +329,7 @@ sylius_grid:
                                 route: app_admin_pickup_point_active_toggle
                                 parameters:
                                     pointId: resource.id
-                    
+
         app_product_refund:
             driver:
                 name: doctrine/orm
@@ -340,7 +339,7 @@ sylius_grid:
                         method: createQueryBuilderByProductId
                         arguments: ['!!int $productId']
             fields:
-                code: 
+                code:
                     type: string
                     label: sylius.ui.code
                 discount:
@@ -361,7 +360,7 @@ sylius_grid:
                                 parameters:
                                     id: resource.id
                                     productId: $productId
-                main:                                    
+                main:
                     create:
                         type: create
                         options:
@@ -401,7 +400,7 @@ sylius_grid:
 sylius_resource:
     resources:
         app.pickup_point:
-            classes: 
+            classes:
                 model: App\Entity\Shipping\PickupPoint
                 interface: App\Entity\Shipping\PickupPointInterface
                 factory: App\PickupPoint\Factory\PickupPointFactory
@@ -414,7 +413,7 @@ sylius_resource:
                 form: App\Form\Type\Product\ProductRefundType
                 interface: App\Entity\Product\ProductRefundInterface
                 repository: App\Repository\ProductRefundRepository
-                
+
         app.order_refund:
             classes:
                 model: App\Entity\Order\Refund

@@ -44,12 +44,14 @@
                 </a>
             </div>
             <div class="header__actions col-sm-12 col-md-6 px-0 flex">
-                <div class="input input--icon">
-                    <a href="#" class="flex">
-                        <img class="input__icon" src="/assets/shop/img/glass.png" alt="szukaj" />
-                    </a>
-                    <input type="text" placeholder="Szukaj" name="bitbag_elasticsearch_search[box][query]" />
-                </div>
+                <form action="{{ path('search_result') }}">
+                    <div class="input input--icon">
+                        <button type="submit" class="flex" style="border: 0; background: transparent; cursor: pointer">
+                            <img class="input__icon" src="/assets/shop/img/glass.png" alt="szukaj" />
+                        </button>
+                        <input type="text" placeholder="Szukaj" name="query" />
+                    </div>
+                </form>
                 <div class="actions flex">
                     <a href="{% if app.user %}{{ path('sylius_shop_account_dashboard') }}{% else %}{{ path('sylius_shop_login') }}{% endif %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28.133" height="35.166" viewBox="0 0 28.133 35.166">

@@ -91,8 +91,11 @@ final class ProductProcessor implements ResourceProcessorInterface
             } else {
                 $productImage = $productImageByType->first();
             }
-            $uploadedFile = $this->imageExternalImporter->importFromUrl($data[ImageTypesProvider::IMAGES_PREFIX . $imageType]);
-
+            try {
+                $uploadedFile = $this->imageExternalImporter->importFromUrl($data[ImageTypesProvider::IMAGES_PREFIX . $imageType]);
+            } catch (\Exception $e) {
+                dd($e);
+            }
             $productImage->setType($imageType);
             $productImage->setFile($uploadedFile);
             $this->imageUploader->upload($productImage);

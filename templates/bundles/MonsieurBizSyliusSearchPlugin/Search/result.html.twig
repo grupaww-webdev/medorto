@@ -1,0 +1,42 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+
+{% block content %}
+    {% include '@SyliusShop/Homepage/_banner.html.twig' %}
+    <section class="search-page container wrapper">
+        {% include '@MonsieurBizSyliusSearchPlugin/Search/_header.html.twig' %}
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <h3 class="search-page__subtitle text-darkBlue">KATEGORIE</h3>
+                {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_leftSidebar.html.twig'})) }}
+
+{#                {% include '@MonsieurBizSyliusSearchPlugin/Search/_sidebar.html.twig' %}#}
+            </div>
+            <div class="col-xs-12 col-md-9">
+                {% if resultSet.totalHits == 0 %}
+                    <div class="ui very padded center aligned secondary segment">
+                        <div class="ui centered grid">
+                            <div class="sixteen wide tablet twelve wide computer center aligned column">
+                                <p>
+                                    {{ 'monsieurbiz_searchplugin.search.result.no_result'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="products__list" id="products" {{ sylius_test_html_attribute('products') }}>
+                        {% include '@SyliusShop/Homepage/_list.html.twig' with {'products': results} %}
+                    </div>
+
+                    {{ pagination.simple(resultSet.pager) }}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <div class="ui stackable grid mbiz-sylius-search-grid">
+        <div class="four wide column">
+        </div>
+        <div class="twelve wide column">
+        </div>
+    </div>
+{% endblock %}

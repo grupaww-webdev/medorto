@@ -1,11 +1,11 @@
 sylius:
-    form: 
+    form:
         product:
             refund_code: Kod refundacji
     admin:
         menu:
             refunds: Zwroty
-            pickup_points: Punkty odbioru            
+            pickup_points: Punkty odbioru
     ui:
         active: Aktywny
         activate: Aktywuj
@@ -66,7 +66,7 @@ app:
             active: Aktywny
     ui:
         pickup_points: Punkty odbioru
-        buy_and_pay: 
+        buy_and_pay:
            title: Kup i zapłać
            description: Wykonaj polecenie zapłaty online i odbierz zamówienie w dowolnym miejscu dzięki przesyłce kurierskiej.
         buy_with_refund:
@@ -162,3 +162,8 @@ odiseo_sylius_vendor_plugin:
             logo: Logo
             channels: Kanały
             extra_emails: Dodatkowy email
+
+monsieurbiz_searchplugin:
+    search:
+        result:
+            search_result: 'Wynik wyszukiwania dla: %query% (%count%)'
