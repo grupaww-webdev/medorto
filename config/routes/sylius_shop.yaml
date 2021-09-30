@@ -37,7 +37,7 @@ sylius_shop_partial_product_index_by_category:
             limit: 4
             repository:
                 method: findAllByCategory
-                arguments: 
+                arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - '$code'
                     - '!!int $count'
@@ -54,7 +54,7 @@ app_shop_product_bestsellers_list:
             limit: 4
             repository:
                 method: findAllByBestsellers
-                arguments: 
+                arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - "expr:service('sylius.context.locale').getLocaleCode()"
                     - '!!int $count'
@@ -113,9 +113,9 @@ app_refund_index:
             template: App\Refund\index.html.twig
             repository:
                 method: findForCustomer
-                arguments: 
+                arguments:
                  - "expr:service('sylius.context.customer').getCustomer()"
-                   
+
 app_refund_create:
     path: /{_locale}/refund/{orderId}
     methods: [GET, POST]
@@ -126,7 +126,7 @@ app_refund_create:
             template: App\Refund\create.html.twig
             factory:
                 method: createNewForOrder
-                arguments: 
+                arguments:
                     - 'expr:service("sylius.repository.order").find($orderId)'
             form:
                 type: App\Form\Type\RefundType
@@ -168,10 +168,10 @@ sylius_shop_ajax_cart_add_item:
                 parameters:
                     productCode: expr:notFoundOnNull(service('sylius.repository.product').find($productId)).getCode()
                     productVariantId: expr:notFoundOnNull(service('app.resolver.variant').resolve($productId)).getId()
-                
-                    
+
+
             flash: sylius.cart.add_item
-            
+
 app_pickup_point_shop_ajax_find_pickup_points:
     path: pickup_points/{providerCode}/find
     defaults:
@@ -234,3 +234,8 @@ redirect_sylius_shop_product_index:
     requirements:
         _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
         slug: .+
+
+search_result:
+    path: /{_locale}/szukaj
+    defaults:
+        _controller: \App\Controller\Action\Shop\Search\Result

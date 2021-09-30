@@ -1,0 +1,40 @@
+{% set taxonFilter = gridConfig.useMainTaxonForFilter() ? resultSet.mainTaxonFilter : resultSet.taxonFilter %}
+
+<div class="ui fluid vertical menu mbiz-sylius-search-filters">
+    <div class="header item">
+        {{ 'monsieurbiz_searchplugin.filters.filter_results' | trans }}
+    </div>
+
+    {% if resultSet.filters|length == 0 and resultSet.priceFilter is empty and taxonFilter is empty %}
+        <div class="item">
+            {{ 'monsieurbiz_searchplugin.filters.no_filter'|trans }}
+        </div>
+    {% else %}
+        {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)) %}
+        <form name="filters-form" method="get" action="{{ path }}">
+            {% if taxonFilter is not empty %}
+                {% include '@MonsieurBizSyliusSearchPlugin/Common/_filter.html.twig' with {'filter': taxonFilter} %}
+            {% endif %}
+
+            {% set sorting = app.request.query.get('sorting') %}
+            {% if sorting is not empty %}
+                {% for sort, order in sorting %}
+                    <input type="hidden" name="sorting[{{ sort }}]" value="{{ order }}" />
+                {% endfor %}
+            {% endif %}
+
+            {% set limit = app.request.query.get('limit') %}
+            {% if limit is not empty %}
+                <input type="hidden" name="limit" value="{{ limit }}" />
+            {% endif %}
+            {% if gridConfig.haveToApplyManuallyFilters() %}
+                <div class="item">
+                    <button type="submit" class="button button--blue" style="width: 100%;">
+                        <i class="search icon"></i> {{ 'monsieurbiz_searchplugin.filters.apply_filters' | trans }}
+                    </button>
+                </div>
+            {% endif %}
+        </form>
+    {% endif %}
+
+</div>

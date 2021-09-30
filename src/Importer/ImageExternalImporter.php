@@ -29,7 +29,15 @@ class ImageExternalImporter implements ImageExternalImporterInterface
             mkdir($this->dir, 0777, true);
         }
 
-        copy($url, $fieldName);
+        $arrContextOptions = [
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ],
+        ];
+
+        $response = file_get_contents($url, false, stream_context_create($arrContextOptions));
+        file_put_contents($fieldName, $response);
 
         return new UploadedFile($fieldName, end($filePaths));
     }

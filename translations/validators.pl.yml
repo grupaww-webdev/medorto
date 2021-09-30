@@ -5,7 +5,7 @@ app:
         discount:
             not_blank: Zniżka musi być wartością pomiędzy 1 a 100
     refund:
-        date_format: Nieprawidłowy format daty 
+        date_format: Nieprawidłowy format daty
         not_blank: To pole jest wymagane
 
 odiseo_sylius_vendor_plugin:

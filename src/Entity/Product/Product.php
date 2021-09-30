@@ -9,6 +9,7 @@ use App\Exception\MissingUniqueCode;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use MonsieurBiz\SyliusSearchPlugin\Model\Documentable\DocumentableInterface;
 use Odiseo\SyliusVendorPlugin\Entity\VendorAwareInterface;
 use Odiseo\SyliusVendorPlugin\Entity\VendorTrait;
 use Sylius\Component\Core\Model\Product as BaseProduct;
@@ -18,9 +19,10 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
  * @ORM\Entity
  * @ORM\Table(name="sylius_product")
  */
-class Product extends BaseProduct implements ProductInterface, VendorAwareInterface
+class Product extends BaseProduct implements ProductInterface, VendorAwareInterface, DocumentableInterface
 {
     use VendorTrait;
+    use DocumentableProductTrait;
 
     /**
      * @var Collection|array<ProductRefundInterface>

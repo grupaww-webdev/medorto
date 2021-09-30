@@ -1,7 +1,7 @@
 # the different stages of this Dockerfile are meant to be built into separate images
 # https://docs.docker.com/compose/compose-file/#target
 
-ARG PHP_VERSION=7.3
+ARG PHP_VERSION=7.4
 ARG NODE_VERSION=10
 ARG NGINX_VERSION=1.16
 
@@ -32,8 +32,8 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
-	docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include/; \
-	docker-php-ext-configure zip --with-libzip; \
+	docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp && \
+	docker-php-ext-configure zip && \
 	docker-php-ext-install -j$(nproc) \
 		exif \
 		gd \
@@ -76,9 +76,9 @@ WORKDIR /srv/sylius
 ARG APP_ENV=prod
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY composer.json composer.lock symfony.lock ./
+COPY composer.json symfony.lock ./
 RUN set -eux; \
-	composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest; \
+	COMPOSER_MEMORY_LIMIT=-1 composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest; \
 	composer clear-cache
 
 # copy only specifically what we need
@@ -135,7 +135,7 @@ COPY --from=sylius_php /srv/sylius/vendor/sylius/sylius/src/Sylius/Bundle/ShopBu
 
 COPY gulpfile.babel.js .babelrc ./
 RUN set -eux; \
-	GULP_ENV=prod yarn build
+	GULP_ENV=dev yarn build
 
 COPY docker/nodejs/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
@@ -151,3 +151,7 @@ WORKDIR /srv/sylius
 
 COPY --from=sylius_php /srv/sylius/public public/
 COPY --from=sylius_nodejs /srv/sylius/public public/
+
+
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.14.2 as elasticsearch
+RUN elasticsearch-plugin install analysis-icu analysis-phonetic

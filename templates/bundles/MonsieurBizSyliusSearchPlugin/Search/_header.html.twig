@@ -1,0 +1,7 @@
+{% include '@MonsieurBizSyliusSearchPlugin/Event/event.html.twig' with {'eventName': 'sylius.shop.search.header.before', 'eventData': {'query': query}} %}
+
+<h2 class="search-page__title text-darkBlue">
+    {{ 'monsieurbiz_searchplugin.search.result.search_result'|trans({'%query%': query, '%count%': resultSet.totalHits}) }}
+</h2>
+
+{% include '@MonsieurBizSyliusSearchPlugin/Event/event.html.twig' with {'eventName': 'sylius.shop.search.header.after', 'eventData': {'query': query}} %}
