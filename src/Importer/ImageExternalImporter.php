@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Importer;
 
+use App\Importer\Exception\ImageNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageExternalImporter implements ImageExternalImporterInterface
@@ -35,7 +36,10 @@ class ImageExternalImporter implements ImageExternalImporterInterface
                 "verify_peer_name" => false,
             ],
         ];
-
+        $imageInfo = @getimagesize($url);
+        if (null === $imageInfo) {
+            throw new ImageNotFoundException();
+        }
         $response = file_get_contents($url, false, stream_context_create($arrContextOptions));
         file_put_contents($fieldName, $response);
 

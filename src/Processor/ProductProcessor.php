@@ -93,14 +93,14 @@ final class ProductProcessor implements ResourceProcessorInterface
             }
             try {
                 $uploadedFile = $this->imageExternalImporter->importFromUrl($data[ImageTypesProvider::IMAGES_PREFIX . $imageType]);
-            } catch (\Exception $e) {
-                dd($e);
-            }
-            $productImage->setType($imageType);
-            $productImage->setFile($uploadedFile);
-            $this->imageUploader->upload($productImage);
+                $productImage->setType($imageType);
+                $productImage->setFile($uploadedFile);
+                $this->imageUploader->upload($productImage);
 
-            $product->addImage($productImage);
+                $product->addImage($productImage);
+            } catch (\Exception $e) {
+
+            }
         }
 
         // create image if import has new one
@@ -116,5 +116,4 @@ final class ProductProcessor implements ResourceProcessorInterface
             $product->addImage($productImage);
         }
     }
-
 }
