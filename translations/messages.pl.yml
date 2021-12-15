@@ -51,6 +51,11 @@ sylius:
                 delete_account: Usuń konto
 app:
     form:
+        shipping_calculator:
+            free_above_configuration:
+                label: Darmowa dostawa powyżej wartości
+                amount: Wartość bazowa
+                limit: Wartość darmowej dostawy
         shipping_method:
             pickup_point_provider: Provider
             select_pickup_point_provider: Wybierz providera
