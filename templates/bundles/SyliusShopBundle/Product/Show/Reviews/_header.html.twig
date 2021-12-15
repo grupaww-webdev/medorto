@@ -10,7 +10,7 @@
     <div class="col-xs-12 col-sm-6">
         <div class="comments__subheading">
             <h3 class="text-darkBlue">Dodaj opinie</h3>
-            <p>Wózek inwalidzki Wheelie AIR 4613</p>
+            <p>{{ product.name }}</p>
         </div>
 
         {{ render(url('app_shop_product_review_create', {'slug': product.slug, 'template': '@SyliusShop/ProductReview/simpleCreate.html.twig'})) }}
