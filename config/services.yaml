@@ -177,6 +177,21 @@ services:
         class: App\Processor\OrderItemRefundCodeCalculator
         tags:
             - { name: sylius.order_processor, priority: 45 }
+                
+    app.shipping_calculator.free:
+        class: App\Calculator\ShippingCostCalculator
+        tags:
+            - { name: sylius.shipping_calculator, calculator: free, form_type: App\Form\Type\Shipping\Rule\ChannelBasedFreeCalculatorType, label: "app.form.shipping_calculator.free_above_configuration.label" }
+    
+    app.form.type.shipping_calculator.free:
+        class: App\Form\Type\Shipping\Calculator\FreeCalculatorType
+        tags:
+            - { name: form.type }
+    
+    app.form.type.shipping_rule.free:
+        class: App\Form\Type\Shipping\Rule\ChannelBasedFreeCalculatorType
+        tags:
+            - { name: form.type }
 
     App\PickupPoint\Form\Extension\ShippingMethodTypeExtension:
         class: App\PickupPoint\Form\Extension\ShippingMethodTypeExtension
