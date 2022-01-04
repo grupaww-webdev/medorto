@@ -87,6 +87,11 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Odiseo\BlogBundle\Form\Type\ArticleTranslationType }
 
+    app.form.extension.type.product:
+        class: App\Form\Extension\Product\ProductTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: \Sylius\Bundle\ProductBundle\Form\Type\ProductType }
+                
     app.form.extension.type.product_translation:
         class: App\Form\Extension\Product\ProductTranslationTypeExtension
         tags:
