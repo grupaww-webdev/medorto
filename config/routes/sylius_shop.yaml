@@ -39,6 +39,7 @@ sylius_shop_partial_product_index_by_category:
                 method: findAllByCategory
                 arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - '$code'
                     - '!!int $count'
             criteria: false
