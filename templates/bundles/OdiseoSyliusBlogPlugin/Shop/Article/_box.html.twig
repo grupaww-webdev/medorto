@@ -9,7 +9,7 @@
             <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_show', {'slug' : article.slug}) }}">
                 <h4>{{ article.title }}</h4>
             </a>
-            <p>{{ article.content|slice(0, 80) }}</p>
+            <p>{{ article.intro|slice(0, 80) }}</p>
         </div>
     </div>
 </div>
