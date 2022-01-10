@@ -1,4 +1,17 @@
-<div class="register col-sm-12 col-md-5" id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
+{% if app.user is null %}
+    <div class="register col-sm-12 col-md-12">
+
+            <h2 class="login__title text-darkBlue">Dane zamawiającego</h2>
+            <div class="login__form login__form--register">
+                {{ form_errors(form.customer.email, sylius_test_form_attribute('login-errors')) }}
+                {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action') %}
+                {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
+            </div>
+
+    </div>
+{% endif %}
+<div class="register col-sm-12 col-md-5"
+     id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
     <h2 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h2>
     <div class="login__form login__form--register">
         {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}
