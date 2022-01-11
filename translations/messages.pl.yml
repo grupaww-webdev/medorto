@@ -2,6 +2,9 @@ sylius:
     form:
         product:
             refund_code: Kod refundacji
+        checkout:
+            addressing:
+                different_shipping_address: Użyć innego adresu do wysyłki?
     admin:
         menu:
             refunds: Zwroty

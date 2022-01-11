@@ -1,36 +1,65 @@
-{% if app.user is null %}
-    <div class="register col-sm-12 col-md-12">
+<div id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }} class="register col-md-6">
+    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
+    <h3 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h3>
 
-            <h2 class="login__title text-darkBlue">Dane zamawiającego</h2>
-            <div class="login__form login__form--register">
-                {{ form_errors(form.customer.email, sylius_test_form_attribute('login-errors')) }}
-                {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action') %}
-                {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
-            </div>
-
-    </div>
-{% endif %}
-<div class="register col-sm-12 col-md-5"
-     id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
-    <h2 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h2>
     <div class="login__form login__form--register">
-        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}
+    {% if app.user is null %}
+    {{ form_errors(form.customer.email, sylius_test_form_attribute('login-errors')) }}
+    {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action') %}
+    {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
+    {% endif %}
+
+    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}
+
+    {{ form_row(form.differentShippingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-shipping-address'}, 'label_attr': {'data-test-different-shipping-address-label': ''}} )) }}
     </div>
-    <h2 class="login__title text-darkBlue">Dane do faktury</h2>
-    <div class="login__checkbox">
-        <label class="login__checkbox__label">
-            <input class="login__checkbox__checkbox" type="checkbox">
-            <span class="login__checkbox__checkmark"></span>
-        </label>
-    </div>
+
+    {{ sylius_template_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
+
+    {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
+    {{ form_row(form._token) }}
 </div>
-<div class="col-sm-12 col-md-6 col-md-offset-1">
-    <div class="login__form">
-        <h2 class="login__title text-darkBlue">Dane do wysyłki</h2>
-        <div class="login__form login__form--register">
-            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
-        </div>
-        {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
-        {{ form_row(form._token) }}
+
+
+
+<div id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }} class="register col-md-6" style="display:  none;">
+    <div class="ui hidden divider"></div>
+    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
+    <h3 class="login__title text-darkBlue">{{ 'sylius.ui.shipping_address'|trans }}</h3>
+    <div class="login__form login__form--register">
+    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
     </div>
+
+    {{ sylius_template_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
 </div>
+
+
+{#<div class="register col-sm-12 col-md-5"#}
+{#     id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>#}
+{#    <h2 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h2>#}
+{#    <div class="login__form login__form--register">#}
+{#        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}#}
+{#    </div>#}
+{#    <h2 class="login__title text-darkBlue">Dane do faktury</h2>#}
+{#    <div class="login__checkbox">#}
+{#        <label class="login__checkbox__label">#}
+{#            <input class="login__checkbox__checkbox" type="checkbox">#}
+{#            <span class="login__checkbox__checkmark"></span>#}
+{#        </label>#}
+{#    </div>#}
+{#    <div class="field">#}
+{#        <div class="ui toggle checkbox checked">#}
+{#            <input type="checkbox" id="sylius_checkout_address_differentShippingAddress" name="sylius_checkout_address[differentShippingAddress]" data-toggles="sylius-shipping-address" value="1" checked="checked" tabindex="0" class="hidden">#}
+{#            <label data-test-different-shipping-address-label="" for="sylius_checkout_address_differentShippingAddress">Use different address for shipping?</label></div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="col-sm-12 col-md-6 col-md-offset-1">#}
+{#    <div class="login__form">#}
+{#        <h2 class="login__title text-darkBlue">Dane do wysyłki</h2>#}
+{#        <div class="login__form login__form--register">#}
+{#            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}#}
+{#        </div>#}
+{#        {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}#}
+{#        {{ form_row(form._token) }}#}
+{#    </div>#}
+{#</div>#}
