@@ -63,6 +63,7 @@ app:
             code: Kod refundacji
             discount: Procent zniżki
             active: Aktywny
+            description: Opis refundacji
         pickup_point:
             name: Nazwa punktu odbioru
             address: Adres
