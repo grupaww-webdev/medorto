@@ -1,19 +1,26 @@
 <section class="newsletter container wrapper">
-    <div class="row">
-        <div class="col-sm-12 col-md-9 col-md-offset-3">
-            <div class="newsletter__content flex">
-                <img src="{{ asset('assets/shop/img/newsletter.png') }}" alt="newsletter" />
-                <div>
-                    <h4>{{ 'sylius.homepage.newsletter'|trans }}</h4>
-                    <p>{{ 'app.ui.homepage.newsletter_description'|trans|raw }}</p>
-                    <form class="newsletter__form flex" id="newsletter__form">
-                        <label class="relative">
-                            <input class="input" type="text" placeholder="{{ 'sylius.ui.email'|trans }}" />
-                        </label>
-                        <input class="button button--darkBlue button--submit" type="submit" value="{{ 'sylius.homepage.subscribe'|trans }}" />
-                    </form>
+    <form id="newsletter__form">
+        <div class="row">
+            <div class="col-sm-12 col-md-9 col-md-offset-3">
+                <div class="newsletter__content flex">
+                    <img src="{{ asset('assets/shop/img/newsletter.png') }}" alt="newsletter" />
+                    <div>
+                        <h4>{{ 'sylius.homepage.newsletter'|trans }}</h4>
+                        <p>{{ 'app.ui.homepage.newsletter_description'|trans|raw }}</p>
+                        <div class="newsletter__form flex" id="newsletter__form">
+                            <label class="relative">
+                                <input class="input" type="text" placeholder="{{ 'sylius.ui.email'|trans }}" />
+                            </label>
+                            <input class="button button--darkBlue button--submit" type="submit" value="{{ 'sylius.homepage.subscribe'|trans }}" />
+                        </div>
+                        <p class="text-rodo">
+                                Podając swój adres e-mail, wyrażasz zgodę <br> na przetwarzanie go przez nas w celach marketingowych.
+                                <br>
+                                Szczegóły zasad przetwarzania danych znajdziesz w <a href="{{ bitbag_cms_get_link_for_code('gdpr') }}">regulaminie</a>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </section>

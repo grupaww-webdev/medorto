@@ -3,11 +3,11 @@
 {% elseif active == 'address' %}
     {% set steps = {'cart': 'completed', 'address': 'cart__breadcrumbs__item--active', 'select_shipping': 'disabled', 'select_payment': 'disabled', 'complete': 'disabled'} %}
 {% elseif active == 'select_shipping' %}
-    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'cart__breadcrumbs__item--active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
 {% elseif active == 'select_payment' %}
-    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'active', 'complete': 'disabled'} %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'cart__breadcrumbs__item--active', 'complete': 'disabled'} %}
 {% else %}
-    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
+    {% set steps = {'cart': 'completed', 'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'cart__breadcrumbs__item--active'} %}
 {% endif %}
 
 <ul class="cart__breadcrumbs flex flex--between flex--center">
