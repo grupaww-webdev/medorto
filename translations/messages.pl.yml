@@ -91,6 +91,7 @@ app:
         order: Zamówienie nr
         total: Całkowita wartość zamówienia
         blog: BLOG
+        about_us: O Nas
         our_shops: Nasze Sklepy
         reviews:
             title: Opinie

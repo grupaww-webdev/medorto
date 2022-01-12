@@ -22,7 +22,7 @@
 
 
 
-<div id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }} class="register col-md-6" style="display:  none;">
+<div id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }} class="register hidden col-md-6">
     <div class="ui hidden divider"></div>
     {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
     <h3 class="login__title text-darkBlue">{{ 'sylius.ui.shipping_address'|trans }}</h3>
@@ -32,34 +32,3 @@
 
     {{ sylius_template_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
 </div>
-
-
-{#<div class="register col-sm-12 col-md-5"#}
-{#     id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>#}
-{#    <h2 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h2>#}
-{#    <div class="login__form login__form--register">#}
-{#        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}#}
-{#    </div>#}
-{#    <h2 class="login__title text-darkBlue">Dane do faktury</h2>#}
-{#    <div class="login__checkbox">#}
-{#        <label class="login__checkbox__label">#}
-{#            <input class="login__checkbox__checkbox" type="checkbox">#}
-{#            <span class="login__checkbox__checkmark"></span>#}
-{#        </label>#}
-{#    </div>#}
-{#    <div class="field">#}
-{#        <div class="ui toggle checkbox checked">#}
-{#            <input type="checkbox" id="sylius_checkout_address_differentShippingAddress" name="sylius_checkout_address[differentShippingAddress]" data-toggles="sylius-shipping-address" value="1" checked="checked" tabindex="0" class="hidden">#}
-{#            <label data-test-different-shipping-address-label="" for="sylius_checkout_address_differentShippingAddress">Use different address for shipping?</label></div>#}
-{#    </div>#}
-{#</div>#}
-{#<div class="col-sm-12 col-md-6 col-md-offset-1">#}
-{#    <div class="login__form">#}
-{#        <h2 class="login__title text-darkBlue">Dane do wysyłki</h2>#}
-{#        <div class="login__form login__form--register">#}
-{#            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}#}
-{#        </div>#}
-{#        {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}#}
-{#        {{ form_row(form._token) }}#}
-{#    </div>#}
-{#</div>#}
