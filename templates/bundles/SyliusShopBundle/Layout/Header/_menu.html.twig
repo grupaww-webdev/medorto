@@ -1,1 +1,28 @@
 {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+<li class="header__menu__item header__menu__item--active">
+    <a href="{{ path('sylius_shop_product_index_promotions') }}">{{ 'app.ui.homepage.promotions'|trans }}</a>
+</li>
+<li class="header__menu__item header__menu__item--active">
+    <a href="{{ path('sylius_shop_product_index_latest') }}">{{ 'app.ui.homepage.newests'|trans }}</a>
+</li>
+<li class="header__menu__item header__menu__item--active">
+    <a href="#">{{ 'app.ui.about_us'|trans }} <img src="/assets/shop/img/chevron.png" alt="chevron"></a>
+    <ul class="header__submenu">
+        <li class="header__submenu__item header__submenu__item--bold">
+            <a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.homepage.bestsellers'|trans }}</a>
+        </li>
+
+        <li class="header__submenu__item header__submenu__item--bold">
+            <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_index') }}">{{ 'app.ui.blog'|trans }}</a>
+        </li>
+
+        <li class="header__submenu__item header__submenu__item--bold">
+            <a href="{{ bitbag_cms_get_link_for_code('pick_up_places') }}">{{ 'app.ui.our_shops'|trans }}</a>
+        </li>
+
+        <li class="header__submenu__item header__submenu__item--bold">
+            <a href="{{ path('bitbag_sylius_cms_plugin_shop_frequently_asked_question_index') }}">{{ 'app.ui.breadcrumbs.faq'|trans }}</a>
+        </li>
+    </ul>
+
+</li>

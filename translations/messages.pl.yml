@@ -2,6 +2,9 @@ sylius:
     form:
         product:
             refund_code: Kod refundacji
+        checkout:
+            addressing:
+                different_shipping_address: Użyć innego adresu do wysyłki?
     admin:
         menu:
             refunds: Zwroty
@@ -87,6 +90,9 @@ app:
         subtotal: Wartość
         order: Zamówienie nr
         total: Całkowita wartość zamówienia
+        blog: BLOG
+        about_us: O Nas
+        our_shops: Nasze Sklepy
         reviews:
             title: Opinie
             user_reviews: Opinie użytkowników
