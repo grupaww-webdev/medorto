@@ -90,6 +90,8 @@ app:
         subtotal: Wartość
         order: Zamówienie nr
         total: Całkowita wartość zamówienia
+        blog: Blog
+        our_shops: Nasze Sklepy
         reviews:
             title: Opinie
             user_reviews: Opinie użytkowników
