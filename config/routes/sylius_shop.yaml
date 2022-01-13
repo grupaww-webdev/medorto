@@ -224,6 +224,7 @@ sylius_shop_product_index_promotions:
                 method: findAllByCategoryPaginator
                 arguments:
                     - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
                     - 'promotions'
 
 redirect_sylius_shop_product_index:
