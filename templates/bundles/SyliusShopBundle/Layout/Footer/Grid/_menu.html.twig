@@ -1,16 +1,26 @@
-<div class="footer__block col-xs-12 col-md-4">
+<div class="footer__block col-xs-12 col-md-3">
     <ul>
         <li><a href="{{ bitbag_cms_get_link_for_code('privacy') }}">{{ 'app.ui.menu.footer.privacy'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('regulations') }}">{{ 'app.ui.menu.footer.regulations'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('gdpr') }}">{{ 'app.ui.menu.footer.gpdr'|trans }}</a></li>
         <li><a href="{{ path('bitbag_sylius_cms_plugin_shop_frequently_asked_question_index') }}">{{ 'app.ui.menu.footer.faq'|trans }}</a></li>
+        <li><a href="{{ bitbag_cms_get_link_for_code('franchise') }}">{{ 'app.ui.menu.footer.franchise'|trans }}</a></li>
     </ul>
 </div>
-<div class="footer__block col-xs-12 col-md-4">
+<div class="footer__block col-xs-12 col-md-3">
     <ul>
         <li><a href="{{ path('sylius_shop_product_index_promotions') }}">{{ 'app.ui.menu.footer.promotions'|trans }}</a></li>
-        <li><a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.menu.footer.bestsellers'|trans }}</a></li>
+        <li><a href="{{ path('sylius_shop_product_index_latest') }}">{{ 'app.ui.menu.footer.latest'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('shipping_costs') }}">{{ 'app.ui.menu.footer.shipping_costs'|trans }}</a></li>
         <li><a href="{{ bitbag_cms_get_link_for_code('pick_up_places') }}">{{ 'app.ui.menu.footer.pick_up_places'|trans }}</a></li>
+    </ul>
+</div>
+<div class="footer__block col-xs-12 col-md-3">
+    <ul>
+        <li><a href="{{ bitbag_cms_get_link_for_code('o-nas') }}">{{ 'app.ui.menu.footer.about_us'|trans }}</a></li>
+        <li><a href="{{ path('odiseo_sylius_blog_plugin_shop_article_index') }}">{{ 'app.ui.menu.footer.blog'|trans }}</a></li>
+        <li><a href="{{ bitbag_cms_get_link_for_code('our_shops') }}">{{ 'app.ui.menu.footer.our_shops'|trans }}</a></li>
+        <li><a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.menu.footer.bestsellers'|trans }}</a></li>
+        <li><a href="{{ path('odiseo_sylius_blog_plugin_shop_article_show',{'slug': 'refundacja-online'}) }}">{{ 'app.ui.menu.footer.refund'|trans }}</a></li>
     </ul>
 </div>
