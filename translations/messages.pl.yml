@@ -135,6 +135,12 @@ app:
                 faq: FAQ
                 promotions: Promocje
                 bestsellers: Bestsellery
+                latest: Nowości
+                about_us: O Nas
+                blog: Blog
+                our_shops: Nasze Sklepy
+                franchise: Franczyza
+                refund: Refundacja
     order:
         status: Status zamówienia
         placed_date: Data złożenia zamówienia

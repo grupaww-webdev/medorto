@@ -1,0 +1,17 @@
+sylius_mailer:
+    sender:
+        name: Medorto Zakupy
+        address: zakupy@medorto.pl
+    emails:
+        user_registration:
+            sender:
+                name: Medorto
+                address: medorto@medorto.pl
+        verification_token:
+            sender:
+                name: Medorto
+                address: medorto@medorto.pl
+        reset_password_token:
+            sender:
+                name: Medorto
+                address: medorto@medorto.pl
