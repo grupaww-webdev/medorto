@@ -46,6 +46,9 @@
     "bitbag/cms-plugin": {
         "version": "v3.0.0"
     },
+    "bitbag/elasticsearch-plugin": {
+        "version": "v1.7.1"
+    },
     "bitbag/przelewy24-plugin": {
         "version": "v1.2.0"
     },
@@ -237,6 +240,18 @@
         },
         "files": [
             "config/packages/fos_ckeditor.yaml"
+        ]
+    },
+    "friendsofsymfony/elastica-bundle": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "46c9cd2c1e07f0fcfd97e96f12b03b2e0845c4cd"
+        },
+        "files": [
+            "./config/packages/fos_elastica.yaml"
         ]
     },
     "friendsofsymfony/oauth-server-bundle": {
