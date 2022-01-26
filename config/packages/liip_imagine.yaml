@@ -15,6 +15,9 @@ liip_imagine:
             filters:
                 thumbnail: { size: [69, 78], mode: outbound }
                 fixed: { width: 69, height: 78 }
+        app_shop_product_large_thumbnail:
+            filters:
+                thumbnail: { size: [ 550, 550 ], mode: outbound }
         app_shop_blog:
             filters:
                 thumbnail: { size: [480, 380], mode: outbound }
