@@ -2,7 +2,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% block content %}
-<form method="post" action="{{ path('app_shop_update_refund_product', {'productCode': product.code, 'productVariantId': (productVariantId|default(product.variants|first))}) }}">
+<form method="post" action="{{ path('app_shop_update_refund_product', {'productCode': product.code, 'productVariantId': variant.id}) }}">
     <div class="products container wrapper">
         <div class="row">
             <div class="products__lists col-xs-12">
@@ -21,7 +21,7 @@
                                     <p>{{ 'app.ui.buy_and_pay.description'|trans }}</p>
                                 </div>
                                 <div class="ui col-xs-12 col-sm-6 col-md-4 text-right">
-                                    <h3 class="text-lightBlue mt-0 mb-0">{{ money.calculatePrice(product|sylius_resolve_variant) }}</h3>
+                                    <h3 class="text-lightBlue mt-0 mb-0">{{ money.calculatePrice(variant) }}</h3>
                                 </div>
                             </div>
                             <div class="row">
