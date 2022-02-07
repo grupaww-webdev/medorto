@@ -3,7 +3,7 @@
 {% set variant = product|sylius_resolve_variant %}
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 
-<p class="products__price">
+<p class="products__price" id="product-price" data-js-product-price="">
     {{ money.calculatePrice(variant) }}
     {% if hasDiscount %}
         <del>{{ money.calculateOriginalPrice(variant) }}</del>

@@ -8,6 +8,7 @@ use App\Entity\Product\Product;
 use Exception;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,9 +43,11 @@ final class ShowRefundProductToCard
      * @var RouterInterface
      */
     private $router;
+    private ProductVariantRepositoryInterface $productVariantRepository;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
         ChannelContextInterface $channelContext,
         SessionInterface $session,
         TranslatorInterface $translator,
@@ -57,6 +60,7 @@ final class ShowRefundProductToCard
         $this->translator = $translator;
         $this->template = $template;
         $this->router = $router;
+        $this->productVariantRepository = $productVariantRepository;
     }
 
     public function __invoke(string $productCode, int $productVariantId, Request $request)
@@ -66,6 +70,8 @@ final class ShowRefundProductToCard
 
             /** @var Product $product */
             $product = $this->productRepository->findOneByChannelAndCode($channel, $productCode);
+            $productVariant = $this->productVariantRepository->find($productVariantId);
+
             if (null === $product) {
                 throw new Exception($this->translator->trans('sylius.exception.product_not_found'));
             }
@@ -82,7 +88,7 @@ final class ShowRefundProductToCard
             'App/Shop/Cart/add_to_cart_refund.html.twig',
             [
                 'product' => $product,
-                'productVariantId' => $productVariantId
+                'variant' => $productVariant
             ]
         ));
     }

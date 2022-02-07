@@ -2,42 +2,47 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Cart\PutSimpleItemToCart;
+namespace App\Application\Cart\PutOptionBasedConfigurableItemToCart;
 
 use App\Entity\Order\OrderItemInterface;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class PutSimpleItemToCartHandler implements MessageHandlerInterface
+final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandlerInterface
 {
     private OrderRepositoryInterface $orderRepository;
     private ProductRepositoryInterface $productRepository;
     private OrderModifierInterface $orderModifier;
     private CartItemFactoryInterface $orderItemFactory;
     private OrderItemQuantityModifierInterface $orderQuantityModifier;
+    private ProductVariantRepositoryInterface $productVariantRepository;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository,
         CartItemFactoryInterface $orderItemFactory,
         OrderModifierInterface $orderModifier,
-        OrderItemQuantityModifierInterface $orderQuantityModifier
+        OrderItemQuantityModifierInterface $orderQuantityModifier,
+        ProductVariantRepositoryInterface $productVariantRepository
     ) {
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->orderModifier = $orderModifier;
         $this->orderQuantityModifier = $orderQuantityModifier;
         $this->orderItemFactory = $orderItemFactory;
+        $this->productVariantRepository = $productVariantRepository;
     }
 
-    public function __invoke(PutSimpleItemToCartCommand $command): int
+    public function __invoke(PutOptionBasedConfigurableItemToCartCommand $command): int
     {
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->find($command->getCartId());
@@ -48,9 +53,9 @@ final class PutSimpleItemToCartHandler implements MessageHandlerInterface
         $product = $this->productRepository->find($command->getProductId());
         Assert::notNull($product, 'Product has not been found');
 
-        Assert::true($product->isSimple(), 'Product has to be simple');
+        $productVariant = $this->getVariant($command->getOptions(), $product);
+        Assert::false($product->isSimple(), 'Product has to be simple');
 
-        $productVariant = $product->getVariants()[0];
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->orderItemFactory->createForProduct($product);
         $cartItem->setVariant($productVariant);
@@ -58,5 +63,29 @@ final class PutSimpleItemToCartHandler implements MessageHandlerInterface
         $this->orderModifier->addToOrder($cart, $cartItem);
 
         return $productVariant->getId();
+    }
+
+    private function getVariant(array $options, ProductInterface $product): ProductVariantInterface
+    {
+        foreach ($product->getVariants() as $variant) {
+            if ($this->areOptionsMatched($options, $variant)) {
+                Assert::isInstanceOf($variant, ProductVariantInterface::class);
+
+                return $variant;
+            }
+        }
+
+        throw new \InvalidArgumentException('Variant could not be resolved');
+    }
+
+    private function areOptionsMatched(array $options, ProductVariantInterface $variant): bool
+    {
+        foreach ($variant->getOptionValues() as $optionValue) {
+            if (!isset($options[$optionValue->getOptionCode()]) || $optionValue->getCode() !== $options[$optionValue->getOptionCode()]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

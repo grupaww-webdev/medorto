@@ -73,6 +73,10 @@ final class UpdateRefundProduct
             if (false === $product->hasRefundCodes()) {
                 throw new Exception($this->translator->trans('sylius.exception.no_product_refund'));
             }
+            if (false === $request->request->has('refund-code')) {
+                return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));
+            }
+
             $this->messageBus->dispatch(
                 new UpdateRefundProductCommand(
                     $product->getId(),
