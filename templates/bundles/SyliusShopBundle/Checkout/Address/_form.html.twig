@@ -4,9 +4,14 @@
 
     <div class="login__form login__form--register">
     {% if app.user is null %}
-    {{ form_errors(form.customer.email, sylius_test_form_attribute('login-errors')) }}
-    {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action') %}
-    {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
+
+        {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action') %}
+        <div class="relative">
+            {{ form_label(form.customer.email, sylius_test_form_attribute('login-email')) }}
+            {{ form_errors(form.customer.email, sylius_test_form_attribute('login-email')) }}
+            {{ form_widget(form.customer.email, sylius_test_form_attribute('login-email')|merge({'attr': {'class': 'input'}})) }}
+        </div>
+
     {% endif %}
 
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order, 'type': 'billing'} %}

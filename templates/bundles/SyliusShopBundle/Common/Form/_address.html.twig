@@ -5,33 +5,39 @@
 {% endif %}
 <div class="relative">
     {{ form_label(form.firstName, sylius_test_form_attribute(type ~ 'first-name')) }}
-    {{ form_widget(form.firstName, sylius_test_form_attribute(type ~ 'first-name')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.firstName, sylius_test_form_attribute(type ~ 'first-name')) }}
+    {{ form_widget(form.firstName, sylius_test_form_attribute(type ~ 'first-name')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 <div class="relative">
     {{ form_label(form.lastName, sylius_test_form_attribute(type ~ 'last-name')) }}
-    {{ form_widget(form.lastName, sylius_test_form_attribute(type ~ 'last-name')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.lastName, sylius_test_form_attribute(type ~ 'last-name')) }}
+    {{ form_widget(form.lastName, sylius_test_form_attribute(type ~ 'last-name')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 <div class="relative">
     {{ form_label(form.company, sylius_test_form_attribute(type ~ 'company')) }}
-    {{ form_widget(form.company, sylius_test_form_attribute(type ~ 'company')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.company, sylius_test_form_attribute(type ~ 'company')) }}
+    {{ form_widget(form.company, sylius_test_form_attribute(type ~ 'company')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 <div class="relative">
     {{ form_label(form.street, sylius_test_form_attribute(type ~ 'street')) }}
-    {{ form_widget(form.street, sylius_test_form_attribute(type ~ 'street')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.street, sylius_test_form_attribute(type ~ 'street')) }}
+    {{ form_widget(form.street, sylius_test_form_attribute(type ~ 'street')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 <div class="relative">
     {{ form_label(form.postcode, sylius_test_form_attribute(type ~ 'postcode')) }}
-    {{ form_widget(form.postcode, sylius_test_form_attribute(type ~ 'postcode')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.postcode, sylius_test_form_attribute(type ~ 'postcode')) }}
+    {{ form_widget(form.postcode, sylius_test_form_attribute(type ~ 'postcode')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 <div class="relative">
     {{ form_label(form.city, sylius_test_form_attribute(type ~ 'city')) }}
-    {{ form_widget(form.city, sylius_test_form_attribute(type ~ 'city')|merge({'attr': {'class': 'input'}})) }}
     {{ form_errors(form.city, sylius_test_form_attribute(type ~ 'city')) }}
+    {{ form_widget(form.city, sylius_test_form_attribute(type ~ 'city')|merge({'attr': {'class': 'input'}})) }}
+
 </div>
 {{ form_row(form.phoneNumber) }}
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
