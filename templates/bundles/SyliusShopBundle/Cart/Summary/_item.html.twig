@@ -5,7 +5,7 @@
     <div class="flex flex--between full-size" {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
     </div>
-    <div class="flex flex--end half-size">
+    <div class="flex flex--between full-size">
         <b class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</b>
         {{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)|sylius_merge_recursive({'attr': {'form': main_form, 'class': 'input'}})) }}
         <form action="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" method="post">
