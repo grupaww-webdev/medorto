@@ -1,1 +1,13 @@
-{% include '@SyliusShop/error500.html.twig' %}
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <section class="page cart container wrapper">
+        <div class="ui padded segment text-center">
+            <h2 class="ui center aligned icon header">
+                <img src="{{ asset('assets/shop/img/medorto.png') }}" alt="Medorto logo" class="ui small image"/>
+                <br/><br/>
+                {{ 'sylius.ui.server_has_encountered_some_errors'|trans }}
+            </h2>
+        </div>
+    </section>
+{% endblock %}

@@ -1,4 +1,11 @@
 sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'zostało prawidłowo złożone.'
+            subject: 'Potwierdzenie zamówienia'
+            view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
+            thank_you: 'Dziękujemy za zakupy w Naszym sklepie!'
+            your_order_number: 'Twoje zamówienie nr'
     form:
         product:
             refund_code: Kod refundacji
@@ -10,6 +17,7 @@ sylius:
             refunds: Zwroty
             pickup_points: Punkty odbioru
     ui:
+        error: Uwaga # softening the errors message
         active: Aktywny
         activate: Aktywuj
         deactivate: Dezaktywuj

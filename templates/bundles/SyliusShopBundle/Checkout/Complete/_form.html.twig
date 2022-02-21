@@ -1,0 +1,15 @@
+{#<div class="row middle aligned">#}
+{#    a#}
+{#    {{ form_row(form.notes, sylius_test_form_attribute('extra-notes')|merge({'rows': 3})) }}#}
+{#    b#}
+{#</div>#}
+<div class="ui hidden divider"></div>
+<div class="ui padded segment flex flex--center flex--column">
+    <div class="ui padded segment">
+        {{ form_label(form.notes) }}
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui padded segment">
+        {{ form_widget(form.notes, {'attr': { 'style': 'height: 150px; width: 500px'}}) }}
+    </div>
+</div>
