@@ -21,14 +21,14 @@
         }
     }
     &__list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        @media screen and (max-width: $mobile) {
-            grid-template-columns: repeat(1, 1fr);
-        }
-        grid-auto-rows: 1fr;
-        grid-column-gap: 5px;
-        grid-row-gap: 5px;
+        //display: grid;
+        //grid-template-columns: repeat(3, 1fr);
+        //@media screen and (max-width: $mobile) {
+        //    grid-template-columns: repeat(1, 1fr);
+        //}
+        //grid-auto-rows: 1fr;
+        //grid-column-gap: 5px;
+        //grid-row-gap: 5px;
 
         &.vertical {
             grid-template-columns: repeat(1, 1fr);
