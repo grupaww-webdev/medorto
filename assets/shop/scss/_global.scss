@@ -150,8 +150,36 @@ a {
     color: $red;
 }
 
+.products__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.products__item {
+    flex-basis: 32%;
+    margin-left: 1.3%;
+
+    @media screen and (max-width: 667px){
+        flex-basis: 90%;
+        margin-left: 5%;
+    }
+}
+
 .main-image {
     max-width: 380px;
     object-fit: contain;
     object-position: center;
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-height: 145px;
+
+    @media screen and (max-width: 667px){
+        max-height: 30vh;
+        margin: 0 auto;
+    }
+}
+
+.breadcrumbs {
+    margin-bottom: 20px;
 }
