@@ -36,3 +36,19 @@
 @import "components/order";
 @import "components/product_refund";
 @import "components/tabs";
+
+.products__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.products__item {
+    flex-basis: 32%;
+    margin-left: 1.3%;
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-height: 145px;
+}
