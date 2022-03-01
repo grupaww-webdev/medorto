@@ -33,7 +33,7 @@
         &.vertical {
             grid-template-columns: repeat(1, 1fr);
 
-            &.products__item {
+            .products__item {
                 flex-basis: 97.4%;
             }
         }
