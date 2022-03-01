@@ -35,6 +35,10 @@
 
             .products__item {
                 flex-basis: 97.4%;
+
+                @media screen and (max-width: 667px){
+                    flex-basis: 90%;
+                }
             }
         }
     }
