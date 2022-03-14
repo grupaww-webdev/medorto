@@ -27,11 +27,19 @@
             grid-template-columns: repeat(1, 1fr);
         }
         grid-auto-rows: 1fr;
-        grid-column-gap: 5px;
-        grid-row-gap: 5px;
+        //grid-column-gap: 5px;
+        //grid-row-gap: 5px;
 
         &.vertical {
             grid-template-columns: repeat(1, 1fr);
+
+            .products__item {
+                flex-basis: 97.4%;
+
+                @media screen and (max-width: 667px){
+                    flex-basis: 90%;
+                }
+            }
         }
     }
     &__item {

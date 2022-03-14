@@ -7,7 +7,7 @@ liip_imagine:
     filter_sets:
         app_shop_product_thumbnail:
             filters:
-                thumbnail: { size: [202, 200], mode: outbound }
+                relative_resize: { heighten: 200, widen: 200 }
         app_shop_category_thumbnail:
             filters:
                 thumbnail: { size: [1300, 258], mode: outbound }                
@@ -17,7 +17,7 @@ liip_imagine:
                 fixed: { width: 69, height: 78 }
         app_shop_product_large_thumbnail:
             filters:
-                thumbnail: { size: [ 550, 550 ], mode: outbound }
+                relative_resize: { heighten: 550 }
         app_shop_blog:
             filters:
                 thumbnail: { size: [480, 380], mode: outbound }
