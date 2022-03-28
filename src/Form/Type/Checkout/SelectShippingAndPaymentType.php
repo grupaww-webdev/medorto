@@ -13,6 +13,8 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class SelectShippingAndPaymentType extends AbstractResourceType
 {
@@ -28,9 +30,20 @@ final class SelectShippingAndPaymentType extends AbstractResourceType
                 'label' => false,
             ])
             ->add('rules', CheckboxType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ]);
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'allow_extra_fields' => true,
+        ]);
     }
 
     public function getBlockPrefix(): string
