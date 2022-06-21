@@ -22,6 +22,12 @@
 
 </div>
 <div class="relative">
+    {{ form_label(form.nip, sylius_test_form_attribute(type ~ 'company')) }}
+    {{ form_errors(form.nip, sylius_test_form_attribute(type ~ 'company')) }}
+    {{ form_widget(form.nip, sylius_test_form_attribute(type ~ 'company')|merge({'attr': {'class': 'input'}})) }}
+
+</div>
+<div class="relative">
     {{ form_label(form.street, sylius_test_form_attribute(type ~ 'street')) }}
     {{ form_errors(form.street, sylius_test_form_attribute(type ~ 'street')) }}
     {{ form_widget(form.street, sylius_test_form_attribute(type ~ 'street')|merge({'attr': {'class': 'input'}})) }}
