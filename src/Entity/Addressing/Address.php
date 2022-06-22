@@ -13,4 +13,28 @@ use Sylius\Component\Core\Model\Address as BaseAddress;
  */
 class Address extends BaseAddress
 {
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $nip;
+
+    /**
+     * @return string|null
+     */
+    public function getNip(): ?string
+    {
+        return $this->nip;
+    }
+
+    /**
+     * @param   string|null  $nip
+     */
+    public function setNip(?string $nip): void
+    {
+        $this->nip = $nip;
+    }
+
+
 }
