@@ -147,7 +147,7 @@
     const options = {
         type: "carousel",
         gap: 0,
-        perView: 1,
+        perView: 5,
     };
     if ($('.glide').length > 0) {
         new Glide(".glide", options).mount();
@@ -160,6 +160,7 @@
         useGradient: false,
     });
     checkCookie();
+    selectProductImage();
 </script>
 {{ sylius_template_event('sylius.shop.layout.after_body') }}
 </body>

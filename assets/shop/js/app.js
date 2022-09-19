@@ -38,7 +38,7 @@ function checkCookie() {
 }
 
 function selectProductImage() {
-	const slides = document.querySelectorAll(".glide__slide .responsive-img");
+	const slides = document.querySelectorAll(".glide__slide");
 
 	for (let i = 0; i < slides.length; i++) {
 		slides[i].addEventListener("click", function () {
