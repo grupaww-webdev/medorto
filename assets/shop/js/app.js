@@ -41,9 +41,9 @@ function selectProductImage() {
 	const slides = document.querySelectorAll(".glide__slide");
 
 	for (let i = 0; i < slides.length; i++) {
-		slides[i].addEventListener("click", function () {
-			document.querySelector(".product__img").setAttribute("src", slides[i].getAttribute("src"));
-		});
+    slides[i].addEventListener("click", function () {
+      document.querySelector(".product__img").setAttribute("src", slides[i].getElementsByTagName('img')[0].getAttribute("src"));
+    });
 	}
 }
 

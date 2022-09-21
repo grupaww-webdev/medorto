@@ -20,8 +20,17 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
+
     <script>
+        const options = {
+            type: "carousel",
+            gap: 0,
+            perView: 5,
+        };
+        if ($('.glide').length > 0) {
+            new Glide(".glide", options).mount();
+        }
         $(".user-rating").starRating({
             totalStars: 5,
             starShape: "rounded",

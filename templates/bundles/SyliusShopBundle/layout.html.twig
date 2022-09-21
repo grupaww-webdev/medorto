@@ -142,16 +142,20 @@
 
 {% block javascripts %}
     {{ sylius_template_event('sylius.shop.layout.javascripts') }}
+
+    <script>
+        const options = {
+            type: "carousel",
+            gap: 0,
+            perView: 1,
+        };
+        if ($('.glide').length > 0) {
+            new Glide(".glide", options).mount();
+        }
+    </script>
 {% endblock %}
 <script>
-    const options = {
-        type: "carousel",
-        gap: 0,
-        perView: 5,
-    };
-    if ($('.glide').length > 0) {
-        new Glide(".glide", options).mount();
-    }
+
     $(".my-rating").starRating({
         totalStars: 5,
         starShape: "rounded",
