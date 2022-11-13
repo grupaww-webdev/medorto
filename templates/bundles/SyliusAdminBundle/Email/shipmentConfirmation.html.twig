@@ -1,4 +1,4 @@
-{% extends 'bundles/SyliusAdminBundle/Email/layout.html.twig' %}
+{% extends '@SyliusAdmin/Email/layout.html.twig' %}
 
 {% block subject %}
     {{ 'sylius.email.shipment_confirmation.subject'|trans({}, null, localeCode) }}
@@ -6,20 +6,16 @@
 
 {% block content %}
     <div style="text-align: center;">
-        <div>
-            {{ 'sylius.email.shipment_confirmation.your_order_with_number'|trans({}, null, localeCode) }}
-            <span style="color: #2999da;">{{ order.number }}</span>
-            {{ 'sylius.email.shipment_confirmation.has_been_sent_using'|trans({}, null, localeCode) }}
-            <span style="color: #2999da;">{{ shipment.method }}</span>.
+        <h3>{{ 'sylius.email.shipment_confirmation.dear_client'|trans({}, null, localeCode) }}</h3>
+
+        <div style="margin-bottom: 20px;">
+            {{ 'sylius.email.shipment_confirmation.has_been_successfully_placed'|trans({}, null, localeCode) }}
         </div>
-        {% if shipment.tracking is not null %}
-            <div style="margin-bottom: 20px;">
-                {% set tracking_code %}<span style="color: #2999da;">{{ shipment.tracking }}</span>{% endset %}
-                {{ 'sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code'|trans({
-                    '%tracking_code%': tracking_code
-                }, null, localeCode)|raw }}
-            </div>
-        {% endif %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="https://bit.ly/3UFvL0Z" style="display: inline-block; text-align: center; background: #195281; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+                {{ 'sylius.email.shipment_confirmation.get_opinion'|trans({}, null, localeCode) }}
+            </a>
+        </div>
         <div>
             {{ 'sylius.email.shipment_confirmation.thank_you_for_transaction'|trans({}, null, localeCode) }}
         </div>

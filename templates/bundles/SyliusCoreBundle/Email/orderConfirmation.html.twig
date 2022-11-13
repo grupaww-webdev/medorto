@@ -1,0 +1,9 @@
+{% extends 'bundles/SyliusShopBundle/Email/layout.html.twig' %}
+
+{% block subject %}
+    {% include 'bundles/SyliusShopBundle/Email/Blocks/OrderConfirmation/_subject.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    {% include 'bundles/SyliusShopBundle/Email/Blocks/OrderConfirmation/_content.html.twig' %}
+{% endblock %}

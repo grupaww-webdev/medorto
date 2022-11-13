@@ -1,11 +1,22 @@
 sylius:
     email:
         order_confirmation:
-            has_been_successfully_placed: 'zostało prawidłowo złożone.'
-            subject: 'Potwierdzenie zamówienia'
+            dear_client: 'Szanowny Kliencie,'
+            has_been_successfully_placed: 'dziękujemy za złożenie zamówienia w sklepie medorto.pl'
+            subject: 'Dziękujemy za złożenie zamówienia!'
             view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
             thank_you: 'Dziękujemy za zakupy w Naszym sklepie!'
-            your_order_number: 'Twoje zamówienie nr'
+            thank_you_new: 'Dziękujemy za zakupy w Naszym sklepie!'
+            your_order_number: 'Przekazujemy je do realizacji. Nr twojego zamówienia'
+            about_next_steps: 'O kolejnych krokach poinformujemy Cię w nastepnych mailach.'
+            medorto: Zespół Medorto
+        shipment_confirmation:
+            dear_client: 'Szanowny Kliencie,'
+            subject: 'Twoje zamówienie zostało wysłane'
+            you_can_check_its_location_with_the_tracking_code: 'Przesyłkę możesz sprawdzać używając kodu śledzenia: %tracking_code%'
+            has_been_sent_using: "zostało wysłane z użyciem"
+            has_been_successfully_placed: 'Dziękujemy za zakupy w Medorto. Twoje zamówienie właśnie zostało wysłane. Mamy nadzieję, że jesteś zadowolony z przebiegu transakcji.'
+            get_opinion: 'Jednocześnie zachęcamy do pozostawienia opinii o naszym sklepie w wizytówce Google'
     form:
         product:
             refund_code: Kod refundacji
