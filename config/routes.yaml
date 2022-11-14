@@ -25,3 +25,10 @@ odiseo_sylius_vendor_plugin_shop:
 
 monsieurbiz_search_plugin:
   resource: "@MonsieurBizSyliusSearchPlugin/Resources/config/routing.yaml"
+  
+
+medorto_admin_order_send_preparation_email:
+  path: /{id}/send-preparation-email
+  methods: [ GET ]
+  defaults:
+      _controller: App\Controller\Action\Admin\Order\SendOrderPreparationEmailAction

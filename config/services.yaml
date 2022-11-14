@@ -247,3 +247,6 @@ services:
                 elastically_mappings_directory: '%kernel.project_dir%/vendor/monsieurbiz/sylius-search-plugin/src/Resources/config/elasticsearch/mappings'
                 elastically_index_class_mapping:
                     documents-pl_pl: \MonsieurBiz\SyliusSearchPlugin\Model\Document\Result
+                    
+    App\EmailManager\OrderNotificationEmailManager:
+        arguments: [ '@sylius.email_sender' ]

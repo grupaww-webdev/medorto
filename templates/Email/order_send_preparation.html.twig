@@ -1,0 +1,23 @@
+{% extends '@SyliusAdmin/Email/layout.html.twig' %}
+
+{% block subject %}
+    {{ 'sylius.email.order_preparation.subject'|trans({}, null, localeCode) }}
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h3>{{ 'sylius.email.order_preparation.dear_client'|trans({}, null, localeCode) }}</h3>
+
+        {{ 'sylius.email.order_preparation.your_order_number_1'|trans({}, null, localeCode) }}
+        <div style="margin: 10px 0;">
+          <span style="border: 1px solid #eee; padding: 10px; color: #2999da; font-size: 28px;">
+            {{ order.number }}
+          </span>
+        </div>
+        {{ 'sylius.email.order_preparation.your_order_number_2'|trans({}, null, localeCode) }}
+
+        <div>
+            {{ 'sylius.email.order_preparation.thank_you_for_transaction'|trans({}, null, localeCode) }}
+        </div>
+    </div>
+{% endblock %}

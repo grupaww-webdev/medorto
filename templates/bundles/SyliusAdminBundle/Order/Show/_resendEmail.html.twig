@@ -1,0 +1,13 @@
+<div class="ui segment">
+    {% set path_1 = path('sylius_admin_order_resend_confirmation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
+    <a href="{{ path_1 }}" class="ui icon labeled tiny fluid button" {{ sylius_test_html_attribute('resend-order-confirmation-email') }}>
+        <i class="send icon"></i> {{ 'sylius.ui.resend_the_order_confirmation_email'|trans }}
+    </a>
+</div>
+<div class="ui segment">
+    {% set path_2 = path('medorto_admin_order_send_preparation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
+    <a href="{{ path_2 }}" class="ui icon labeled tiny fluid button" {{ sylius_test_html_attribute('send-order-preparation-email') }}>
+        <i class="send icon"></i> {{ 'sylius.ui.send_the_order_preparation_email'|trans }}
+    </a>
+</div>
+

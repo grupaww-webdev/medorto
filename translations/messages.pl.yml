@@ -1,13 +1,19 @@
 sylius:
     email:
+        order_preparation:
+            dear_client: 'Szanowny Kliencie,'
+            subject: 'Przyjęliśmy Twoje zamówienie do realizacji'
+            your_order_number_1: 'Twoje zamówienie o numerze: '
+            your_order_number_2: 'jest w trakcie realizacji.'
+            thank_you_for_transaction: O wysłaniu zamówienia poinformujemy Cię w osobnej wiadomości.
         order_confirmation:
             dear_client: 'Szanowny Kliencie,'
-            has_been_successfully_placed: 'dziękujemy za złożenie zamówienia w sklepie medorto.pl'
+            has_been_successfully_placed: 'Dziękujemy za złożenie zamówienia w sklepie medorto.pl'
             subject: 'Dziękujemy za złożenie zamówienia!'
             view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
             thank_you: 'Dziękujemy za zakupy w Naszym sklepie!'
             thank_you_new: 'Dziękujemy za zakupy w Naszym sklepie!'
-            your_order_number: 'Przekazujemy je do realizacji. Nr twojego zamówienia'
+            your_order_number: ' Nr twojego zamówienia'
             about_next_steps: 'O kolejnych krokach poinformujemy Cię w nastepnych mailach.'
             medorto: Zespół Medorto
         shipment_confirmation:
@@ -54,6 +60,7 @@ sylius:
         full_name: Imię i nazwisko
         back_to_shop: Wróć do sklepu
         confirm_rules: Przeczytałem i akceptuję <a href=":privacyLink::"><b>Politykę Prywatności</b></a> i <a href=":rulesLink:"><b>Regulamin</b></a> zakupów metoro.pl
+        send_the_order_preparation_email: Wyślij email z potwierdzeniem przygotowywania zamówienia
         cart:
             label: Koszyk
             step_1:

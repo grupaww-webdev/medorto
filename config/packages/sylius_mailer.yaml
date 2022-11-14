@@ -15,3 +15,9 @@ sylius_mailer:
             sender:
                 name: Medorto
                 address: "medorto@medorto.pl"
+        order_send_preparation:
+            template: "Email/order_send_preparation.html.twig"
+            sender:
+                name: Medorto Zakupy
+                address: "zakupy@medorto.pl"
+                
