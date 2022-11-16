@@ -17,7 +17,8 @@
   &__item {
     @include flex(row, flex-start, center);
     flex-direction: column;
-    padding: 160px 90px;
+    padding: 0 90px;
+    min-height: 500px;
     @media screen and (max-width: $mobile) {
       padding: 12px 12px 48px;
     }
