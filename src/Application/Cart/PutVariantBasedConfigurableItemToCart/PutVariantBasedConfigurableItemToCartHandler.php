@@ -12,6 +12,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -26,13 +27,19 @@ final class PutVariantBasedConfigurableItemToCartHandler implements MessageHandl
     private OrderItemQuantityModifierInterface $orderQuantityModifier;
     private ProductVariantRepositoryInterface $productVariantRepository;
 
+    /**
+     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     */
+    private AvailabilityCheckerInterface $availabilityChecker;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository,
         CartItemFactoryInterface $orderItemFactory,
         OrderModifierInterface $orderModifier,
         OrderItemQuantityModifierInterface $orderQuantityModifier,
-        ProductVariantRepositoryInterface $productVariantRepository
+        ProductVariantRepositoryInterface $productVariantRepository,
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
@@ -40,6 +47,7 @@ final class PutVariantBasedConfigurableItemToCartHandler implements MessageHandl
         $this->orderQuantityModifier = $orderQuantityModifier;
         $this->orderItemFactory = $orderItemFactory;
         $this->productVariantRepository = $productVariantRepository;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function __invoke(PutVariantBasedConfigurableItemToCartCommand $command): int
@@ -56,6 +64,9 @@ final class PutVariantBasedConfigurableItemToCartHandler implements MessageHandl
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->productVariantRepository->findOneByCodeAndProductCode($command->getVariantCode(), $product->getCode());
         Assert::false($product->isSimple(), 'Product has to be simple');
+
+        $isStockSufficient = $this->availabilityChecker->isStockSufficient($productVariant, $command->getQuantity());
+        Assert::true($isStockSufficient, 'Product does not have sufficient stock.');
 
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->orderItemFactory->createForProduct($product);

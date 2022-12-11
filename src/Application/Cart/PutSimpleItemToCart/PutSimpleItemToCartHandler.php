@@ -10,6 +10,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -23,18 +24,25 @@ final class PutSimpleItemToCartHandler implements MessageHandlerInterface
     private CartItemFactoryInterface $orderItemFactory;
     private OrderItemQuantityModifierInterface $orderQuantityModifier;
 
+    /**
+     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     */
+    private AvailabilityCheckerInterface $availabilityChecker;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository,
         CartItemFactoryInterface $orderItemFactory,
         OrderModifierInterface $orderModifier,
-        OrderItemQuantityModifierInterface $orderQuantityModifier
+        OrderItemQuantityModifierInterface $orderQuantityModifier,
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->orderModifier = $orderModifier;
         $this->orderQuantityModifier = $orderQuantityModifier;
         $this->orderItemFactory = $orderItemFactory;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function __invoke(PutSimpleItemToCartCommand $command): int
@@ -51,6 +59,10 @@ final class PutSimpleItemToCartHandler implements MessageHandlerInterface
         Assert::true($product->isSimple(), 'Product has to be simple');
 
         $productVariant = $product->getVariants()[0];
+
+        $isStockSufficient = $this->availabilityChecker->isStockSufficient($productVariant, $command->getQuantity());
+        Assert::true($isStockSufficient, 'Product does not have sufficient stock.');
+
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->orderItemFactory->createForProduct($product);
         $cartItem->setVariant($productVariant);

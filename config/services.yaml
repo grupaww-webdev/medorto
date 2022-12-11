@@ -178,6 +178,7 @@ services:
     app.resolver.variant:
         public: true
         class: App\Resolver\ProductVariantResolver
+        
     App\Processor\OrderItemRefundCodeCalculator:
         class: App\Processor\OrderItemRefundCodeCalculator
         tags:

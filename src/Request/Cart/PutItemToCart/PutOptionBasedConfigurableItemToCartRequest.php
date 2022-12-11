@@ -32,6 +32,11 @@ final class PutOptionBasedConfigurableItemToCartRequest implements RequestInterf
         return $request->request->get('sylius_add_to_cart')['cartItem']['variant'];
     }
 
+    public static function getQuantity(Request $request): int
+    {
+        return (int)$request->request->get('sylius_add_to_cart')['cartItem']['quantity'] ?? 1;
+    }
+
     public function getProductId(): int
     {
         return $this->productId;
@@ -58,7 +63,7 @@ final class PutOptionBasedConfigurableItemToCartRequest implements RequestInterf
             $cartId,
             $request->query->getInt('productId'),
             self::getOptions($request),
-            $request->request->getInt('quantity', 1)
+            self::getQuantity($request)
         );
     }
 

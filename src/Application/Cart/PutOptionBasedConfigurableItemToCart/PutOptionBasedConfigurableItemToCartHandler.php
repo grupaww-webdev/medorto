@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Cart\PutOptionBasedConfigurableItemToCart;
 
 use App\Entity\Order\OrderItemInterface;
+use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -12,6 +13,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -26,6 +28,16 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
     private OrderItemQuantityModifierInterface $orderQuantityModifier;
     private ProductVariantRepositoryInterface $productVariantRepository;
 
+    /**
+     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     */
+    private AvailabilityCheckerInterface $availabilityChecker;
+
+    /**
+     * @var \Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator
+     */
+    private InStockValidator $inStockValidator;
+
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         ProductRepositoryInterface $productRepository,
@@ -33,6 +45,7 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
         OrderModifierInterface $orderModifier,
         OrderItemQuantityModifierInterface $orderQuantityModifier,
         ProductVariantRepositoryInterface $productVariantRepository
+//        InStockValidator $inStockValidator
     ) {
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
@@ -40,6 +53,7 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
         $this->orderQuantityModifier = $orderQuantityModifier;
         $this->orderItemFactory = $orderItemFactory;
         $this->productVariantRepository = $productVariantRepository;
+//        $this->inStockValidator = $inStockValidator;
     }
 
     public function __invoke(PutOptionBasedConfigurableItemToCartCommand $command): int
@@ -55,6 +69,9 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
 
         $productVariant = $this->getVariant($command->getOptions(), $product);
         Assert::false($product->isSimple(), 'Product has to be simple');
+
+        $isStockSufficient = $this->availabilityChecker->isStockSufficient($productVariant, $command->getQuantity() );
+        Assert::true($isStockSufficient, 'Product does not have sufficient stock.');
 
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->orderItemFactory->createForProduct($product);
