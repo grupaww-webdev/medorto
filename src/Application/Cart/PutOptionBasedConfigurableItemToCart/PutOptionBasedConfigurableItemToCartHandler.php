@@ -26,17 +26,7 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
     private OrderModifierInterface $orderModifier;
     private CartItemFactoryInterface $orderItemFactory;
     private OrderItemQuantityModifierInterface $orderQuantityModifier;
-    private ProductVariantRepositoryInterface $productVariantRepository;
-
-    /**
-     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
-     */
     private AvailabilityCheckerInterface $availabilityChecker;
-
-    /**
-     * @var \Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator
-     */
-    private InStockValidator $inStockValidator;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
@@ -44,16 +34,14 @@ final class PutOptionBasedConfigurableItemToCartHandler implements MessageHandle
         CartItemFactoryInterface $orderItemFactory,
         OrderModifierInterface $orderModifier,
         OrderItemQuantityModifierInterface $orderQuantityModifier,
-        ProductVariantRepositoryInterface $productVariantRepository
-//        InStockValidator $inStockValidator
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->orderModifier = $orderModifier;
         $this->orderQuantityModifier = $orderQuantityModifier;
         $this->orderItemFactory = $orderItemFactory;
-        $this->productVariantRepository = $productVariantRepository;
-//        $this->inStockValidator = $inStockValidator;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function __invoke(PutOptionBasedConfigurableItemToCartCommand $command): int
