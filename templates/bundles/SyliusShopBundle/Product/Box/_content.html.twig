@@ -16,8 +16,14 @@
         {% elseif app.request.query.get('_label') %}
             <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ app.request.query.get('_label')|trans}}</p>
         {% endif %}
-        <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
-        {% if product.isSimple() %}
+
+        {% if not product.enabledVariants.empty() %}
+            <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
+        {% else %}
+            <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ 'sylius.ui.out_of_stock'|trans }}</p>
+        {% endif %}
+
+        {% if product.isSimple() and not product.enabledVariants.empty() %}
             <a href="{{ path('app_shop_add_to_cart', {'productId': product.id, 'quantity': 1}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.add_to_cart'|trans }}</a>
         {% else %}
             <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.show'|trans }}</a>
