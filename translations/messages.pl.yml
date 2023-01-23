@@ -58,6 +58,7 @@ sylius:
         order_number: Numer zamówienia
         shipment_method: Metoda wysyłki
         full_name: Imię i nazwisko
+        place_order: Zamawiam
         back_to_shop: Wróć do sklepu
         confirm_rules: Przeczytałem i akceptuję <a href=":privacyLink::"><b>Politykę Prywatności</b></a> i <a href=":rulesLink:"><b>Regulamin</b></a> zakupów metoro.pl
         send_the_order_preparation_email: Wyślij email z potwierdzeniem przygotowywania zamówienia

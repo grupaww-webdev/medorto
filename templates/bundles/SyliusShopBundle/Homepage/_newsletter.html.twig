@@ -1,3 +1,4 @@
+{% if false %}
 <section class="newsletter container wrapper">
     <form id="newsletter__form">
         <div class="row">
@@ -17,7 +18,8 @@
 
                             <input type="checkbox" id="" name="rules" required="required" class="checkbox" value="1">
 
-                                Podając swój adres e-mail, wyrażasz zgodę <br> na przetwarzanie go przez nas w celach marketingowych.
+                            Zgadzam się na przetwarzanie moich danych osobowych przez Medorto Adam Chmiel i Wspólnicy s.c. w celu wysyłania mi newslettera,
+                            czyli informacji o towarach, usługach, promocjach lub nowościach zgodnie z Polityką prywatności [aktywny link]. Wiem, że zgodę tę mogę w każdej chwili cofnąć. Tam gzie jest nawias z aktywnym linkiem trzeba dodać link do polityki prywatności ( zał. w komentarzu u dołu)
                                 <br>
                                 Szczegóły zasad przetwarzania danych znajdziesz w <a href="{{ bitbag_cms_get_link_for_code('gdpr') }}">regulaminie</a>.
 
@@ -28,3 +30,4 @@
         </div>
     </form>
 </section>
+{% endif %}

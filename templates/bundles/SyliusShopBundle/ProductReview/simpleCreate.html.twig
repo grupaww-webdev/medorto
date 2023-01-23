@@ -7,6 +7,14 @@
 
     {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
 
+<p class="text-rodo">
+
+    <input type="checkbox" id="" name="rules" required="required" class="checkbox" value="1">
+
+    Wyrażam zgodę na przetwarzanie danych osobowych przez Medorto Adam Chmiel i Wspólnicy s.c.
+
+</p>
+
     {{ form_row(form._token) }}
     <input
         type="submit"
