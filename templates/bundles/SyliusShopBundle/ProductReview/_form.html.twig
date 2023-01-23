@@ -2,24 +2,24 @@
     <p>{{ 'app.ui.reviews.review_product'|trans }}</p>
     <div class="user-rating flex"></div>
     {{ form_errors(form.rating) }}
-    {{ form_widget(form.rating, sylius_test_form_attribute('rating')|sylius_merge_recursive( {'attr': {'style': 'display: none'}})) }}
+    {{ form_widget(form.rating, sylius_test_form_attribute('rating')|sylius_merge_recursive( {'attr': {'style': 'display: none', 'required': 'required'}})) }}
 </div>
 <div class="login__form login__form--register">
     <div class="relative">
         {{ form_label(form.title) }}
-        {{ form_widget(form.title, sylius_test_form_attribute('title')|sylius_merge_recursive( {'attr': {'class': 'input'}})) }}
+        {{ form_widget(form.title, sylius_test_form_attribute('title')|sylius_merge_recursive( {'attr': {'class': 'input', 'required': 'required'}})) }}
         {{ form_errors(form.title) }}
     </div>
     {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
         <div class="relative">
             {{ form_label(form.author.email) }}
-            {{ form_widget(form.author.email, sylius_test_form_attribute('author-email')|sylius_merge_recursive( {'attr': {'class': 'input'}})) }}
+            {{ form_widget(form.author.email, sylius_test_form_attribute('author-email')|sylius_merge_recursive( {'attr': {'class': 'input', 'required': 'required'}})) }}
             {{ form_errors(form.author.email) }}
         </div>
     {% endif %}
     <div>
         {{ form_label(form.comment) }}
-        {{ form_widget(form.comment, sylius_test_form_attribute('comment')|sylius_merge_recursive( {'attr': {'class': 'input input--textarea'}})) }}
+        {{ form_widget(form.comment, sylius_test_form_attribute('comment')|sylius_merge_recursive( {'attr': {'class': 'input input--textarea', 'required': 'required'}})) }}
         {{ form_errors(form.comment) }}
     </div>
 </div>
