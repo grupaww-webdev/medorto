@@ -251,3 +251,20 @@ services:
                     
     App\EmailManager\OrderNotificationEmailManager:
         arguments: [ '@sylius.email_sender' ]
+        
+    App\EventListener\ProductPriceHistoryListener:
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate, entity: App\Entity\Channel\ChannelPricing, priority: 500 }
+                
+    App\Provider\ProductVariantsPricesProvider:
+        decorates: sylius.provider.product_variants_prices
+        tags:
+            - { name: sylius.provider.product_variants_prices }
+            
+    Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper:
+        alias: App\Helper\PriceHelper
+                
+    App\Helper\PriceHelper:
+        decorates: sylius.templating.helper.price
+        tags:
+            - { name: sylius.templating.helper.price }

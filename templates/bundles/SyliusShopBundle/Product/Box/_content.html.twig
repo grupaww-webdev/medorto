@@ -1,5 +1,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set hasDiscount = product|sylius_resolve_variant|sylius_has_discount({'channel': sylius.channel}) %}
+
 {% if product.enabled %}
 <div class="products__item text-center">
     <div>
@@ -18,7 +20,11 @@
         {% endif %}
 
         {% if not product.enabledVariants.empty() %}
-            <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
+            {% if hasDiscount %}
+                <p class="products__price" {{ sylius_test_html_attribute('product-price') }}><small><del>{{ money.calculateOriginalPrice(product|sylius_resolve_variant) }}</del></small> {{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
+            {% else %}
+                <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
+            {% endif %}
         {% else %}
             <p class="products__price" {{ sylius_test_html_attribute('product-price') }}>{{ 'sylius.ui.out_of_stock'|trans }}</p>
         {% endif %}
@@ -30,7 +36,7 @@
         {% endif %}
         <div class="products__rating">
             <div class="my-rating" data-rating="{{ product.averageRating }}"></div>
-            <span class="products__amount">({{ product.reviews.count() }})</span>
+            <span class="products__amount">({{ product.acceptedReviews|length }})</span>
         </div>
     </div>
 </div>

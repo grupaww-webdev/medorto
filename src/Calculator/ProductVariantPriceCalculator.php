@@ -9,12 +9,14 @@ use App\Exception\MissingRefundCode;
 use App\Exception\MissingUniqueCode;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
     /**
-     * @var ProductVariantPriceCalculatorInterface
+     * @var ProductVariantPriceCalculatorInterface|/Sylius/ ProductVariantPriceCalculator
      */
     private $productVariantPriceCalculator;
 
@@ -27,6 +29,10 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     {
         $price = $this->productVariantPriceCalculator->calculate($productVariant, $context);
 
+        if (true === isset($context['minimum'])) {
+            return $this->calculateMinimum($productVariant, $context);
+        }
+
         if (false === isset($context['code'])) {
              return $price;
         }
@@ -38,7 +44,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
 
     public function calculateOriginal(ProductVariantInterface $productVariant, array $context): int
     {
-        $price = $this->productVariantPriceCalculator->calculate($productVariant, $context);
+        $price = $this->productVariantPriceCalculator->calculateOriginal($productVariant, $context);
 
         if (false === isset($context['code'])) {
             return $price;
@@ -50,6 +56,23 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         return $this->calculateRefundCode($product, $price, $context['code']);
     }
 
+    public function calculateMinimum(ProductVariantInterface $productVariant, array $context): int
+    {
+        Assert::keyExists($context, 'channel');
+
+        $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
+        if (null === $channelPricing) {
+            $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
+            if ($productVariant->getName() !== null) {
+                $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
+            } else {
+                $message .= sprintf(' with code %s', $productVariant->getCode());
+            }
+            throw new MissingChannelConfigurationException($message);
+        }
+        return $channelPricing->lastMinimumPrice();
+    }
+
     private function calculateRefundCode(Product $product, int $price, string $code): int
     {
         try {
@@ -59,6 +82,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
             return $price;
         }
     }
+
 
 
 }
