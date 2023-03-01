@@ -109,6 +109,7 @@ final class ProductRepository extends BaseProductRepository implements
             ->join('o.refunds','refunds')
             ->andWhere(':channel MEMBER OF o.channels')
             ->andWhere('o.enabled = true')
+            ->andWhere('refunds.active = true')
             ->addOrderBy('o.createdAt', 'DESC')
             ->setParameter('channel', $channel)
             ->setParameter('locale', $locale);

@@ -59,17 +59,19 @@
 
                         {% for ref in refunds %}
 
-                            <tr>
-                                <td>{{ ref.code }}</td>
-                                <td>
-                                    {{ variant.name }}
-                                </td>
-                                <td>
-                                    {{ money.calculatePrice(variant) }}
-                                </td>
-                                <td>{{ ref.discount }}&nbsp;%</td>
-                                <td>{{ money.calculatePriceWithRefund(variant, ref.code) }}</td>
-                            </tr>
+                            {% if ref.active %}
+                                <tr>
+                                    <td>{{ ref.code }}</td>
+                                    <td>
+                                        {{ variant.name }}
+                                    </td>
+                                    <td>
+                                        {{ money.calculatePrice(variant) }}
+                                    </td>
+                                    <td>{{ ref.discount }}&nbsp;%</td>
+                                    <td>{{ money.calculatePriceWithRefund(variant, ref.code) }}</td>
+                                </tr>
+                            {%  endif %}
 
                         {% endfor %}
 
