@@ -1,0 +1,17 @@
+{% if type is defined %}
+    {% set type = type ~ '-' %}
+{% else %}
+    {% set type = null %}
+{% endif %}
+
+<div class="relative">
+    {{ form_label(form.refundPesel, sylius_test_form_attribute(  'refund-pesel')) }}
+    {{ form_errors(form.refundPesel, sylius_test_form_attribute(  'refund-pesel')) }}
+    {{ form_widget(form.refundPesel, sylius_test_form_attribute(  'refund-pesel')|merge({'attr': {'class': 'input', 'required': 'required'}})) }}
+
+</div>
+<div class="relative">
+    {{ form_label(form.refundCode, sylius_test_form_attribute(  'refund-code')) }}
+    {{ form_errors(form.refundCode, sylius_test_form_attribute(  'refund-code')) }}
+    {{ form_widget(form.refundCode, sylius_test_form_attribute(  'refund-code')|merge({'attr': {'class': 'input', 'required': 'required'}})) }}
+</div>

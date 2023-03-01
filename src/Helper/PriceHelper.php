@@ -33,4 +33,18 @@ class PriceHelper extends \Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelpe
             ->calculateMinimum($productVariant, $context)
             ;
     }
+
+    /**
+     * @throws \InvalidArgumentException
+     */
+    public function getRefundPrice(ProductVariantInterface $productVariant, array $context): int
+    {
+        Assert::keyExists($context, 'channel');
+        Assert::isInstanceOf($this->productVariantPriceCalculator, ProductVariantPricesCalculatorInterface::class);
+
+        return $this
+            ->productVariantPriceCalculator
+            ->calculateMinimum($productVariant, $context)
+            ;
+    }
 }

@@ -33,6 +33,16 @@ final class ProductRepository extends BaseProductRepository implements
             ->getResult();
     }
 
+    public function findAllByRefund(
+        ChannelInterface $channel,
+        string $locale,
+        int $limit = self::DEFAULT_LIMIT
+    ): array {
+        return $this->getRefundQueryBuilder($channel, $locale)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findLatestByChannel(
         ChannelInterface $channel,
         string $locale,
@@ -82,6 +92,26 @@ final class ProductRepository extends BaseProductRepository implements
         return $this->getPaginator(
             $this->getByCategoryQueryBuilder($channel, $locale, self::CATEGORY_LATEST)
         );
+    }
+
+    private function getRefundQueryBuilder(
+        ChannelInterface $channel,
+        string $locale
+    ) {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin(
+                'o.translations',
+                'translation',
+                'WITH',
+                'translation.locale = :locale'
+            )
+            ->join('o.refunds','refunds')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = true')
+            ->addOrderBy('o.createdAt', 'DESC')
+            ->setParameter('channel', $channel)
+            ->setParameter('locale', $locale);
     }
 
     /**

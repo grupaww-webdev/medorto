@@ -73,6 +73,24 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         return $channelPricing->lastMinimumPrice();
     }
 
+    public function calculateRefund(ProductVariantInterface $productVariant, array $context): int
+    {
+        Assert::keyExists($context, 'channel');
+        Assert::keyExists($context, 'code');
+
+        $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
+        if (null === $channelPricing) {
+            $message = sprintf('Channel %s has no price defined for product variant', $context['channel']->getName());
+            if ($productVariant->getName() !== null) {
+                $message .= sprintf(' %s (%s)', $productVariant->getName(), $productVariant->getCode());
+            } else {
+                $message .= sprintf(' with code %s', $productVariant->getCode());
+            }
+            throw new MissingChannelConfigurationException($message);
+        }
+        return $channelPricing->lastMinimumPrice();
+    }
+
     private function calculateRefundCode(Product $product, int $price, string $code): int
     {
         try {

@@ -67,6 +67,12 @@ services:
        arguments: ['%sylius.model.order.class%', '%sylius.form.type.checkout_select_shipping.validation_groups%']
        tags:
            - { name: form.type }
+               
+    app.form.extension.type.address_type_extension:
+        class: App\Form\Extension\AddressTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType }
+    
     app.request.matcher:
         class: Symfony\Component\HttpFoundation\RequestMatcher
 

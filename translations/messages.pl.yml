@@ -29,11 +29,15 @@ sylius:
         checkout:
             addressing:
                 different_shipping_address: Użyć innego adresu do wysyłki?
+            refundPesel: Pesel
+            refundCode: Nr zlecenia
     admin:
         menu:
             refunds: Zwroty
             pickup_points: Punkty odbioru
     ui:
+        PESEL: PESEL
+        REF: REF Nr
         error: Uwaga # softening the errors message
         active: Aktywny
         activate: Aktywuj
@@ -49,6 +53,7 @@ sylius:
         your_shopping_cart: Koszyk
         discount: Oszczędzasz
         forgot_password: nie mogę się zalogować
+        refund_data: Dane do refundacji
         register_in_the_store: Rejestracja
         personal_information: Dane zamawiającego
         shipping_and_payment: Dostawa i płatność
@@ -146,6 +151,7 @@ app:
             bestsellers: BESTSELLERY
             newests: NOWOŚCI
             promotions: PROMOCJE
+            refunds: REFUNDACJA
             newsletter_description: 'Nie przegap żadnej promocji, zdobywaj dodatkowe rabaty'
             our_shops:
                 title: Sklepy własne

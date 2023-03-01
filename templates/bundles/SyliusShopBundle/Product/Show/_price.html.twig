@@ -1,6 +1,27 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set variant = product|sylius_resolve_variant %}
+{% set refunds = product.refunds %}
+
+{% if refunds.count > 0 and 1 > 2 %}
+<h3 class="products__heading text-darkBlue flex">Refundacja</h3>
+<table class="table table__border table__border-rounded order__table">
+    <tbody><tr>
+        <th>Refundacja</th>
+        <th>Wartość</th>
+        <th></th>
+    </tr>
+    {% for ref in refunds %}
+
+    <tr>
+        <td>{{ ref.discount }}&nbsp;%</td>
+        <td>{{ money.calculatePriceWithRefund(variant, ref.code) }}</td>
+        <td>{{ ref.description }}</td>
+    </tr>
+    {% endfor %}
+    </tbody></table>
+{% endif %}
+
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 
 <p>

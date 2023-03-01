@@ -226,6 +226,20 @@ sylius_shop_product_index_promotions:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - "expr:service('sylius.context.locale').getLocaleCode()"
                     - 'promotions'
+                        
+sylius_shop_product_index_refunds:
+    path: /{_locale}/refunds/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            paginate: 12
+            template: "App/Shop/Product/refunds.html.twig"
+            repository:
+                method: findAllByRefund
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
 
 redirect_sylius_shop_product_index:
     path: /{_locale}/taxons/{slug}

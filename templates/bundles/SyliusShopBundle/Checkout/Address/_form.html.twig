@@ -1,3 +1,14 @@
+{% if order.hasRefundItems %}
+<div id="sylius-refund-dara" class="register col-md-12 ">
+    <div class="ui hidden divider"></div>
+    <h3 class="login__title text-darkBlue">{{ 'sylius.ui.refund_data'|trans }}</h3>
+    <div class="login__form login__form--register">
+        {% include '@SyliusShop/Common/Form/_refund.html.twig' with {'form': form, 'order': order, 'type': 'refund'} %}
+    </div>
+    <div class="ui divider"></div>
+</div>
+{% endif %}
+
 <div id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }} class="register col-md-6">
     {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
     <h3 class="login__title text-darkBlue">{{ 'sylius.ui.billing_address'|trans }}</h3>
