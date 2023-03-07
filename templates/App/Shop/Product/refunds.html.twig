@@ -48,8 +48,8 @@
                     <td>
                         <table>
                             <tr>
-                                <th>Kod</th>
                                 <th>Nazwa</th>
+                                <th>Rozmiar</th>
                                 <th>Cena</th>
                                 <th>Refundacja</th>
                                 <th>Po refundacji</th>
@@ -68,7 +68,7 @@
                                     <td>
                                         {{ money.calculatePrice(variant) }}
                                     </td>
-                                    <td>{{ ref.discount }}&nbsp;%</td>
+                                    <td>{{ money.calculatePriceRefund(variant, ref.code) }}</td>
                                     <td>{{ money.calculatePriceWithRefund(variant, ref.code) }}</td>
                                 </tr>
                             {%  endif %}

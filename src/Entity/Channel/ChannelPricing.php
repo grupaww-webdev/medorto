@@ -36,7 +36,7 @@ class ChannelPricing extends BaseChannelPricing
     public function lastMinimumPrice(): ?int
     {
         $date = (new DateTime())->modify('-1 month')->modify("midnight");
-        $price = $this->getPrice();
+        $price = max($this->getPrice(), $this->getOriginalPrice());
 
         /** @var \App\Entity\Channel\ChannelPricingHistory $historyPrice */
         foreach($this->historyPrices as $historyPrice)

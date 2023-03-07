@@ -47,21 +47,12 @@ final class ProductPriceHistoryListener
 
         Assert::isInstanceOf($entity, ChannelPricing::class);
 
-        $history = $this->saveHistoryChannelPrices($entity);
+        $oldPrice = $this->oldPrice($uof->getEntityChangeSet($entity));
+
+        $history = $this->saveHistoryChannelPrices($entity, $oldPrice);
 
         $manager->persist($history);
         $manager->flush();
-
-//        dump(
-//            $manager,
-//            $entity,
-//            $history,
-//            $uof->getEntityChangeSet($entity),
-//            $this->isPriceChanged(
-//                $uof->getEntityChangeSet($entity)
-//            ) === false
-//        );
-//        die;
     }
 
     protected function isPriceChanged(array $changeSet): bool
@@ -69,37 +60,19 @@ final class ProductPriceHistoryListener
         return array_key_exists(self::KEY, $changeSet);
     }
 
-//    public function handleProduct(GenericEvent $event)
-//    {
-//        /** @var Product $subject */
-//        $subject = $event->getSubject();
-//        Assert::isInstanceOf($subject, Product::class);
-//
-//        dump($subject, $event);
-//        die;
-//    }
-//
-//    public function handleProductVariant(GenericEvent $event)
-//    {
-//        /** @var ProductVariant $subject */
-//        $subject = $event->getSubject();
-//
-//        Assert::isInstanceOf($subject, ProductVariant::class);
-//
-//        dump(
-//            $subject->getChannelPricings()->toArray(),
-//            $event
-//        );
-//    }
-
-    protected function saveHistoryChannelPrices(ChannelPricing $channelPricing)
+    protected function saveHistoryChannelPrices(ChannelPricing $channelPricing, int $price): ChannelPricingHistory
     {
         $channelPricingHistory = new ChannelPricingHistory();
         $channelPricingHistory->setChannelPricing($channelPricing);
-        $channelPricingHistory->setNewPrice($channelPricing->getPrice());
+        $channelPricingHistory->setNewPrice($price);
         $channelPricingHistory->setChangeDate(new \DateTime());
 
         return $channelPricingHistory;
+    }
+
+    protected function oldPrice(array $changeSet): int
+    {
+        return  $changeSet[self::KEY][0] ?? 0;
     }
 
 }

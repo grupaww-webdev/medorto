@@ -37,10 +37,11 @@
     })) }}
 {%- endmacro -%}
 
-{#{%- macro calculateRefund(variant,refund) -%}#}
-{#    {% from _self import convertAndFormat %}#}
+{%- macro calculatePriceRefund(variant,code) -%}
+    {% from _self import convertAndFormat %}
 
-{#    {{- convertAndFormat(variant|sylius_calculate_refund_price({#}
-{#        'channel': sylius.channel#}
-{#    })) }}#}
-{#{%- endmacro -%}#}
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel}) - variant|sylius_calculate_price({
+        'channel': sylius.channel,
+        'code': code
+    })) }}
+{%- endmacro -%}

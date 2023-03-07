@@ -1,6 +1,5 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% set hasDiscount = product|sylius_resolve_variant|sylius_has_discount({'channel': sylius.channel}) %}
 
 {% if product.enabled %}
 <div class="products__item text-center">
@@ -20,6 +19,7 @@
         {% endif %}
 
         {% if not product.enabledVariants.empty() %}
+            {% set hasDiscount = product|sylius_resolve_variant|sylius_has_discount({'channel': sylius.channel}) %}
             {% if hasDiscount %}
                 <p class="products__price" {{ sylius_test_html_attribute('product-price') }}><small><del>{{ money.calculateOriginalPrice(product|sylius_resolve_variant) }}</del></small> {{ money.calculatePrice(product|sylius_resolve_variant) }}</p>
             {% else %}

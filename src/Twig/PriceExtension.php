@@ -2,7 +2,8 @@
 
 namespace App\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
+
+use App\Helper\PriceHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
