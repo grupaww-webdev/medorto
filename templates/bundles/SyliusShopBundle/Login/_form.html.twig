@@ -4,6 +4,14 @@
     {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
 {% endif %}
 
-{{ form_widget(form._username, {'attr': {'class': 'input'}}) }}
-{{ form_widget(form._password, {'attr': {'class': 'input'}}) }}
-{#{{ form_widget(form._remember_me, sylius_test_form_attribute('remember-me')) }}#}
+<div class="required field">
+    <label for="_username" class="required">{{ 'sylius.ui.email'|trans }}</label>
+    {{ form_widget(form._username, sylius_test_form_attribute('title')|sylius_merge_recursive( {'attr': {'class': 'input', 'placeholder': 'sylius.ui.email'|trans}})) }}
+    {{ form_errors(form._username) }}
+</div>
+
+<div class="required field">
+    <label for="_username" class="required">{{'sylius.ui.password'|trans}}</label>
+    {{ form_widget(form._password, sylius_test_form_attribute('title')|sylius_merge_recursive( {'attr': {'class': 'input', 'placeholder': 'sylius.ui.password'|trans}})) }}
+    {{ form_errors(form._password) }}
+</div>

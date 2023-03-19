@@ -68,16 +68,28 @@
 
 <main>
     {% include 'App/Layout/_mobileMenu.html.twig' %}
-    <section class="nfz-bar wrapper">
-        <div class="row">
-            <div class="nfz-bar__offset col-xs-12 col-md-6 col-md-offset-6 bg-blue text-white flex">
-                <img src="/assets/shop/img/nfz.png" alt="logo nfz" />
-                <p>
-                    <span class="font-light">{{ 'app.ui.top_banner.slogan'|trans|raw }}</span>
-                    <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_show',{'slug': 'refundacja-online'}) }}" class="text-white">{{ 'app.ui.top_banner.slogan_bold'|trans|raw }}</a>
-                </p>
-            </div>
+    <section class="bg-darkBlue text-white text-center">
+        <div class="container wrapper">
+
+            <p class="flex flex--between" style="padding: 5px;">
+                <span class=" ">Infolinia: +48 733 533 953</span>
+                <span class=" ">Email: medorto@medorto.pl</span>
+            </p>
+
         </div>
+    </section>
+    <section class="nfz-bar wrapper">
+        <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_show',{'slug': 'refundacja-online'}) }}">
+            <div class="row">
+                <div class="nfz-bar__offset col-xs-12 col-md-6 col-md-offset-6 bg-blue text-white flex">
+                    <img src="/assets/shop/img/nfz.png" alt="logo nfz"/>
+                    <p>
+                        <span class="font-light">{{ 'app.ui.top_banner.slogan'|trans|raw }}</span>
+                        <span href="#" class="text-white">{{ 'app.ui.top_banner.slogan_bold'|trans|raw }}</span>
+                    </p>
+                </div>
+            </div>
+        </a>
     </section>
     <header class="header container">
         <div class="row">

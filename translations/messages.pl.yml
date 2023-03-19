@@ -52,7 +52,7 @@ sylius:
         registered_customers: Zaloguj się
         your_shopping_cart: Koszyk
         discount: Oszczędzasz
-        forgot_password: nie mogę się zalogować
+#        forgot_password: nie mogę się zalogować
         refund_data: Dane do refundacji
         register_in_the_store: Rejestracja
         personal_information: Dane zamawiającego

@@ -2,18 +2,23 @@
 
 {% set product = product_review.reviewSubject %}
 
-{{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'comments__form'}}) }}
+{% set customer = sylius.customer %}
+
+{% if customer.user is defined and customer.user.verified %}
+
+    {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'comments__form'}}) }}
+
     {% include '@SyliusShop/ProductReview/_form.html.twig' %}
 
     {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
 
-<p class="text-rodo">
+    <p class="text-rodo">
 
-    <input type="checkbox" id="" name="rules" required="required" class="checkbox" value="1">
+        <input type="checkbox" id="" name="rules" required="required" class="checkbox" value="1">
 
-    Wyrażam zgodę na przetwarzanie danych osobowych przez Medorto Adam Chmiel i Wspólnicy s.c.
+        Wyrażam zgodę na przetwarzanie danych osobowych przez Medorto Adam Chmiel i Wspólnicy s.c.
 
-</p>
+    </p>
 
     {{ form_row(form._token) }}
     <input
@@ -21,4 +26,13 @@
         value="{{ 'sylius.ui.add'|trans }}"
         class="button button--blue"
     />
-{{ form_end(form, {'render_rest': false}) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% else %}
+    <div class="ui icon info message">
+        <i class="info circle icon"></i>
+        <div class="content">
+            <p>Recenzje mogą dodawać tylko zalogowani użytkownicy</p>
+        </div>
+    </div>
+{% endif %}
+

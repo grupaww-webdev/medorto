@@ -43,9 +43,9 @@ sylius_ui:
 
         sylius.app.homepage:
             blocks:
-                banner:
-                    template: "@SyliusShop/Homepage/_banner.html.twig"
-                    priority: 60
+#                banner:
+#                    template: "@SyliusShop/Homepage/_banner.html.twig"
+#                    priority: 60
                 products_grid:
                     template: "@SyliusShop/Homepage/_productsGrid.html.twig"
                     priority: 40
@@ -61,9 +61,9 @@ sylius_ui:
 
         sylius.app.faq:
             blocks:
-                banner:
-                    template: "@SyliusShop/Homepage/_banner.html.twig"
-                    priority: 20
+#                banner:
+#                    template: "@SyliusShop/Homepage/_banner.html.twig"
+#                    priority: 20
                     
         sylius.app.account.refund.index.subcontent:
             blocks:
