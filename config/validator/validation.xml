@@ -12,14 +12,16 @@
                 <option name="min">1</option>
             </constraint>
         </property>
-        <property name="discount">
+        <property name="discountPiece">
             <constraint name="NotBlank">
                 <option name="message">app.product_refund.discount.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Range">
-                <option name="max">100</option>
-                <option name="min">1</option>
+
+        </property>
+        <property name="discountPack">
+            <constraint name="NotBlank">
+                <option name="message">app.product_refund.discount.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
 
