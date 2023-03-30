@@ -50,7 +50,7 @@ final class AddToCart
         $product = $this->productRepository->find($productId);
         if ($product->hasRefundCodes()) {
 
-            if($isRefundBuy == 'refund'){
+            if($isRefundBuy == 'refund' && null !== $refundCode){
                 $this->refund($product, $variantId, $refundCode);
             } else {
 //                return new RedirectResponse($this->router->generate('app_shop_add_to_cart_with_refund',
