@@ -5,3 +5,18 @@
         <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' or option == 'minimum-price' %}{{ money.convertAndFormat(value) }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
     {% endfor %}
 </div>
+
+{% if product.hasRefundCodes %}
+<div id="sylius-refund-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
+    {% for variant in product.variants %}
+{#        {% if variant.is %}#}
+            {% for refund in product.refunds %}
+                <div {% for option in variant.optionValues %} data-{{ option.option.code }}="{{ option.code }}"{% endfor %}
+                    data-refund="{{ refund.code }}" data-value="{{ money.calculatePriceWithRefund(variant,refund.code) }}"
+                    data-piece="{{ money.refundPiece(refund) }}"
+                    data-pack="{{ money.refundPack(refund) }}"></div>
+            {% endfor %}
+{#        {% endif %}#}
+    {% endfor %}
+</div>
+{% endif %}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Type\Product;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -21,15 +22,27 @@ class ProductRefundType  extends AbstractResourceType
             ->add('code', TextType::class, [
                 'label' => 'app.form.product_refund.code'
             ])
-            ->add('discount', NumberType::class, [
-                'label' => 'app.form.product_refund.discount',
-                'attr' => [
-                    'min' => 1,
-                    'max' => 100
-                ],
+//            ->add('discount', NumberType::class, [
+//                'label' => 'app.form.product_refund.discount',
+//                'attr' => [
+//                    'min' => 1,
+//                    'max' => 100
+//                ],
+//                'constraints' => [
+//                    new NotBlank(),
+//                    new Range(['min' => 1, 'max' => 100])
+//                ]
+//            ])
+            ->add('discountPiece', MoneyType::class, [
+                'label' => 'app.form.product_refund.discountPiece',
                 'constraints' => [
                     new NotBlank(),
-                    new Range(['min' => 1, 'max' => 100])
+                ]
+            ])
+            ->add('discountPack', MoneyType::class, [
+                'label' => 'app.form.product_refund.discountPack',
+                'constraints' => [
+                    new NotBlank(),
                 ]
             ])
             ->add('description', TextareaType::class, [

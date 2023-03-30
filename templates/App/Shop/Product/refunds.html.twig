@@ -4,20 +4,20 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% block content %}
-    <section class="slider slider--static">
-        <div class="glide__slides">
-            <div class="glide__slide">
-                <div class="col-xs-12 col-md-6 px-0">
-                    <img class="responsive-img" src="/assets/shop/img/placeholder.jpg" alt="{{ 'app.ui.homepage.promotions'|trans }}">
-                </div>
-                <div class="col-xs-12 col-md-6 bg-darkBlue text-white slider__item">
-                    <div class="slider__content">
-                        <h2>{{ 'app.ui.homepage.refunds'|trans }}</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{#    <section class="slider slider--static">#}
+{#        <div class="glide__slides">#}
+{#            <div class="glide__slide">#}
+{#                <div class="col-xs-12 col-md-6 px-0">#}
+{#                    <img class="responsive-img" src="/assets/shop/img/placeholder.jpg" alt="{{ 'app.ui.homepage.promotions'|trans }}">#}
+{#                </div>#}
+{#                <div class="col-xs-12 col-md-6 bg-darkBlue text-white slider__item">#}
+{#                    <div class="slider__content">#}
+{#                        <h2>{{ 'app.ui.homepage.refunds'|trans }}</h2>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
 
     <div class="ui clearing hidden divider"></div>
 
@@ -50,9 +50,12 @@
                             <tr>
                                 <th>Nazwa</th>
                                 <th>Rozmiar</th>
-                                <th>Cena</th>
-                                <th>Refundacja</th>
-                                <th>Po refundacji</th>
+
+                                <th>Cena za sztukę</th>
+                                <th>Cena za opakowanie</th>
+                                <th>Refundacja za sztukę</th>
+                                <th>Refundacja za opakowanie</th>
+                                <th>Dopłata pacjenta</th>
                             </tr>
 
                     {% for variant in variants %}
@@ -65,9 +68,11 @@
                                     <td>
                                         {{ variant.name }}
                                     </td>
-                                    <td>
-                                        {{ money.calculatePrice(variant) }}
-                                    </td>
+
+
+                                    <td>{{ money.calculatePricePiece(variant, ref.count) }}</td>
+                                    <td>{{ money.calculatePrice(variant) }}</td>
+                                    <td>{{ money.refundPiece(ref) }}</td>
                                     <td>{{ money.calculatePriceRefund(variant, ref.code) }}</td>
                                     <td>{{ money.calculatePriceWithRefund(variant, ref.code) }}</td>
                                 </tr>

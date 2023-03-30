@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Action\Shop;
 
+use App\Application\Cart\UpdateRefundProduct\UpdateRefundProductCommand;
+use App\Entity\Product\Product;
 use App\Entity\Product\ProductInterface;
 use App\Request\Cart\PutItemToCart\PutItemToCartCommandProvider;
+use Exception;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,21 +40,43 @@ final class AddToCart
         Request $request
     ) {
         $productId = $request->query->get('productId');
+        $refundCode = $request->request->get('refund-code');
+        $isRefundBuy = $request->request->get('tabset');
 
         $this->cartCommandProvider->validate($request);
         $command = $this->cartCommandProvider->getCommand($request);
         $variantId = $this->handle($command);
         /** @var ProductInterface $product */
         $product = $this->productRepository->find($productId);
-
         if ($product->hasRefundCodes()) {
-            return new RedirectResponse($this->router->generate('app_shop_add_to_cart_with_refund',
-                [
-                    'productCode' => $product->getCode(),
-                    'productVariantId' => $variantId
-                ]));
+
+            if($isRefundBuy == 'refund'){
+                $this->refund($product, $variantId, $refundCode);
+            } else {
+//                return new RedirectResponse($this->router->generate('app_shop_add_to_cart_with_refund',
+//                    [
+//                        'productCode' => $product->getCode(),
+//                        'productVariantId' => $variantId
+//                    ]));
+            }
         }
 
+        return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));
+    }
+
+    public function refund(Product $product, int $productVariantId, string $refundCode): RedirectResponse
+    {
+        try {
+            $this->messageBus->dispatch(
+                new UpdateRefundProductCommand(
+                    $product->getId(),
+                    $productVariantId,
+                    $refundCode
+                )
+            );
+        } catch (Exception $exception) {
+            $this->session->getFlashBag()->add('danger', $exception->getMessage());
+        }
         return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));
     }
 }

@@ -95,6 +95,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     {
         try {
             $refund = $product->getRefundCode($code);
+            return (int) ($price - $refund->getDiscountPack());
             return (int) ($price * (1 - $refund->getDiscount() / 100));
         } catch(MissingUniqueCode|MissingRefundCode $exception) {
             return $price;

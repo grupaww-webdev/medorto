@@ -342,9 +342,23 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
-                discount:
-                    type: string
-                    label: app.ui.discount
+#                discount:
+#                    type: string
+#                    label: app.ui.discount
+                discountPiece:
+                    type: twig
+                    label: sylius.ui.discountPiece
+                    path: .
+                    sortable: discountPiece
+                    options:
+                        template: "App/Refund/Grid/discountPiece.html.twig"
+                discountPack:
+                    type: twig
+                    label: sylius.ui.discountPack
+                    path: .
+                    sortable: discountPack
+                    options:
+                        template: "App/Refund/Grid/discountPack.html.twig"
                 active:
                     type: twig
                     label: sylius.ui.enabled

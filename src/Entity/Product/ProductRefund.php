@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\Product;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -32,6 +33,18 @@ class ProductRefund implements ResourceInterface, ProductRefundInterface
      * @var float
      */
     private $discount;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $discountPiece;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    private $discountPack;
 
     /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="refunds")
@@ -62,6 +75,15 @@ class ProductRefund implements ResourceInterface, ProductRefundInterface
         $this->product = $product;
     }
 
+    /**
+     * @Serializer\VirtualProperty()
+     * @return int
+     */
+    public function count(): int
+    {
+        return (int)round($this->getDiscountPack()/$this->discountPiece,0);
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -75,6 +97,16 @@ class ProductRefund implements ResourceInterface, ProductRefundInterface
     public function getDiscount(): float
     {
         return (float)$this->discount;
+    }
+
+    public function getDiscountPiece(): int
+    {
+        return $this->discountPiece;
+    }
+
+    public function getDiscountPack(): int
+    {
+        return $this->discountPack;
     }
 
     public function getProduct(): ProductInterface
@@ -100,6 +132,16 @@ class ProductRefund implements ResourceInterface, ProductRefundInterface
     public function setDiscount(float $discount): void
     {
         $this->discount = (float)$discount;
+    }
+
+    public function setDiscountPiece(float $discountPiece): void
+    {
+        $this->discountPiece = $discountPiece;
+    }
+
+    public function setDiscountPack(float $discountPack): void
+    {
+        $this->discountPack = $discountPack;
     }
 
     public function setActive(bool $active): void

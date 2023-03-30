@@ -9,6 +9,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantsPricesProvider implements
@@ -18,10 +19,17 @@ final class ProductVariantsPricesProvider implements
     /** @var ProductVariantPriceCalculator */
     private ProductVariantPriceCalculator $productVariantPriceCalculator;
 
+    /**
+     * @var \Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface
+     */
+    private AvailabilityCheckerInterface $availabilityChecker;
+
     public function __construct(
-        ProductVariantPriceCalculator $productVariantPriceCalculator
+        ProductVariantPriceCalculator $productVariantPriceCalculator,
+        AvailabilityCheckerInterface $availabilityChecker
     ) {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
+        $this->availabilityChecker = $availabilityChecker;
     }
 
     public function provideVariantsPrices(
@@ -32,6 +40,7 @@ final class ProductVariantsPricesProvider implements
 
         /** @var ProductVariantInterface $variant */
         foreach ($product->getEnabledVariants() as $variant) {
+            if($this->availabilityChecker->isStockAvailable($variant))
             $variantsPrices[] = $this->constructOptionsMap($variant, $channel);
         }
 
@@ -48,6 +57,8 @@ final class ProductVariantsPricesProvider implements
         foreach ($variant->getOptionValues() as $option) {
             $optionMap[$option->getOptionCode()] = $option->getCode();
         }
+
+//        dump($variant);die;
 
         $price = $this->productVariantPriceCalculator->calculate(
             $variant,

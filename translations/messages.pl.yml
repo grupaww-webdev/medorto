@@ -26,6 +26,8 @@ sylius:
     form:
         product:
             refund_code: Kod refundacji
+            discountPiece: Refundacja za sztukę
+            discountPack: Refundacja za opakowanie
         checkout:
             addressing:
                 different_shipping_address: Użyć innego adresu do wysyłki?
@@ -52,6 +54,8 @@ sylius:
         registered_customers: Zaloguj się
         your_shopping_cart: Koszyk
         discount: Oszczędzasz
+        discountPiece: Refundacja za sztukę
+        discountPack: Refundacja za opakowanie
 #        forgot_password: nie mogę się zalogować
         refund_data: Dane do refundacji
         register_in_the_store: Rejestracja
@@ -99,6 +103,8 @@ app:
             discount: Procent zniżki
             active: Aktywny
             description: Opis refundacji
+            discountPiece: Refundacja za sztukę
+            discountPack: Refundacja za opakowanie
         pickup_point:
             name: Nazwa punktu odbioru
             address: Adres
@@ -108,6 +114,8 @@ app:
         customer:
             nip: NIP
     ui:
+        standart_buy: Zakup po standardowej cenie
+        refund_buy: Zakup z refundacją NFZ
         pickup_points: Punkty odbioru
         buy_and_pay:
            title: Kup i zapłać

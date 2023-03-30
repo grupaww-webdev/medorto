@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 {% set product = order_item.variant.product %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
@@ -19,8 +21,85 @@
 {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
 
 {% if product.hasRefundCodes %}
-    <p class="font-bold mt-2">{{ 'sylius.ui.refund'|trans }}</p>
+{#    <p class="font-bold mt-2">{{ 'sylius.ui.refund'|trans }}</p>#}
+
+    {% set pricing = sylius_product_variant_prices(product, sylius.channel) %}
+    <div class="tabset row">
+
+        <input type="radio" name="tabset" value="default" id="a" aria-controls="a" checked>
+        <label for="a" class="col-md-6">{{ 'app.ui.buy_and_pay.title'|trans }}</label>
+
+        <input type="radio" name="tabset" value="refund" id="b" aria-controls="b">
+        <label for="b" class="col-md-6"> {{ 'app.ui.buy_with_refund.title'|trans }}</label>
+
+
+        <div class="tab-panels col-md-12 row">
+
+            <section id="a" class="tab-panel col-md-12">
+                <div class="hero container wrapper bg-darkBlue">
+                    <div class="row">
+                        <div class="col-sm-12 text-center text-white">
+                            <p class="text-white">{{ 'app.ui.standart_buy'|trans }}</p>
+                            <br>
+                            <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="b" class="tab-panel col-md-12">
+                <div class="hero container wrapper">
+                    <p class="text-darkBlue">{{ 'app.ui.refund_buy'|trans }}</p>
+                    <table class="table table__border table__border-rounded order__table">
+                        {% set variant = product|sylius_resolve_variant %}
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Refundacja</th>
+                            <th>Za sztukę</th>
+                            <th>Za opakowanie</th>
+                            <th>Cena</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for refund in product.refunds %}
+                        {% if refund.active %}
+                            <tr>
+                                <td>
+                                    <input type="radio" name="refund-code" value="{{ refund.code }}">
+                                </td>
+                                <td>
+                                    {{ refund.description }}
+                                </td>
+                                <td>
+                                    <span class="refund_piece" data-refund="{{ refund.code }}">{{ money.refundPiece(refund) }}</span>
+                                </td>
+                                <td>
+                                    <span class="refund_pack" data-refund="{{ refund.code }}">{{ money.refundPack(refund) }}</span>
+                                </td>
+                                <td>
+                                    <span class="refund_value" data-refund="{{ refund.code }}">{{ money.calculatePriceWithRefund(variant,refund.code) }}</span>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button class="button button--blue" type="submit">
+                        {{ 'sylius.ui.add_to_cart'|trans }}
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+{% else %}
+
+        <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+
 {% endif %}
-<button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
+

@@ -45,3 +45,21 @@
         'code': code
     })) }}
 {%- endmacro -%}
+
+{%- macro calculatePricePiece(variant,count) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel}) / count ) }}
+{%- endmacro -%}
+
+{%- macro refundPiece(refund) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(refund.discountPiece) }}
+{%- endmacro -%}
+
+{%- macro refundPack(refund) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(refund.discountPack) }}
+{%- endmacro -%}
