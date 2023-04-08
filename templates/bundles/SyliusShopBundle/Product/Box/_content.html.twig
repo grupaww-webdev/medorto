@@ -36,12 +36,6 @@
 
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.show'|trans }}</a>
 
-{#        {% if product.isSimple() and not product.enabledVariants.empty() %}#}
-{#            <a href="{{ path('app_shop_add_to_cart', {'productId': product.id, 'quantity': 1}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.add_to_cart'|trans }}</a>#}
-{#        {% else %}#}
-{#            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" class="button button--blue" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ 'sylius.ui.show'|trans }}</a>#}
-{#        {% endif %}#}
-
     </div>
 </div>
 {% endif %}

@@ -52,12 +52,6 @@ final class AddToCart
 
             if($isRefundBuy == 'refund' && null !== $refundCode){
                 $this->refund($product, $variantId, $refundCode);
-            } else {
-//                return new RedirectResponse($this->router->generate('app_shop_add_to_cart_with_refund',
-//                    [
-//                        'productCode' => $product->getCode(),
-//                        'productVariantId' => $variantId
-//                    ]));
             }
         }
 
