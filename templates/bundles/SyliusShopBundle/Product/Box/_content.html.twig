@@ -15,7 +15,15 @@
         {% if product.hasRefundCodes %}
             <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ 'sylius.ui.refund'|trans }}</p>
         {% elseif app.request.query.get('_label') %}
-            <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ app.request.query.get('_label')|trans}}</p>
+            <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ app.request.query.get('_label')|trans }}</p>
+        {% else %}
+            {% if product.isNew %}
+                <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ "app.ui.products.new"|trans }}</p>
+            {% endif %}
+
+            {% if product.isBestseller %}
+                <p class="products__notify {{ labelClass|default('bg-darkBlue text-white') }}">{{ "app.ui.products.bestseller"|trans }}</p>
+            {% endif %}
         {% endif %}
 
         {% if not product.enabledVariants.empty() %}

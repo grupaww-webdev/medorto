@@ -1,0 +1,21 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+
+<div class="ui tab" data-tab="options">
+    <h3 class="ui top attached header">{{ 'sylius.ui.options'|trans }}</h3>
+
+    <div class="ui attached segment">
+
+        <div class="ui two column stackable grid">
+            <div class="column">
+                <div class="ui segment">
+                    {{ form_row(form.bestseller) }}
+                    {{ form_row(form.new) }}
+                </div>
+            </div>
+            <div class="column">
+            </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+    </div>
+</div>

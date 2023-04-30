@@ -275,3 +275,7 @@ services:
         decorates: sylius.templating.helper.price
         tags:
             - { name: sylius.templating.helper.price }
+
+    App\Menu\AdminProductFormMenuListener: 
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }

@@ -6,6 +6,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -35,6 +36,14 @@ final class ProductTypeExtension extends AbstractTypeExtension
                     'required' => true
                 ]
             )
+            ->add('bestseller', CheckboxType::class, [
+                'required' => false,
+                'label' => 'sylius.form.product.bestseller',
+            ])
+            ->add('new', CheckboxType::class, [
+                'required' => false,
+                'label' => 'sylius.form.product.new',
+            ])
         ;
     }
 

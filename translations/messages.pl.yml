@@ -25,6 +25,8 @@ sylius:
             get_opinion: 'Jednocześnie zachęcamy do pozostawienia opinii o naszym sklepie w wizytówce Google'
     form:
         product:
+            new: Oznacz jako NOWOŚĆ
+            bestseller: Oznacz jako BESTSELLER
             refund_code: Kod refundacji
             discountPiece: Refundacja za sztukę
             discountPack: Refundacja za opakowanie
@@ -141,6 +143,7 @@ app:
             review_product: Oceń produkt
         products:
             new: Nowość
+            bestseller: Bestseller
         breadcrumbs:
             homepage: Strona główna
             faq: FAQ

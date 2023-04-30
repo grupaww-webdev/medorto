@@ -14,6 +14,7 @@ use Odiseo\SyliusVendorPlugin\Entity\VendorAwareInterface;
 use Odiseo\SyliusVendorPlugin\Entity\VendorTrait;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -30,10 +31,56 @@ class Product extends BaseProduct implements ProductInterface, VendorAwareInterf
      */
     private $refunds;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @Assert\Type(type="boolean")
+     */
+    protected $bestseller = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default": false})
+     * @Assert\Type(type="boolean")
+     */
+    protected $new = false;
+
     public function __construct()
     {
         parent::__construct();
         $this->refunds = new ArrayCollection();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBestseller(): bool
+    {
+        return $this->bestseller;
+    }
+
+    /**
+     * @param bool $bestseller
+     */
+    public function setBestseller(bool $bestseller): void
+    {
+        $this->bestseller = $bestseller;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return $this->new;
+    }
+
+    /**
+     * @param bool $new
+     */
+    public function setNew(bool $new): void
+    {
+        $this->new = $new;
     }
 
     protected function createTranslation(): ProductTranslationInterface
