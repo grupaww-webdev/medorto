@@ -39,7 +39,7 @@
 </p>
 
 
-<p id="product-minimum-price-banner" style="display: none;">
+<p id="product-minimum-price-banner" style="{% if not hasDiscount %}display: none;{% endif %}">
     Najniższa cena z 30 dni:
     <span class="products__prices" id="product-minimum-price-value">{% if hasDiscount %}{{ money.calculateMinimumPrice(variant) }}{% endif %}</span>
 </p>
