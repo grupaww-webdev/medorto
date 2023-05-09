@@ -33,8 +33,9 @@
 
 {% if taxons|length > 0 %}
     {% for taxon in taxons %}
-        <li class="header__menu__item header__menu__item--active">
+        <li class="header__menu__item header__menu__item--active col-md-3">
             {{ macros.item(taxon, 1) }}
         </li>
     {% endfor %}
 {% endif %}
+
