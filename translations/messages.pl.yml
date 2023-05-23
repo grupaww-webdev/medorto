@@ -35,6 +35,10 @@ sylius:
                 different_shipping_address: Użyć innego adresu do wysyłki?
             refundPesel: Pesel
             refundCode: Nr zlecenia
+        
+        promotion_action:
+            percentage_discount_configuration:
+                enty:         N-ty
     admin:
         menu:
             refunds: Zwroty
@@ -231,3 +235,5 @@ monsieurbiz_searchplugin:
     search:
         result:
             search_result: 'Wynik wyszukiwania dla: %query% (%count%)'
+            
+

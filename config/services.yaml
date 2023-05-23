@@ -279,3 +279,14 @@ services:
     App\Menu\AdminProductFormMenuListener: 
         tags:
             - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }
+               
+    app.form.type.promotion_action.en_product_discount_configuration:
+        class: App\Form\Type\Action\EnProductDiscountConfigurationType
+        tags:
+            - { name: form.type }
+                
+    app.promotion_action.en_product_discount:
+        class: App\Promotion\Action\EnProductDiscountPromotionActionCommand
+        arguments: [ '@sylius.proportional_integer_distributor', '@sylius.promotion.units_promotion_adjustments_applicator' ]
+        tags:
+            - { name: sylius.promotion_action, type: en_product_discount, form_type: App\Form\Type\Action\EnProductDiscountConfigurationType, label: Obniżka na N-ty produkt }

@@ -62,7 +62,7 @@
 
                         {% for ref in refunds %}
 
-                            {% if ref.active %}
+                            {% if ref.active and ref.count > 0 %}
                                 <tr>
                                     <td>{{ ref.code }}</td>
                                     <td>
