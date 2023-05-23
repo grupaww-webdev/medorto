@@ -90,7 +90,7 @@ class EnProductDiscountPromotionActionCommand extends DiscountPromotionActionCom
 
         if ($quantity > $enty) {
             $floor = floor($quantity / $enty);
-            $discount = $price - ($price * $percentage);
+            $discount = ($price * $percentage);
 
             return floor($floor * $discount);
         }
