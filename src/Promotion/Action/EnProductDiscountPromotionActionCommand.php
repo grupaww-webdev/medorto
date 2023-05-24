@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class EnProductDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
-    const TYPE = 'cheapest_item_discount';
+    const TYPE = 'en_product_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface

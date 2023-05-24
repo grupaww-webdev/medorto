@@ -54,6 +54,6 @@ class EnProductDiscountConfigurationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'app_promotion_action_cheapest_product_discount_configuration';
+        return 'app_promotion_action_en_product_discount_configuration';
     }
 }
