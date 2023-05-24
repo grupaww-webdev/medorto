@@ -88,7 +88,7 @@ class EnProductDiscountPromotionActionCommand extends DiscountPromotionActionCom
         $price = $item->getUnitPrice();
         $quantity = $item->getQuantity();
 
-        if ($quantity > $enty) {
+        if ($quantity >= $enty) {
             $floor = floor($quantity / $enty);
             $discount = ($price * $percentage);
 
