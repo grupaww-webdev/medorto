@@ -4,3 +4,16 @@
         {% include '@SyliusShop/Product/Show/_priceWidget.html.twig' %}
     </div>
 </div>
+
+{% if product.shippingLabel is not empty %}
+    <p class="product__description">
+    <div style="padding: 18px !important; font-weight: bold;"
+         class="nfz-bar__offset col-xs-12 col-md-12 bg-blue text-white flex">
+        <p>
+            <span class="font-light">Realizacja</span>
+            <span href="#" class="text-white">{{ product.shippingLabel|raw }}</span>
+        </p>
+    </div>
+    </p>
+    <br>
+{% endif %}

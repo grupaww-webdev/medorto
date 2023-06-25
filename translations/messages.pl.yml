@@ -30,6 +30,7 @@ sylius:
             refund_code: Kod refundacji
             discountPiece: Refundacja za sztukę
             discountPack: Refundacja za opakowanie
+            shippingLabel: Informacja o wysyłce
         checkout:
             addressing:
                 different_shipping_address: Użyć innego adresu do wysyłki?

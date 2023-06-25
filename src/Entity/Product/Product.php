@@ -83,6 +83,32 @@ class Product extends BaseProduct implements ProductInterface, VendorAwareInterf
         $this->new = $new;
     }
 
+    public function getMetaDescription(): ?string
+    {
+        return $this->getTranslation()->getMetaDescription();
+    }
+
+    public function setMetaDescription(?string $metaDescription): void
+    {
+        $this->getTranslation()->setMetaDescription($metaDescription);
+    }
+
+    /**
+     * @return string
+     */
+    public function getShippingLabel(): ?string
+    {
+        return $this->getTranslation()->getShippingLabel();
+    }
+
+    /**
+     * @param string $shippingLabel
+     */
+    public function setShippingLabel(?string $shippingLabel): void
+    {
+        $this->getTranslation()->setShippingLabel($shippingLabel);
+    }
+
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
