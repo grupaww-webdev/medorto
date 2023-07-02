@@ -121,6 +121,7 @@ app:
         customer:
             nip: NIP
     ui:
+        categories: Kategorie
         standart_buy: Zakup po standardowej cenie
         refund_buy: Zakup z refundacją NFZ
         pickup_points: Punkty odbioru

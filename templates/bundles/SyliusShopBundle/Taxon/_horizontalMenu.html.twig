@@ -1,41 +1,105 @@
+
+{#{% macro item(taxon, level) %}#}
+{#    {% import _self as macros %}#}
+{#    {% if taxon.enabledChildren|length > 0 %}#}
+{#        {% if level == 1 %}#}
+{#            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }} <img src="/assets/shop/img/chevron.png" alt="{{ taxon.name }}" /></a>#}
+{#            <ul class="header__submenu" {{ sylius_test_html_attribute('menu') }}>#}
+{#                {% for childTaxon in taxon.enabledChildren %}#}
+{#                    {{ macros.item(childTaxon, level + 1) }}#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% else %}#}
+{#            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>#}
+{#                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
+{#                <ul>#}
+{#                    {% for childTaxon in taxon.enabledChildren %}#}
+{#                        {{ macros.item(childTaxon, level + 1) }}#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#    {% else %}#}
+{#        {% if level == 1 %}#}
+{#            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
+{#        {% else   %}#}
+{#            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>#}
+{#                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#    {% endif %}#}
+{#{% endmacro %}#}
+
+
+
+
 {% macro item(taxon, level) %}
     {% import _self as macros %}
     {% if taxon.enabledChildren|length > 0 %}
         {% if level == 1 %}
             <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }} <img src="/assets/shop/img/chevron.png" alt="{{ taxon.name }}" /></a>
-            <ul class="header__submenu" {{ sylius_test_html_attribute('menu') }}>
+            <div class="header__submenu subsubmenu" {{ sylius_test_html_attribute('menu') }}>
                 {% for childTaxon in taxon.enabledChildren %}
                     {{ macros.item(childTaxon, level + 1) }}
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
-            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
+            <div class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
                 <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
-                <ul>
+                <div class="subsubmenu">
                     {% for childTaxon in taxon.enabledChildren %}
                         {{ macros.item(childTaxon, level + 1) }}
                     {% endfor %}
-                </ul>
-            </li>
+                </div>
+            </div>
         {% endif %}
     {% else %}
         {% if level == 1 %}
             <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
         {% else   %}
-            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
+            <div class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>
                 <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
-            </li>
+            </div>
         {% endif %}
     {% endif %}
 {% endmacro %}
 
 {% import _self as macros %}
 
-{% if taxons|length > 0 %}
-    {% for taxon in taxons %}
-        <li class="header__menu__item header__menu__item--active ">
-            {{ macros.item(taxon, 1) }}
-        </li>
-    {% endfor %}
-{% endif %}
+{#{% if taxons|length > 0 %}#}
+{#    {% for taxon in taxons %}#}
+{#        <li class="header__menu__item header__menu__item--active ">#}
+{#            {{ macros.item(taxon, 1) }}#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
 
+
+
+<div class="header__menu__item header__menu__item--active ">
+    <a class="button button--secondary button--blue text-white" href="#">{{ 'app.ui.categories'|trans }}</a>
+    <div class="header__submenu">
+        {% if taxons|length > 0 %}
+            {% for taxon in taxons %}
+
+                <div class="header__submenu__item  text-center">
+                    <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"><h3>{{ taxon.name }}</h3></a>
+                    <div class="subsubmenu" style="">
+
+                        {% if taxon.enabledChildren|length > 0 %}
+                            {% for childTaxon in taxon.enabledChildren %}
+                                <div class="header__submenu__item">
+                                    <a href="{{ path('sylius_shop_product_index', {'slug': childTaxon.slug, '_locale': childTaxon.translation.locale}) }}">{{ childTaxon.name }}</a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+</div>
