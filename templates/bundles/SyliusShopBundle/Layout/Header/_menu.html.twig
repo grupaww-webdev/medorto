@@ -38,11 +38,11 @@
     <a href="{{ path('sylius_shop_product_index_refunds') }}">{{ 'app.ui.homepage.refunds'|trans }}</a>
 </li>
 <li class="header__menu__item header__menu__item--active">
+    <a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.homepage.bestsellers'|trans }}</a>
+</li>
+<li class="header__menu__item header__menu__item--active">
     <a href="{{ bitbag_cms_get_link_for_code('o-nas') }}">{{ 'app.ui.about_us'|trans }} <img src="/assets/shop/img/chevron.png" alt="chevron"></a>
     <ul class="header__submenu">
-        <li class="header__submenu__item header__submenu__item--bold">
-            <a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.homepage.bestsellers'|trans }}</a>
-        </li>
 
         <li class="header__submenu__item header__submenu__item--bold">
             <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_index') }}">{{ 'app.ui.blog'|trans }}</a>

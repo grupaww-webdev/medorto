@@ -290,3 +290,8 @@ services:
         arguments: [ '@sylius.proportional_integer_distributor', '@sylius.promotion.units_promotion_adjustments_applicator' ]
         tags:
             - { name: sylius.promotion_action, type: en_product_discount, form_type: App\Form\Type\Action\EnProductDiscountConfigurationType, label: Obniżka na N-ty produkt }
+
+    App\Form\Extension\Product\ProductReviewType:
+        class: App\Form\Extension\Product\ProductReviewType
+        tags:
+            - { name: form.type_extension, extended_type: 'Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType' }

@@ -13,4 +13,6 @@ use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
  */
 class ProductReview extends BaseProductReview
 {
+
+    public $recaptcha;
 }

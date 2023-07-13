@@ -22,4 +22,15 @@
         {{ form_widget(form.comment, sylius_test_form_attribute('comment')|sylius_merge_recursive( {'attr': {'class': 'input input--textarea', 'required': 'required'}})) }}
         {{ form_errors(form.comment) }}
     </div>
+    {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+    {{ form_widget(form.recaptcha, { 'attr': {
+        'options' : {
+            'theme': 'light',
+            'type': 'image',
+            'size': 'normal'
+        },
+    } }) }}
+
 </div>
+

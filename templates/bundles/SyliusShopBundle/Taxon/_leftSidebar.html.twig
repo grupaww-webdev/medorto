@@ -16,7 +16,44 @@
 {% if taxons|length > 0 %}
 <ul class="search-page__categories" {{ sylius_test_html_attribute('menu') }}>
     {% for taxon in taxons %}
-        {{ macros.item(taxon, 1) }}
+        <li>
+            <label>
+                <a  href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
+                {% if taxon.enabledChildren|length > 0 %}
+                    <a href="#tax_{{ taxon.id }}" class="btn btn-link" data-toggle="collapse">
+                        <img src="/assets/shop/img/chevron.png" alt="chevron">
+                    </a>
+                {% endif %}
+            </label>
+        </li>
+        {% if taxon.enabledChildren|length > 0 %}
+            <ul id="tax_{{ taxon.id }}" class="search-page__subcategories collapse">
+                {% for taxonChildren in taxon.enabledChildren %}
+                    <li>
+                        <label>
+                            <a  href="{{ path('sylius_shop_product_index', {'slug': taxonChildren.slug, '_locale': taxonChildren.translation.locale}) }}">{{ taxonChildren.name }}</a>
+                            {% if taxonChildren.enabledChildren|length > 0 %}
+                                <a href="#tax_{{ taxonChildren.id }}" class="btn btn-link" data-toggle="collapse">
+                                    <img src="/assets/shop/img/chevron.png" alt="chevron" >
+                                </a>
+                            {% endif %}
+                        </label>
+                    </li>
+                    {% if taxonChildren.enabledChildren|length > 0 %}
+                        <ul id="tax_{{ taxonChildren.id }}" class="search-page__subcategories collapse">
+                            {% for taxonChildrenChildren in taxonChildren.enabledChildren %}
+                                <li>
+                                    <label>
+                                        <a href="{{ path('sylius_shop_product_index', {'slug': taxonChildrenChildren.slug, '_locale': taxonChildrenChildren.translation.locale}) }}">{{ taxonChildrenChildren.name }}</a>
+                                    </label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
     {% endfor %}
 </ul>
 {% endif %}
