@@ -216,8 +216,31 @@
         totalStars: 5,
         starShape: "rounded",
         starSize: 24,
+        hoverColor: "#f99e23",
         activeColor: "#f99e23",
+        ratedColor: "#f99e23!important",
         useGradient: false,
+        disableAfterRate: false,
+        useFullStars: true,
+        strokeColor: 'transparent',
+        callback: function(currentRating, $el) {
+            $('#sylius_product_review_rating_' + (currentRating - 1)).prop('checked', true);
+        }
+    });
+    $(".user-rating").starRating({
+        totalStars: 5,
+        starShape: "rounded",
+        starSize: 44,
+        hoverColor: "#f99e23",
+        activeColor: "#f99e23",
+        ratedColor: "#f99e23!important",
+        useGradient: false,
+        disableAfterRate: false,
+        useFullStars: true,
+        strokeColor: 'transparent',
+        callback: function(currentRating, $el) {
+            $('#sylius_product_review_rating_' + (currentRating - 1)).prop('checked', true);
+        }
     });
     checkCookie();
     selectProductImage();

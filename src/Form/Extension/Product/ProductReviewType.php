@@ -23,13 +23,19 @@ class ProductReviewType extends AbstractTypeExtension
             ),
             'mapped'      => false,
             'constraints' => array(
-                new RecaptchaTrue()
-            )
+                new RecaptchaTrue(['groups' => ['sylius']])
+            )           ,
+            'required' => true
         ));
     }
 
     public static function getExtendedTypes(): iterable
     {
         return [SyliusProductReviewType::class];
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return '';
     }
 }

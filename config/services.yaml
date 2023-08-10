@@ -293,5 +293,8 @@ services:
 
     App\Form\Extension\Product\ProductReviewType:
         class: App\Form\Extension\Product\ProductReviewType
+        arguments:
+            - "%sylius.model.product_review.class%"
+            - [ 'sylius' ]
         tags:
             - { name: form.type_extension, extended_type: 'Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType' }

@@ -1,6 +1,6 @@
 <div class="flex">
     <p>{{ 'app.ui.reviews.review_product'|trans }}</p>
-    <div class="user-rating flex"></div>
+    <div class="my-rating flex"></div>
     {{ form_errors(form.rating) }}
     {{ form_widget(form.rating, sylius_test_form_attribute('rating')|sylius_merge_recursive( {'attr': {'style': 'display: none', 'required': 'required'}})) }}
 </div>
@@ -23,6 +23,8 @@
         {{ form_errors(form.comment) }}
     </div>
     {% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+    {{ form_errors(form.recaptcha) }}
 
     {{ form_widget(form.recaptcha, { 'attr': {
         'options' : {
