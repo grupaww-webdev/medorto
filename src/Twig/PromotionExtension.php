@@ -29,6 +29,6 @@ class PromotionExtension extends AbstractExtension
         /** @var ProductTaxon $taxon */
         $taxon =  $this->entityManager->getRepository(ProductTaxon::class)->findBy(['taxon' => 27]);
 
-        return count($taxon) < 0;
+        return count($taxon) > 0;
     }
 }
