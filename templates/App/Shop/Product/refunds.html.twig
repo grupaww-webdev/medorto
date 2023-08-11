@@ -2,6 +2,7 @@
 
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
 
 {% block content %}
 {#    <section class="slider slider--static">#}
@@ -27,6 +28,7 @@
 
     {% if resources|length > 0 %}
         <h3 class="products__heading text-darkBlue flex">Refundacja</h3>
+        {{ pagination.simple(resources) }}
         <table class="table table__border table__border-rounded order__table">
             <tbody>
             <tr>
@@ -88,7 +90,7 @@
                 </tr>
             {% endfor %}
             </tbody></table>
-
+        {{ pagination.simple(resources) }}
 
     {% else %}
         {{ messages.info('sylius.ui.no_results_to_display') }}

@@ -1,0 +1,28 @@
+{% if media|length %}
+    <section class="container wrapper slider glide">
+        <div class="glide__track" data-glide-el="track">
+            <div class="glide__slides">
+
+                {% for image in media %}
+                    {{ render(path('bitbag_sylius_cms_plugin_shop_media_render', {'code' : image.code, 'template' : 'App/Cms/_banner_image.html.twig'})) }}
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="glide__bullets" data-glide-el="controls[nav]">
+            {% set it = 0 %}
+            {% for image in media %}
+                <button class="glide__bullet" data-glide-dir="={{ it }}"></button>
+                {% set it = it + 1 %}
+            {% endfor %}
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                <img src="{{ asset('assets/shop/img/arrow.png') }}" alt="arrow-left"/>
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                <img src="{{ asset('assets/shop/img/arrow.png') }}" alt="arrow-right"/>
+            </button>
+        </div>
+    </section>
+{% endif %}
