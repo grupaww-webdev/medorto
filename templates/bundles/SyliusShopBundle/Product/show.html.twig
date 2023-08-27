@@ -17,6 +17,9 @@
         </div>
         {{ sylius_template_event('app.shop.product.show.content', _context) }}
     </section>
+
+    {% include '@SyliusShop/Product/Show/_cartModal.html.twig' %}
+
 {% endblock %}
 
 {% block javascripts %}

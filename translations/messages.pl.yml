@@ -121,6 +121,9 @@ app:
         customer:
             nip: NIP
     ui:
+        addedToCart: Dodano przedmiot do koszyka
+        toCart: Przejdź do koszyka
+        continueShop: Wróć do sklepu
         categories: Kategorie
         standart_buy: Zakup po standardowej cenie
         refund_buy: Zakup z refundacją NFZ

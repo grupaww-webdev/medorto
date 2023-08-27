@@ -1,0 +1,93 @@
+<style>
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    #addedToCartModal {
+        display: flex;           /* establish flex container */
+        flex-direction: column;  /* make main axis vertical */
+        justify-content: center; /* center items vertically, in this case */
+        align-items: center;     /* center items horizontally, in this case */
+    }
+
+</style>
+
+<!-- The Modal -->
+<div id="addedToCartModal" class="modal flex-container">
+
+    <section class="hero container wrapper bg-darkBlue flex-item">
+        <div class="row">
+            <div class="col-sm-12 text-center text-white">
+                <h1 id="sylius-product-name" class="product__title text-white">{{'app.ui.addedToCart'|trans}}</h1>
+
+                <form action="{{ path("sylius_shop_cart_summary") }}">
+                    <button type="submit" class="button button--blue toCart">{{'app.ui.toCart'|trans}}</button>
+                </form>
+                <br>
+                <hr style="color: white">
+                <br>
+                <button type="button" class="close button button--white text-blue">{{'app.ui.continueShop'|trans}}</button>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+<script>
+
+    var flashMessage = 'none';
+
+    // Get the modal
+    var modal = document.getElementById("addedToCartModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    var button = document.getElementsByClassName("toCart")[0];
+
+    modal.style.display = "none";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    button.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+    {% for flashMessage in app.session.flashbag.get('cart') %}
+
+    flashMessage = '{{ flashMessage }}';
+
+    {% endfor %}
+
+    window.onload=function(event) {
+
+        if(flashMessage == 'add.product') {
+            modal.style.display = "block";
+        }
+    }
+
+</script>

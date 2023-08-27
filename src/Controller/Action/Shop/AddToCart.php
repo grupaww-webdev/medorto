@@ -55,7 +55,9 @@ final class AddToCart
             }
         }
 
-        return new RedirectResponse($this->router->generate('sylius_shop_cart_summary'));
+        $request->getSession()->getFlashBag()->add('cart', 'add.product' );
+
+        return new RedirectResponse($this->router->generate('sylius_shop_product_show',['_locale' => $request->getLocale(), 'slug' => $product->getSlug()]));
     }
 
     public function refund(Product $product, int $productVariantId, string $refundCode): RedirectResponse
