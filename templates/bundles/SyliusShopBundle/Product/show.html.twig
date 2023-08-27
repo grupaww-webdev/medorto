@@ -6,7 +6,7 @@
     {% set taxon = product.mainTaxon %}
     {% include '@SyliusShop/Taxon/Header/_content.html.twig' %}
     {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
-    <section class="product container">
+    <section class="product container medium-zoom-demo">
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
@@ -20,7 +20,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
 
     <script>
         const options = {
@@ -46,5 +45,9 @@
                 $('#sylius_product_review_rating_' + (currentRating - 1)).prop('checked', true);
             }
         });
+
+        // fsLightbox.open();
     </script>
+
+
 {% endblock %}

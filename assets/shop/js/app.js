@@ -43,6 +43,8 @@ function selectProductImage() {
 	for (let i = 0; i < slides.length; i++) {
     slides[i].addEventListener("click", function () {
       document.querySelector(".product__img").setAttribute("src", slides[i].getElementsByTagName('img')[0].getAttribute("src"));
+      document.querySelector(".product__img__link").setAttribute("href", slides[i].getElementsByTagName('img')[0].getAttribute("src"));
+      refreshFsLightbox();
     });
 	}
 }

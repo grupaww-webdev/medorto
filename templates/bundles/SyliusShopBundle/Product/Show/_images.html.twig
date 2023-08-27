@@ -10,7 +10,16 @@
     {% set original_path = '//placehold.it/400x300' %}
     {% set path = original_path %}
 {% endif %}
-<img class="product__img" src="{{ path }}" id="main-image" alt="{{ product.name }}" data-large-thumbnail="{{ original_path }}" {{ sylius_test_html_attribute('main-image') }} />
+
+<a data-fslightbox id="main-image-link" href="{{ path }}" class="product__img__link">
+    <img class="product__img" src="{{ path }}" id="main-image" alt="{{ product.name }}" data-large-thumbnail="{{ original_path }}" {{ sylius_test_html_attribute('main-image') }} />
+</a>
+
+{#<div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>#}
+{#<a href="{{ original_path }}" class="ui fluid image product__img__link" data-lightbox="sylius-product-image">#}
+{#    <img src="{{ path }}" id="main-image" class="product__img" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }} />#}
+{#</a>#}
+
 {% if product.images|length > 1 %}
     {{ sylius_template_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
 
@@ -21,7 +30,10 @@
                 {% for image in product.images %}
                     {% set path = image.path is not null ? image.path|imagine_filter('app_shop_product_small_thumbnail') : '//placehold.it/200x200' %}
                     <div class="glide__slide">
-                        <img src="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+{#                        <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" data-lightbox="sylius-product-image">#}
+                            <img src="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+{#                        </a>#}
+{#                        <img src="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />#}
                     </div>
                 {% endfor %}
             </div>
