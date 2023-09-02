@@ -4,8 +4,11 @@
 
 {% block content %}
     {% set taxon = product.mainTaxon %}
+
     {% include '@SyliusShop/Taxon/Header/_content.html.twig' %}
     {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+    {% include '@SyliusShop/Product/Show/_saveInfo.html.twig' %}
+
     <section class="product container medium-zoom-demo">
         <div class="row">
             <div class="col-xs-12 col-md-6">
