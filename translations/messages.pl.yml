@@ -45,6 +45,7 @@ sylius:
             refunds: Zwroty
             pickup_points: Punkty odbioru
     ui:
+        availability: Dostępność
         PESEL: PESEL
         REF: REF Nr
         error: Uwaga # softening the errors message

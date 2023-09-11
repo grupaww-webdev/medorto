@@ -58,13 +58,14 @@ final class ProductVariantsPricesProvider implements
             $optionMap[$option->getOptionCode()] = $option->getCode();
         }
 
-//        dump($variant);die;
-
         $price = $this->productVariantPriceCalculator->calculate(
             $variant,
             ['channel' => $channel]
         );
+
         $optionMap['value'] = $price;
+        $optionMap['quantity'] = ($variant->getOnHand() - $variant->getOnHold());
+        $optionMap['trackable'] = $variant->isTracked();
 
         if ($this->productVariantPriceCalculator instanceof ProductVariantPricesCalculatorInterface) {
             $originalPrice = $this->productVariantPriceCalculator->calculateOriginal(

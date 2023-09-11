@@ -6,13 +6,24 @@ declare(strict_types=1);
 namespace App\Request\Cart\PutItemToCart;
 
 use App\Application\Cart\PutOptionBasedConfigurableItemToCart\PutOptionBasedConfigurableItemToCartCommand;
+use App\Entity\Order\OrderItem;
+use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailability;
 
-final class PutOptionBasedConfigurableItemToCartRequest implements RequestInterface
+final class PutOptionBasedConfigurableItemToCartRequest implements RequestInterface // , AddToCartCommandInterface
 {
     protected int $cartId;
     protected int $productId;
     protected array $options;
+
+    /**
+     * @var int|null
+     */
     protected int $quantity;
 
     protected function __construct(?int $cartId, ?int $productId, ?array $options, ?int $quantity)

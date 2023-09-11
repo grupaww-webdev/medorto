@@ -20,8 +20,14 @@
 
 {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item, 'form': form}) }}
 
+<div id="product-quantity-section" class="products__item text-center" style="display: {% if sylius_product_variant_quantity(product|sylius_resolve_variant) > 0 %}inline{% else %}none{% endif %}">
+
+    <p  class="font-bold mt-2">{{ 'sylius.ui.availability'|trans }}: <span id="product-quantity-value" class="bold">{{ sylius_product_variant_quantity(product|sylius_resolve_variant) }}</span></p>
+
+</div>
+
 {% if product.hasRefundCodes %}
-{#    <p class="font-bold mt-2">{{ 'sylius.ui.refund'|trans }}</p>#}
+
 
     {% set pricing = sylius_product_variant_prices(product, sylius.channel) %}
     <div class="tabset row">
@@ -97,6 +103,13 @@
 {% else %}
 
         <button type="submit" class="button button--blue" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+
+    {% for flashMessage in app.session.flashbag.get('cart-error') %}
+
+        <p class="text-orange">{{ flashMessage }}</p>
+
+
+    {% endfor %}
 
 {% endif %}
 

@@ -22,6 +22,11 @@
             {% else %}
                 {{ messages.info('sylius.ui.no_results_to_display') }}
             {% endif %}
+
+            {{ render(url('sylius_shop_partial_taxon_show_by_slug', {
+                'slug': app.request.attributes.get('slug'),
+                'template': '@SyliusShop/Taxon/_footer.html.twig'
+            })) }}
         </div>
     </div>
 </div>

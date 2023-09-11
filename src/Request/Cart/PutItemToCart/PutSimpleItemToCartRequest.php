@@ -7,6 +7,7 @@ namespace App\Request\Cart\PutItemToCart;
 
 use App\Application\Cart\PutSimpleItemToCart\PutSimpleItemToCartCommand;
 use Symfony\Component\HttpFoundation\Request;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailability;
 
 class PutSimpleItemToCartRequest implements RequestInterface
 {
@@ -16,7 +17,9 @@ class PutSimpleItemToCartRequest implements RequestInterface
     /** @var int */
     protected $productId;
 
-    /** @var int */
+    /**
+     * @var int|null
+     */
     protected $quantity;
 
     protected function __construct(
@@ -56,12 +59,12 @@ class PutSimpleItemToCartRequest implements RequestInterface
     public static function fromHttpRequest(int $cartId, Request $request): RequestInterface
     {
         if ($request->isMethod('GET')) {
-            $quantity = $request->query->getInt('quantity', 1);
+            $quantity =  $request->query->getInt('quantity', 1);
         } else {
             if ($request->request->has('sylius_add_to_cart')) {
                 $quantity = (int) $request->request->get('sylius_add_to_cart')['cartItem']['quantity'];
             } else {
-                $quantity = $request->request->getInt('quantity', 1);
+                $quantity = (int) $request->request->getInt('quantity', 1);
             }
         }
 

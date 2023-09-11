@@ -7,6 +7,7 @@ namespace App\Request\Cart\PutItemToCart;
 
 use App\Application\Cart\PutVariantBasedConfigurableItemToCart\PutVariantBasedConfigurableItemToCartCommand;
 use Symfony\Component\HttpFoundation\Request;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailability;
 
 final class PutVariantBasedConfigurableItemToCartRequest implements RequestInterface
 {
@@ -16,7 +17,9 @@ final class PutVariantBasedConfigurableItemToCartRequest implements RequestInter
     protected $productId;
     /** @var string */
     protected $variantCode;
-    /** @var int */
+    /**
+     * @var int|null
+     */
     protected $quantity;
 
     protected function __construct(?int $cartId, ?int $productId, ?string $variantCode, ?int $quantity)

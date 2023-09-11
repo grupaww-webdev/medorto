@@ -1,0 +1,9 @@
+{% if taxon.description|length %}
+    <section class="hero container wrapper ">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                {{ taxon.description|raw }}
+            </div>
+        </div>
+    </section>
+{% endif %}

@@ -109,11 +109,6 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.product.show.after_add_to_cart
-        app.shop.vendor.simple:
-            blocks:
-                content:
-                    template: "App/Shop/Vendor/simple.html.twig"
-                    priority: 10
         app.shop.product.show.content:
             blocks:
                 before_tabs_legacy:

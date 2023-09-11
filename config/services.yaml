@@ -298,3 +298,8 @@ services:
             - [ 'sylius' ]
         tags:
             - { name: form.type_extension, extended_type: 'Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType' }
+
+    app.form.extension.type.taxation_translation:
+        class: App\Form\Extension\Taxonomy\TaxonTranslationTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType }

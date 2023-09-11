@@ -15,6 +15,15 @@
                 {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
             </div>
             <div class="col-xs-12 col-sm-6">
+                {% if product.vendor %}
+                    {% set vendor = product.vendor %}
+                    <h3 class="products__heading text-darkBlue flex flex--between" style="margin: 20px;">
+                        {{ vendor.name }}
+                        <img src="{{ vendor.logoName|imagine_filter('odiseo_sylius_vendor_plugin_logo') }}" alt="{{ vendor.name }}" height="40px;">
+                    </h3>
+                    <hr class="text-darkBlue">
+                {% endif %}
+
                 {{ sylius_template_event('app.shop.product.show.right_sidebar', _context) }}
             </div>
         </div>

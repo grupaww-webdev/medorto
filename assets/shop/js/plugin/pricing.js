@@ -1,9 +1,36 @@
 
 // import $ from 'jquery';
 
+const handleProductAvailable = function handleProductOptionsChange(selector) {
+  let pricing = $('#sylius-variants-pricing');
+
+  const quantity = pricing.find(selector).attr('data-quantity');
+  const trackable = pricing.find(selector).attr('data-trackable');
+
+  console.log({
+    'quantity': quantity,
+    'trackable': trackable
+  });
+
+  if (trackable)
+  {
+    $('#product-quantity-section').css('display', 'inline');
+    if (quantity > 0) {
+      $('#product-quantity-value').text(quantity);
+    } else {
+      $('#product-quantity-value').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
+    }
+  }
+  else
+  {
+    $('#product-quantity-section').css('display', 'none');
+  }
+}
+
 function calculateOptionPrices()
 {
   let selector = '';
+  let pricing = $('#sylius-variants-pricing');
 
   $('#sylius-product-adding-to-cart select[data-option]').each((index, element) => {
     const select = $(element);
@@ -11,10 +38,11 @@ function calculateOptionPrices()
     selector += `[data-${select.attr('data-option')}="${option}"]`;
   });
 
-  const price = $('#sylius-variants-pricing').find(selector).attr('data-value');
-  const originalPrice = $('#sylius-variants-pricing').find(selector).attr('data-original-price');
-  const minimumPrice = $('#sylius-variants-pricing').find(selector).attr('data-minimum-price');
+  const price = pricing.find(selector).attr('data-value');
+  const originalPrice = pricing.find(selector).attr('data-original-price');
+  const minimumPrice = pricing.find(selector).attr('data-minimum-price');
 
+  handleProductAvailable(selector);
 
   if (price !== undefined) {
     $('#product-price').text(price);
@@ -48,6 +76,7 @@ function calculateOptionPrices()
 const handleProductOptionsChange = function handleProductOptionsChange() {
   $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', () => {
     let selector = '';
+    let pricing = $('#sylius-variants-pricing');
 
     $('#sylius-product-adding-to-cart select[data-option]').each((index, element) => {
       const select = $(element);
@@ -55,10 +84,11 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
       selector += `[data-${select.attr('data-option')}="${option}"]`;
     });
 
-    const price = $('#sylius-variants-pricing').find(selector).attr('data-value');
-    const originalPrice = $('#sylius-variants-pricing').find(selector).attr('data-original-price');
-    const minimumPrice = $('#sylius-variants-pricing').find(selector).attr('data-minimum-price');
+    const price = pricing.find(selector).attr('data-value');
+    const originalPrice = pricing.find(selector).attr('data-original-price');
+    const minimumPrice = pricing.find(selector).attr('data-minimum-price');
 
+    handleProductAvailable(selector);
 
 
     if (price !== undefined) {
