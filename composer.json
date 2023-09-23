@@ -31,7 +31,8 @@
         "sylius/paypal-plugin": "^1.1",
         "sylius/sylius": "~1.9.0",
         "symfony/dotenv": "^4.4 || ^5.2",
-        "symfony/flex": "^1.11"
+        "symfony/flex": "^1.11",
+        "vitalybaev/google-merchant-feed": "*"
     },
     "require-dev": {
         "behat/behat": "^3.7",
