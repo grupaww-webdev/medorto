@@ -36,7 +36,7 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         ProductRepositoryInterface $productRepository,
         RouterInterface $router,
         CacheManager $cache,
-        AvailabilityCheckerInterface $availabilityChecker    ,
+        AvailabilityCheckerInterface $availabilityChecker,
         ParameterBagInterface $parameterBag
     ) {
         parent::__construct();
@@ -98,8 +98,12 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         $name = !empty($product->getName()) ? $product->getName() : $product->getProduct()->getName();
         $link = $this->router->generate('sylius_shop_product_show',
             ['_locale' => 'pl_PL', 'slug' => $product->getProduct()->getSlug()]);
-        $path = $product->getProduct()->getImages()->first()->getPath();
-        $image = $this->cache->getBrowserPath(parse_url($path, PHP_URL_PATH), 'sylius_shop_product_original');
+        $path = $product->getProduct()->getImages()->count() ? $product->getProduct()->getImages()->first()->getPath() : null;
+        if ($path) {
+            $image = $this->cache->getBrowserPath(parse_url($path, PHP_URL_PATH), 'sylius_shop_product_original');
+        } else {
+            $image = null;
+        }
         $price = $product->getChannelPricings()->first() ? ($product->getChannelPricings()->first()->getPrice() / 100) : 0;
         $description = !empty($product->getProduct()->getDescription()) ? $product->getProduct()->getDescription() : $product->getProduct()->getName();
 
@@ -111,7 +115,9 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         $item->setTitle($name);
         $item->setDescription($description);
         $item->setLink($link);
-        $item->setImage($image);
+        if ($image) {
+            $item->setImage($image);
+        }
         if ($this->availabilityChecker->isStockAvailable($product)) {
             $item->setAvailability(Availability::IN_STOCK);
         } else {
@@ -130,9 +136,9 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         // Here we get complete XML of the feed, that we could write to file or send directly
         $feedXml = $feed->build();
 
-        $publicDirectory = $this->parameterBag->get('kernel.project_dir') . '/public'; // Pobierz ścieżkę do folderu public
+        $publicDirectory = $this->parameterBag->get('kernel.project_dir').'/public'; // Pobierz ścieżkę do folderu public
 
-        $filePath = $publicDirectory . '/output.xml';
+        $filePath = $publicDirectory.'/output.xml';
 
         file_put_contents($filePath, $feedXml);
 
