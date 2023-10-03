@@ -67,6 +67,10 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Ustaw bazowy URL na inną domenę
+        $context = $this->router->getContext();
+        $context->setHost("https://medorto.pl");
+
         // Create feed object
         $feed = new Feed("My awesome store", "https://medorto.pl", "My awesome description");
 
