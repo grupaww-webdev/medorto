@@ -119,7 +119,7 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
 
         $price = $product->getChannelPricings()->first() ? ($product->getChannelPricings()->first()->getPrice() / 100) : 0;
 
-        $description = !empty($product->getProduct()->getDescription()) ? $product->getProduct()->getDescription() : $product->getProduct()->getName();
+        $description = !empty($product->getProduct()->getMetaDescription()) ? $product->getProduct()->getMetaDescription() : "";
 
 
         $item = new Product();
