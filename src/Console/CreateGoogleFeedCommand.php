@@ -123,7 +123,7 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         } else {
             $item->setAvailability(Availability::OUT_OF_STOCK);
         }
-        $item->setPrice("{($price} PLN");
+        $item->setPrice("{$price} PLN");
 
         $item->setCondition('new');
 
