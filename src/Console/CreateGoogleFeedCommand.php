@@ -8,6 +8,8 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Vitalybaev\GoogleMerchant\Feed;
 use Vitalybaev\GoogleMerchant\Product;
@@ -96,15 +98,19 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
 
 
         $name = !empty($product->getName()) ? $product->getName() : $product->getProduct()->getName();
+
         $link = $this->router->generate('sylius_shop_product_show',
-            ['_locale' => 'pl_PL', 'slug' => $product->getProduct()->getSlug()]);
+            ['_locale' => 'pl_PL', 'slug' => $product->getProduct()->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+
         $path = $product->getProduct()->getImages()->count() ? $product->getProduct()->getImages()->first()->getPath() : null;
         if ($path) {
-            $image = $this->cache->getBrowserPath(parse_url($path, PHP_URL_PATH), 'sylius_shop_product_original');
+            $image = $this->router->generate('liip_imagine_filter', ['path' => $path], UrlGeneratorInterface::ABSOLUTE_URL);
         } else {
             $image = null;
         }
+
         $price = $product->getChannelPricings()->first() ? ($product->getChannelPricings()->first()->getPrice() / 100) : 0;
+
         $description = !empty($product->getProduct()->getDescription()) ? $product->getProduct()->getDescription() : $product->getProduct()->getName();
 
 
