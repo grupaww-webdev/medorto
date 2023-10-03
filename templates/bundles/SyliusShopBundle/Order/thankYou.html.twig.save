@@ -59,19 +59,28 @@
     </div>
 {% verbatim %}
 <script>
+window.addEventListener('load',() => {
+wyswietl();
+})
 
 
 
+function wyswietl(){
 var transactionData={
-'transaction_id': document.querySelector('.nrzam').innerHTML,
+'id': document.querySelector('.nrzam').innerHTML,
 'affiliation':'Medorto',
-'value': document.querySelector('.kwota').innerHTML.replace('&nbsp;','').replace(',','.'),
+'revenue': document.querySelector('.kwota').innerHTML.replace('&nbsp;',''),
 'shipping': 0.00 ,
 'tax': 23.00
+
 
 };
 gtag('event', 'purchase', transactionData );
 
+
+
+
+;}
 
 </script>
 

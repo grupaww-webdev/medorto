@@ -79,6 +79,45 @@
             transition-timing-function: ease;
         }
     </style>
+
+    {% verbatim %}
+    <script>
+    window.addEventListener('load', () => {
+    
+    sendClick();
+    })
+
+    function sendClick(){
+    document.querySelector('.products .button').addEventListener('click', () => {
+
+        var id=document.querySelector('.product__title').textContent;
+        var name=document.querySelector('.product__title').textContent;
+        var cena= document.querySelector('.product .products__price').textContent.replace('zł','');
+        var ilosc=document.querySelector('#sylius_add_to_cart_cartItem_quantity').value;
+
+
+
+        var addToCartData = {
+         'items': [
+         {
+             'item_id': id,
+             'item_name': name,
+             'item_category': 'Kategoria',
+             'item_variant': 'Wariant produktu',
+             'price': cena,
+             'quantity': ilosc
+         }
+         ]
+    };
+
+    gtag('event', 'add_to_cart', addToCartData);
+
+    })
+    }
+
+    </script>
+
+    {% endverbatim %}
 </head>
 <body>
 
