@@ -104,7 +104,11 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
 
         $path = $product->getProduct()->getImages()->count() ? $product->getProduct()->getImages()->first()->getPath() : null;
         if ($path) {
-            $image = $this->router->generate('liip_imagine_filter', ['path' => $path], UrlGeneratorInterface::ABSOLUTE_URL);
+            $params = [
+                'path' => $path,
+                'filter' => 'app_shop_product_thumbnail'
+            ];
+            $image = $this->router->generate('liip_imagine_filter', $params, UrlGeneratorInterface::ABSOLUTE_URL);
         } else {
             $image = null;
         }
