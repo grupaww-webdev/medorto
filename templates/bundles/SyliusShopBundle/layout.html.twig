@@ -79,10 +79,10 @@
             transition-timing-function: ease;
         }
     </style>
+{% verbatim %}
 
-    {% verbatim %}
-    <script>
-    window.addEventListener('load', () => {
+<script>
+window.addEventListener('load', () => {
 
     sendClick();
     })
@@ -96,28 +96,58 @@
         var ilosc=document.querySelector('#sylius_add_to_cart_cartItem_quantity').value;
 
 
+         console.log('id'+id);
+         console.log("name"+name);
+         console.log('cena'+cena);
+         console.log("ilosc"+ilosc);
+        
 
-        var addToCartData = {
-         'items': [
-         {
-             'item_id': id,
-             'item_name': name,
-             'item_category': 'Kategoria',
-             'item_variant': 'Wariant produktu',
-             'price': cena,
-             'quantity': ilosc
+        dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
+        dataLayer.push({
+         event: "add_to_cart",
+         ecommerce: {
+            currency: "PLN",
+            value: cena *ilosc,
+            items: [
+            {
+             item_id: id,
+             item_name: name,
+             affiliation: "Medorto",
+             coupon: "No Coupons",
+             discount: 0,
+             index: 0,
+             item_brand: "Medorto",
+             item_category: "Medorto",
+             item_category2: "Medorto",
+             item_category3: "Medorto",
+             item_category4: "Medorto",
+             item_category5: "Medorto sleeve",
+             item_list_id: "Medorto",
+             item_list_name: "Medorto",
+             item_variant: "Medorto",
+             location_id: "Medorto",
+             price: cena,
+             quantity: ilosc
+            }
+            ]
          }
-         ]
-    };
+        });
 
-    gtag('event', 'add_to_cart', addToCartData);
+
+
+
+
+
+
+
 
     })
     }
+</script>
 
-    </script>
 
-    {% endverbatim %}
+{% endverbatim %}
+
 </head>
 <body>
 

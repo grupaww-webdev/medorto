@@ -66,9 +66,10 @@ purchased();
 function purchased(){
 
 var nrzam= document.querySelector('.nrzam').innerHTML;
-var valu= new Number(document.querySelector('.kwota').innerHTML.replace(' ','').replace(',','.').replace('zł','').replace('&nbsp;',''));
+var valu=new Number( document.querySelector('.kwota').textcontent.replace(' ','').replace(',','.').replace('z');
 console.log('kwota'+valu);
 console.log('nrazam'+nrzam);
+
 
 
 gtag("event", "purchase", {
@@ -102,6 +103,7 @@ gtag("event", "purchase", {
     }]
 });
 }
+
 </script>
 
 {% endverbatim %}
