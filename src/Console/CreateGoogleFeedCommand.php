@@ -2,10 +2,13 @@
 
 namespace App\Console;
 
+use App\Entity\Product\ProductTaxon;
 use App\Entity\Product\ProductVariant;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -43,9 +46,6 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
     ) {
         parent::__construct();
         $this->productRepository = $productRepository;
-
-        // Poniżej używamy kontenera do uzyskania generatora URL
-//        $urlGenerator = $this->container->get('router');
         $this->router = $router;
         $this->cache = $cache;
         $this->availabilityChecker = $availabilityChecker;
@@ -121,6 +121,22 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
 
         $description = !empty($product->getProduct()->getMetaDescription()) ? $product->getProduct()->getMetaDescription() : "";
 
+        $taxon = $product->getProduct()->getMainTaxon();
+        if (null === $taxon) {
+            $taxon = $this->findTaxon($product);
+        }
+
+        if ($taxon) {
+            $types = $this->getTaxonPath($taxon);
+        } else {
+            $types = [];
+        }
+
+        if (count($types)) {
+            $type = implode(' > ', $types);
+        }             else {
+            $type = null;
+        }
 
         $item = new Product();
 
@@ -137,6 +153,8 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         } else {
             $item->setAvailability(Availability::OUT_OF_STOCK);
         }
+        if($type)
+            $item->setProductType($type);
         $item->setPrice("{$price} PLN");
 
         $item->setCondition('new');
@@ -159,4 +177,46 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         return $filePath;
     }
 
+    private function getTaxonPath(TaxonInterface $taxon, $path = []) {
+        $path[] = $taxon->getName();
+
+        if ($taxon->getParent() !== null) {
+            return $this->getTaxonPath($taxon->getParent(), $path);
+        }
+
+        return array_reverse($path);
+    }
+
+    private function findTaxon(ProductVariant $product)
+    {
+        $depth = 0;
+        $taxon = null;
+        /** @var ProductTaxonInterface $productTaxon */
+        foreach ($product->getProduct()->getProductTaxons() as $productTaxon)                  {
+            if(null === $taxon)         {
+                $taxon = $productTaxon->getTaxon();
+                $depth = $this->getDepth($taxon);
+            }
+
+            if($depth < $this->getDepth($productTaxon->getTaxon()))              {
+                $taxon = $productTaxon->getTaxon();
+                $depth = $this->getDepth($taxon);
+            }
+        }
+         return $taxon;
+    }
+
+    private function getDepth(TaxonInterface $taxon, $currentDepth = 0) {
+        $children = $taxon->getChildren();
+        $maxChildDepth = 0;
+
+        foreach ($children as $child) {
+            $childDepth = $this->getDepth($child, $currentDepth + 1);
+            if ($childDepth > $maxChildDepth) {
+                $maxChildDepth = $childDepth;
+            }
+        }
+
+        return max($currentDepth, $maxChildDepth);
+    }
 }

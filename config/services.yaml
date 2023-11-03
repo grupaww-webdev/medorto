@@ -261,7 +261,14 @@ services:
     App\EventListener\ProductPriceHistoryListener:
         tags:
             - { name: doctrine.event_listener, event: postUpdate, entity: App\Entity\Channel\ChannelPricing, priority: 500 }
-#            - { name: doctrine.event_listener, event: postUpdate, priority: 500 }
+
+    App\EventListener\ProductTaxonomyListener:
+        tags:
+            - { name: doctrine.event_listener, event: postUpdate, entity: App\Entity\Product\ProductTaxon, priority: 500 }   
+            
+    App\EventListener\Redirect404Listener:
+        tags:
+            - { name: 'kernel.event_subscriber' }
                 
     App\Provider\ProductVariantsPricesProvider:
         decorates: sylius.provider.product_variants_prices

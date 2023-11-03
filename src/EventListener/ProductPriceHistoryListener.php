@@ -40,10 +40,16 @@ final class ProductPriceHistoryListener
         $uof     = $manager->getUnitOfWork();
         $entity  = $args->getEntity();
 
+        if(!$entity instanceof ChannelPricing)
+        {
+            return true;
+        }
+
         if (!$this->isPriceChanged($uof->getEntityChangeSet($entity)))
         {
             return true;
         }
+
 
         Assert::isInstanceOf($entity, ChannelPricing::class);
 
@@ -53,6 +59,8 @@ final class ProductPriceHistoryListener
 
         $manager->persist($history);
         $manager->flush();
+
+        return true;
     }
 
     protected function isPriceChanged(array $changeSet): bool

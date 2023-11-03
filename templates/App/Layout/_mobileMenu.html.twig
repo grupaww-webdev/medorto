@@ -13,8 +13,60 @@
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </label>
-            <span>Kategorie</span>
+            <span>MEDORTO </span>
         </div>
-        {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': 'App/Taxon/_mobileMenu.html.twig'})) }}
+
+        <ul>
+            <li class=" button--blue">
+                <label class="a-label__chevron text-white" for="addon-0">KATEGORIE</label>
+                <input type="checkbox" id="addon-0" name="addon-0" class="m-menu__checkbox">
+                <div class="m-menu">
+                    <div class="m-menu__header button--blue">
+                        <label class="m-menu__toggle" for="addon-0">
+                            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="arcs">
+                                <path d="M19 12H6M12 5l-7 7 7 7"></path>
+                            </svg>
+                        </label>
+                        <span>KATEGORIE</span>
+                    </div>
+                    {{ render(url('sylius_shop_partial_channel_menu_taxon_index', {'template': 'App/Taxon/_mobileMenu.html.twig'})) }}
+                </div>
+            </li>
+            <li>
+                <a href="{{ path('sylius_shop_product_index_promotions') }}">{{ 'app.ui.homepage.promotions'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('sylius_shop_product_index_refunds') }}">{{ 'app.ui.homepage.refunds'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('sylius_shop_product_index_bestsellers') }}">{{ 'app.ui.homepage.bestsellers'|trans }}</a>
+            </li>
+            <li>
+                <label class="a-label__chevron" for="addon-1">{{ 'app.ui.about_us'|trans }}</label>
+                <input type="checkbox" id="addon-1" name="addon-1" class="m-menu__checkbox">
+                <div class="m-menu">
+                    <div class="m-menu__header">
+                        <label class="m-menu__toggle" for="addon-1">
+                            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="butt" stroke-linejoin="arcs">
+                                <path d="M19 12H6M12 5l-7 7 7 7"></path>
+                            </svg>
+                        </label>
+                        <span>{{ 'app.ui.about_us'|trans }}</span>
+                    </div>
+                    <ul>
+
+                        <a href="{{ bitbag_cms_get_link_for_code('o-nas') }}">{{ 'app.ui.about_us'|trans }} </a>
+
+                        <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_index') }}">{{ 'app.ui.blog'|trans }}</a>
+
+                        <a href="{{ bitbag_cms_get_link_for_code('our_shops') }}">{{ 'app.ui.our_shops'|trans }}</a>
+
+                        <a href="{{ path('bitbag_sylius_cms_plugin_shop_frequently_asked_question_index') }}">{{ 'app.ui.breadcrumbs.faq'|trans }}</a>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
     </div>
 </nav>

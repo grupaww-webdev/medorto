@@ -1,38 +1,4 @@
 
-{#{% macro item(taxon, level) %}#}
-{#    {% import _self as macros %}#}
-{#    {% if taxon.enabledChildren|length > 0 %}#}
-{#        {% if level == 1 %}#}
-{#            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }} <img src="/assets/shop/img/chevron.png" alt="{{ taxon.name }}" /></a>#}
-{#            <ul class="header__submenu" {{ sylius_test_html_attribute('menu') }}>#}
-{#                {% for childTaxon in taxon.enabledChildren %}#}
-{#                    {{ macros.item(childTaxon, level + 1) }}#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        {% else %}#}
-{#            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>#}
-{#                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
-{#                <ul>#}
-{#                    {% for childTaxon in taxon.enabledChildren %}#}
-{#                        {{ macros.item(childTaxon, level + 1) }}#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            </li>#}
-{#        {% endif %}#}
-{#    {% else %}#}
-{#        {% if level == 1 %}#}
-{#            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
-{#        {% else   %}#}
-{#            <li class="header__submenu__item header__submenu__item--bold" {{ sylius_test_html_attribute('menu-item') }}>#}
-{#                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>#}
-{#            </li>#}
-{#        {% endif %}#}
-{#    {% endif %}#}
-{#{% endmacro %}#}
-
-
-
-
 {% macro item(taxon, level) %}
     {% import _self as macros %}
     {% if taxon.enabledChildren|length > 0 %}
@@ -65,16 +31,6 @@
 {% endmacro %}
 
 {% import _self as macros %}
-
-{#{% if taxons|length > 0 %}#}
-{#    {% for taxon in taxons %}#}
-{#        <li class="header__menu__item header__menu__item--active ">#}
-{#            {{ macros.item(taxon, 1) }}#}
-{#        </li>#}
-{#    {% endfor %}#}
-{#{% endif %}#}
-
-
 
 <div class="header__menu__item header__menu__item--active ">
     <a class="button button--secondary button--blue text-white" href="#">{{ 'app.ui.categories'|trans }}</a>
