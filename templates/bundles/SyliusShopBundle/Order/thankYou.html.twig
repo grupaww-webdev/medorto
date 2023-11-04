@@ -14,9 +14,9 @@
                 <p class="flex flex--between">{{ 'sylius.ui.order_number'|trans }}: <b class="nrzam">{{ order.number }}</b></p>
                 <p class="flex flex--between">{{ 'sylius.ui.shipment_method'|trans }}: <b>{{ shipment.method.name }}</b></p>
                 <p class="flex flex--between">{{ 'sylius.ui.payment_method'|trans }}: <b>{{ payment.method.name }}</b></p>
-              
+             
 <p class="kwota" >{{ money.format(order.getTotal(), sylius.currencyCode) }} </p> 
-
+<p class="clientem">{{ clientEmail }}</p>
 
         </div>
         </div>
@@ -55,9 +55,37 @@
     <div class="flex flex--end">
         <a href="{{ path('sylius_shop_homepage') }}" class="cart__confirmation__button button button--blue">{{ 'sylius.ui.back_to_shop'|trans }}</a>
 
-    </div>
-{% verbatim %}
+    </div> 
 
+
+
+{% verbatim %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('9TCYVb9B-KjtztqnV');
+        })();
+    </script>
+    <script>
+window.addEventListener('load', () => {
+    setinputs();
+})
+function setinputs(){
+    var dzis = new Date();
+
+
+var data = dzis.toLocaleDateString();
+    emailjs.send("service_7ups8yr","template_djkujzs",{
+        nrzam: document.querySelector('.nrzam').innerHTML,
+        data_zam: data,
+        kwota_Zam: document.querySelector('.kwota').innerHTML.replace('&nbsp;',' '),
+        email_medorto: "zamowienia@medorto.pl",
+        email_klienta: localStorage.getItem('emailclienta'),
+        });
+}
+
+</script>
 <script>
 window.addEventListener('load',() => {
 purchased();
@@ -79,7 +107,7 @@ gtag("event", "purchase", {
     currency: "PLN",
     coupon: "None",
     items: [
-    
+
      {
      item_id: nrzam,
      item_name: "Zamówienie",
@@ -105,6 +133,5 @@ gtag("event", "purchase", {
 </script>
 
 {% endverbatim %}
-
 
 {% endblock %}
