@@ -264,11 +264,11 @@ services:
 
     App\EventListener\ProductTaxonomyListener:
         tags:
-            - { name: doctrine.event_listener, event: postUpdate, entity: App\Entity\Product\ProductTaxon, priority: 500 }   
+            - { name: doctrine.event_listener, event: postFlush, entity: App\Entity\Product\ProductTaxon, priority: 11500 }   
             
     App\EventListener\Redirect404Listener:
         tags:
-            - { name: 'kernel.event_subscriber' }
+            - { name: 'kernel.event_subscriber', priority: 11500 }
                 
     App\Provider\ProductVariantsPricesProvider:
         decorates: sylius.provider.product_variants_prices

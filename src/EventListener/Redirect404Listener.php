@@ -8,23 +8,25 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class Redirect404Listener         implements EventSubscriberInterface
+final class Redirect404Listener implements EventSubscriberInterface
 {
     public function onKernelException(ExceptionEvent $event)
     {
         $exception = $event->getThrowable();
+
         if ($exception instanceof NotFoundHttpException) {
             // Złapany błąd 404
             $request = $event->getRequest();
 
-            $url1 = $request->getRequestUri();
+            $url1 = $request->getUri();
 
             if (isset($this->links[$url1])) {
                 $newUrl = $this->links[$url1];
                 $status = 301;
             } else {
+
                 $newUrl = 'https://medorto.pl';
-                $status = 302;
+                $status = 303;
             }
 
             // Przykład przekierowania na inny adres URL
