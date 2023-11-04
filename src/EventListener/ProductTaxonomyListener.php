@@ -9,7 +9,11 @@ use App\Entity\Taxonomy\Taxon;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\ORMException;
 use Sylius\Behat\Context\Setup\ProductTaxonContext;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
@@ -19,47 +23,26 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ProductTaxonomyListener
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager|\Doctrine\ORM\EntityManagerInterface
-     */
     private $manager;
     private FactoryInterface $productTaxonFactory;
-    /**
-     * @var false
-     */
-    private bool $flush;
-    private ArrayCollection $collection;
+    private \Doctrine\ORM\UnitOfWork $uof;
 
 
     public function __construct(
         FactoryInterface $productTaxonFactory
     ) {
-
         $this->productTaxonFactory = $productTaxonFactory;
-        $this->flush = false;
-        $this->collection = new ArrayCollection();
     }
 
-    public function postFlush(PostFlushEventArgs $args)
+    public function onFlush(OnFlushEventArgs $args): bool
     {
         $this->manager = $args->getEntityManager();
 
-        $uof     =  $this->manager->getUnitOfWork();
-        $updatedCollections = $uof->getScheduledCollectionUpdates();
+        $this->uof     =  $this->manager->getUnitOfWork();
 
-        foreach ($updatedCollections as $collection) {
-            foreach ($collection as $entity) {
-                if($entity instanceof ProductTaxon)
-                    $this->fixTaxon($entity->getTaxon(),$entity->getProduct());
-            }
-        }
-
-        if($this->collection->count())
-        {
-            foreach ($this->collection as $entity)
-                $this->manager->persist($entity);
-
-            $this->manager->flush();
+        foreach ($this->uof->getScheduledEntityInsertions() as $entity) {
+            if($entity instanceof ProductTaxon)
+                $this->fixTaxon($entity->getTaxon(),$entity->getProduct());
         }
 
         return true;
@@ -79,8 +62,9 @@ final class ProductTaxonomyListener
         ]);
 
         if (null === $check) {
-            $productTaxon = $this->createProductTaxon($getTaxon,$getProduct);
-            $this->collection->add($productTaxon);
+            if($this->isEntityNotScheduled($getTaxon)){
+                $this->createProductTaxon($getTaxon,$getProduct);
+            }
         }
 
         if ($getTaxon->getParent()) {
@@ -93,6 +77,7 @@ final class ProductTaxonomyListener
      * @param  ProductInterface  $product
      *
      * @return ProductTaxonInterface
+     * @throws ORMException
      */
     private function createProductTaxon(\Sylius\Component\Core\Model\TaxonInterface $taxon, ProductInterface $product): ProductTaxonInterface
     {
@@ -101,6 +86,21 @@ final class ProductTaxonomyListener
         $productTaxon->setProduct($product);
         $productTaxon->setTaxon($taxon);
 
+        $this->manager->persist($productTaxon);
+
+        $class = $this->manager->getClassMetadata(get_class($productTaxon));
+        $this->uof->computeChangeSet($class, $productTaxon);
+
         return $productTaxon;
+    }
+
+    private function isEntityNotScheduled(Taxon $productTaxon): bool
+    {
+        foreach ($this->uof->getScheduledEntityInsertions() as $entityInsertion)
+            if($entityInsertion instanceof ProductTaxon)
+                if($entityInsertion->getTaxon()->getId() === $productTaxon->getId())
+                    return false;
+
+        return true;
     }
 }

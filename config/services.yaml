@@ -264,7 +264,7 @@ services:
 
     App\EventListener\ProductTaxonomyListener:
         tags:
-            - { name: doctrine.event_listener, event: postFlush, entity: App\Entity\Product\ProductTaxon, priority: 11500 }   
+            - { name: doctrine.event_listener, event: onFlush, entity: App\Entity\Product\ProductTaxon, priority: 11500 }   
             
     App\EventListener\Redirect404Listener:
         tags:
