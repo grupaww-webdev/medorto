@@ -192,7 +192,8 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
         $depth = 0;
         $taxon = null;
         /** @var ProductTaxonInterface $productTaxon */
-        foreach ($product->getProduct()->getProductTaxons() as $productTaxon)                  {
+        foreach ($product->getProduct()->getProductTaxons() as $productTaxon)
+        {
             if(null === $taxon)         {
                 $taxon = $productTaxon->getTaxon();
                 $depth = $this->getDepth($taxon);
@@ -207,16 +208,10 @@ class CreateGoogleFeedCommand extends ContainerAwareCommand implements Container
     }
 
     private function getDepth(TaxonInterface $taxon, $currentDepth = 0) {
-        $children = $taxon->getChildren();
-        $maxChildDepth = 0;
+        $parent = $taxon->getParent();
 
-        foreach ($children as $child) {
-            $childDepth = $this->getDepth($child, $currentDepth + 1);
-            if ($childDepth > $maxChildDepth) {
-                $maxChildDepth = $childDepth;
-            }
-        }
-
-        return max($currentDepth, $maxChildDepth);
+        if($parent)
+             return $this->getDepth($parent, $currentDepth + 1);
+        return $currentDepth;
     }
 }
