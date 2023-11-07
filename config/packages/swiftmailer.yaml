@@ -1,3 +1,2 @@
 swiftmailer:
     url: '%env(MAILER_URL)%'
-    disable_delivery: true

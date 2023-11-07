@@ -6,15 +6,15 @@ sylius_mailer:
         user_registration:
             sender:
                 name: Medorto
-                address: "medorto@medorto.pl"
+                address: "zakupy@medorto.pl" # "medorto@medorto.pl"
         verification_token:
             sender:
                 name: Medorto
-                address: "medorto@medorto.pl"
+                address: "zakupy@medorto.pl" # "medorto@medorto.pl"
         reset_password_token:
             sender:
                 name: Medorto
-                address: "medorto@medorto.pl"
+                address: "zakupy@medorto.pl" # "medorto@medorto.pl"
         order_send_preparation:
             template: "Email/order_send_preparation.html.twig"
             sender:
