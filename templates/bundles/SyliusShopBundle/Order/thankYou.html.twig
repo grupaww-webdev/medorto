@@ -14,9 +14,9 @@
                 <p class="flex flex--between">{{ 'sylius.ui.order_number'|trans }}: <b class="nrzam">{{ order.number }}</b></p>
                 <p class="flex flex--between">{{ 'sylius.ui.shipment_method'|trans }}: <b>{{ shipment.method.name }}</b></p>
                 <p class="flex flex--between">{{ 'sylius.ui.payment_method'|trans }}: <b>{{ payment.method.name }}</b></p>
-             
-<p class="kwota" >{{ money.format(order.getTotal(), sylius.currencyCode) }} </p> 
-<p class="clientem">{{ clientEmail }}</p>
+
+<p class="kwota" >{{ money.format(order.getTotal(), sylius.currencyCode) }} </p>
+<p class="clientem">{{ order.customer.email }}</p>
 
         </div>
         </div>
@@ -55,7 +55,7 @@
     <div class="flex flex--end">
         <a href="{{ path('sylius_shop_homepage') }}" class="cart__confirmation__button button button--blue">{{ 'sylius.ui.back_to_shop'|trans }}</a>
 
-    </div> 
+    </div>
 
 
 

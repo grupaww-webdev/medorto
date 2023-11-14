@@ -13,4 +13,21 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation as BaseTaxonTranslation;
  */
 class TaxonTranslation extends BaseTaxonTranslation
 {
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected ?string $title;
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): void
+    {
+        $this->title = $title;
+    }
+
+
 }

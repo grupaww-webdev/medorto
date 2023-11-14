@@ -18,4 +18,14 @@ class Taxon extends BaseTaxon
     {
         return new TaxonTranslation();
     }
+
+    public function getTitle(): ?string
+    {
+        return $this->getTranslation()->getTitle();
+    }
+
+    public function setTitle(?string $name): void
+    {
+        $this->getTranslation()->setTitle($name);
+    }
 }
