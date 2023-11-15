@@ -1,0 +1,7 @@
+# config/packages/setono_sylius_redirect.yaml
+imports:
+    # ...
+
+    - { resource: "@SetonoSyliusRedirectPlugin/Resources/config/app/config.yaml" }
+    
+    # ...
