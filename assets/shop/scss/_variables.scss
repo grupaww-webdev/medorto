@@ -7,23 +7,28 @@ $black: #000;
 $lightGrey: #878787;
 $mobile: 1023px;
 $red: #e80709;
+$darkRed: #b3001b;
+$lightRed: #F77272;
 
 $colors: (
-  orange: $orange,
-  blue: $blue,
-  darkBlue: $darkBlue,
-  lightBlue: $lightBlue,
-  white: $white,
-  black: $black,
-  lightGrey: $lightGrey,
+    orange: $orange,
+    blue: $blue,
+    darkBlue: $darkBlue,
+    lightBlue: $lightBlue,
+    red: $red,
+    darkRed: $darkRed,
+    lightRed: $lightRed,
+    white: $white,
+    black: $black,
+    lightGrey: $lightGrey,
 );
 
 @mixin gen-props($prefix, $property) {
-  @each $color-name, $color in $colors {
-    .#{$prefix}-#{$color-name} {
-      #{$property}: $color!important;
+    @each $color-name, $color in $colors {
+        .#{$prefix}-#{$color-name} {
+            #{$property}: $color !important;
+        }
     }
-  }
 }
 
 @include gen-props("text", "color");

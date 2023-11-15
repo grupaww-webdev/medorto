@@ -66,7 +66,7 @@ function getemail(){
     if(link.includes('address')){
     document.querySelector('.login--cart .register .button:last-of-type').addEventListener('click', () => {
         localStorage.setItem('emailclienta',document.querySelector('#sylius_checkout_address_customer_email').value);
-        
+
     })
 }
 }
@@ -118,7 +118,7 @@ window.addEventListener('load', () => {
          console.log("name"+name);
          console.log('cena'+cena);
          console.log("ilosc"+ilosc);
-        
+
 
         dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
         dataLayer.push({
@@ -178,18 +178,11 @@ window.addEventListener('load', () => {
 
 <main>
     {% include 'App/Layout/_mobileMenu.html.twig' %}
-    <section class="bg-darkBlue text-white text-center">
-        <div class="container wrapper">
 
-            <p class="flex flex--between" style="padding: 18px; font-weight: bold;">
-                <span class=" ">KONTAKT</span>
-                <span class=" ">Infolinia: +48 733 533 953</span>
-                <span class=" ">Email: medorto@medorto.pl</span>
-                <span class=" ">infolinia czynna od poniedziałku do piątku od 8:00-17:00</span>
-            </p>
+    {{ bitbag_cms_render_block('blue-block') }}
 
-        </div>
-    </section>
+    {{ bitbag_cms_render_block('red-block') }}
+
     <section class="nfz-bar wrapper" >
         <a href="{{ path('odiseo_sylius_blog_plugin_shop_article_show',{'slug': 'refundacja-online'}) }}">
             <div class="row">

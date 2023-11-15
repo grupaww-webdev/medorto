@@ -1,0 +1,134 @@
+.products__list {
+    gap: 10px;
+
+    .button {
+        border-radius: 5px;
+        padding: 13px 25px;
+        max-width: 100%;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1rem;
+
+        &:focus,
+        &:hover {
+            background-color: #085083;
+        }
+    }
+}
+
+.products__item {
+    padding: 25px 10px 10px;
+    box-shadow: 0 0 10px -5px rgba(0, 0, 0, .5);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.products__price {
+    font-size: 1.25rem;
+}
+
+.products__rating {
+    margin-bottom: 10px;
+}
+
+.jq-star {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.products__notify {
+    font-size: 20px;
+    padding: 8px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px 3px;
+    display: inline-block;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 0 8px 0;
+    font-weight: bold;
+}
+
+.products__promo {
+    background-color: #cf0d0d !important;
+
+    .products__item {
+        margin-bottom: 76px;
+    }
+}
+
+section.blog {
+    .blog__item {
+        height: 100%;
+        overflow: hidden;
+        font-size: 18px;
+        font-weight: 400;
+        box-shadow: 0 0 10px -5px rgba(0, 0, 0, .5);
+        border-radius: 8px;
+        overflow: hidden;
+
+        a {
+            display: block;
+
+            img {
+                display: block;
+
+            }
+        }
+    }
+}
+
+
+.product.container {
+    margin-top: 25px;
+
+    .products {
+        > p:first-of-type {
+            display: flex;
+            flex-wrap: wrap;
+
+            span {
+                flex-basis: 100%;
+                display: block;
+                text-align: left;
+
+                &.products__price {
+                    margin-top: 0;
+                }
+
+                del {
+                    opacity: .6;
+                }
+
+            }
+        }
+
+        .products__price {
+            color: #09d;
+        }
+
+        #product-minimum-price-banner {
+            opacity: .7;
+            font-size: 12px;
+            text-align: left;
+            display: block !important;
+        }
+
+        #product-quantity-section {
+            padding: 0;
+            box-shadow: none;
+        }
+    }
+
+    .product__title {
+        line-height: 1.4em;
+        font-size: clamp(20px, 4vw, 30px);
+        margin: 0;
+        margin-bottom: 25px;
+        color: #1c1e21 !important;
+    }
+}
